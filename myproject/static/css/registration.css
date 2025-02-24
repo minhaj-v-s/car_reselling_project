@@ -1,0 +1,107 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Master Container */
+.master {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0077B6;
+    position: relative;
+}
+
+/* Background Image */
+.side-bg {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 0;
+    background: url('../images/reg-form_image.jpg') no-repeat center center/cover;
+}
+
+/* Form & Tagline Wrapper */
+.form-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 800px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+/* Form Container */
+.form-div {
+    width: 55%;
+    text-align: center;
+}
+
+/* Tagline Styling */
+.tagline {
+    width: 40%;
+    text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+    color: #0077B6;
+    padding-left: 20px;
+}
+
+/* Form Heading */
+.form-div h2 {
+    font-size: 24px;
+    color: #0077B6;
+    margin-bottom: 20px;
+}
+
+/* Form Inputs */
+form label {
+    display: block;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 10px;
+    color: #333;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+}
+
+form input:focus {
+    border: 1px solid #0077B6;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 119, 182, 0.5);
+}
+
+/* Submit Button */
+.form-div button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #0077B6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-div button:hover {
+    background-color: #005A8D;
+}

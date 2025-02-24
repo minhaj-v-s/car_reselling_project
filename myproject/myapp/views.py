@@ -7,3 +7,9 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request, 'home.html')
+
+def registration(request):
+    return render(request,"registration.html")
+
+def login(request):
+    return render(request,"login.html")
