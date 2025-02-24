@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+     <!-- Navigation Bar -->
+     <nav class="navbar">
+        <div class="logo">
+            <img src="../static/images/image (1).png" alt="Soorath Autos">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#" class="contact-btn">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="hero">
+        <h1>AFFORDABLE AND LIKE NEW CARS</h1>
+        
+        <div class="car-slider">
+            <div class="car-slide">
+                <img src="../static/images/WhatsApp Image 2025-02-23 at 14.35.13_aa62e211.png" alt="Car Image">
+            </div>
+            <div class="car-slide">
+                <img src="../static/images/WhatsApp Image 2025-02-23 at 14.35.14_c4eba3a1.png" alt="Car Image">
+            </div>
+            <div class="car-slide">
+                <img src="../static/images/WhatsApp Image 2025-02-23 at 14.27.45_79eb4cf8.png" alt="Car Image">
+            </div>
+            <div class="car-slide">
+                <img src="../static/images/WhatsApp Image 2025-02-23 at 14.27.44_634a97bd.png" alt="Car Image">
+            </div>
+        </div>
+        
+        <button class="view-more-btn">View More Cars</button>
+    </section>
+</body>
+</html>
