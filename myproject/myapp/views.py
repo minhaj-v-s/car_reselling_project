@@ -13,3 +13,6 @@ def registration(request):
 
 def login(request):
     return render(request,"login.html")
+
+def cars(request):
+    return render(request,"cars.html")
