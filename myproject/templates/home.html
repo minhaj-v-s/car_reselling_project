@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
-     <!-- Navigation Bar -->
-     <nav class="navbar">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
         <div class="logo">
-            <img src="../static/images/image (1).png" alt="Soorath Autos">
+            <img src="{% static 'images/image (1).png' %}" alt="Soorath Autos">
         </div>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
@@ -26,32 +27,65 @@
     <!-- Main Content -->
     <section class="hero">
         <h1>AFFORDABLE AND LIKE NEW CARS</h1>
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="../static/images/WhatsApp Image 2025-02-23 at 14.27.44_634a97bd.png" class="d-block w-100" alt="...">
+        <div class="slider-container">
+            <!-- Feature Cards -->
+            <div class="feature-cards-wrapper">
+              <div class="set1">
+                <div class="setx">
+                <div class="feature-card">
+                    <img src="{% static 'images/download (2).png' %}" alt="Latest Cars">
+                    <p>Latest Cars</p>
                 </div>
-                <div class="carousel-item">
-                  <img src="../static/images/WhatsApp Image 2025-02-23 at 14.27.45_79eb4cf8.png" class="d-block w-100" alt="...">
                 </div>
-                <div class="carousel-item">
-                  <img src="../static/images/WhatsApp Image 2025-02-23 at 14.35.13_aa62e211.png" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="../static/images/WhatsApp Image 2025-02-23 at 14.35.14_c4eba3a1.png" class="d-block w-100" alt="...">
+                <div class="feature-card">
+                    <img src="{% static 'images/speedometer-icon-free-vector.jpg' %}" alt="Low Odometer">
+                    <p>Low Odometer</p>
                 </div>
               </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          
-          <button class="view-more-btn">View More Cars</button>
+              <div class="set2">
+                <div class="sety"> 
+                <div class="feature-card">
+                    <img src="{% static 'images/download (1).png' %}" alt="Original Engine">
+                    <p>Original Engine</p>
+                </div>
+                </div>
+                
+                <div class="feature-card">
+                    <img src="../static/images/tyre-icon-graphic-web-design_701361-258.avif" alt="Certified Tire">
+                    <p>Certified Tire</p>
+                </div>
+              
+              </div>
+            </div>
+
+            <!-- Car Slider -->
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'images/WhatsApp Image 2025-02-23 at 14.27.44_634a97bd.png' %}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/WhatsApp Image 2025-02-23 at 14.27.45_79eb4cf8.png' %}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/WhatsApp Image 2025-02-23 at 14.35.13_aa62e211.png' %}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/WhatsApp Image 2025-02-23 at 14.35.14_c4eba3a1.png' %}" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <button class="view-more-btn">View More Cars</button>
     </section>
-    
 </body>
 </html>

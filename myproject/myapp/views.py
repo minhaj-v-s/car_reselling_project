@@ -16,3 +16,6 @@ def login(request):
 
 def cars(request):
     return render(request,"cars.html")
+
+def car_description(request):
+    return render(request,"car_description.html")
