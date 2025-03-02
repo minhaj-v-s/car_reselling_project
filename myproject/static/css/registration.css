@@ -40,12 +40,6 @@
     z-index: 1;
 }
 
-/* Form Container */
-.form-div {
-    width: 55%;
-    text-align: center;
-}
-
 /* Tagline Styling */
 .tagline {
     width: 40%;
@@ -54,6 +48,13 @@
     font-weight: bold;
     color: #333;
     padding-left: 20px;
+}
+
+/* Form Container */
+.form-div {
+    width: 55%;
+    text-align: center;
+    order: 1;  /* Moves the form to the right */
 }
 
 /* Form Heading */
@@ -122,4 +123,14 @@ form input:focus {
 
 .login-text a:hover {
     text-decoration: underline;
+}
+
+
+.right_bg{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    right: 0;
+    background-color: green;
+    background: url('../images/odometer.jpg') no-repeat center center/cover;
 }
