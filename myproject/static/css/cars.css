@@ -1,10 +1,10 @@
 body {
-    background-color: #f8f9fa;
+    background-color: #fff9e6;
 }
 
 /* Navigation Bar */
 .navbar {
-    background-color: #0e0f0e;
+    background-color: #222;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -25,6 +25,7 @@ body {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
@@ -32,66 +33,95 @@ body {
 }
 
 .contact-btn {
-    padding: 5px 15px;
-    border: 1px solid #ffcc00;
+    padding: 6px 16px;
+    border: 2px solid #ffcc00;
     border-radius: 20px;
     color: #ffcc00;
+    font-weight: bold;
+    transition: 0.3s ease;
 }
 
+.contact-btn:hover {
+    background-color: #ffcc00;
+    color: #222;
+}
+
+/* Main Content */
 .master {
     padding: 20px;
+    text-align: center;
 }
+
+/* Search Bar */
 .search_bar {
     max-width: 500px;
     margin: 20px auto;
-    padding: 10px;
-    background: #ff6b6b;
+    padding: 12px;
+    background: #ffcc00;
     border-radius: 10px;
     text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
+
 .search_bar input {
     width: 80%;
     padding: 8px;
     border-radius: 5px;
-    border: none;
+    border: 1px solid #222;
+    font-size: 16px;
+    outline: none;
 }
+
+/* Car Listings */
 .car_listing {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
 }
+
+/* Car Card */
 .car_card {
     background: white;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 15px;
     transition: transform 0.3s ease;
 }
+
 .car_card:hover {
     transform: scale(1.05);
 }
+
 .car_card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
     border-radius: 10px;
 }
+
 .car_name {
     font-size: 1.2rem;
     font-weight: bold;
     margin: 10px 0;
+    color: #222;
 }
+
+/* View Details Button */
 .view_description {
-    background: #007bff;
-    color: white;
+    background: #ffcc00;
+    color: #222;
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-size: 16px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: 0.3s ease;
+    font-weight: bold;
 }
+
 .view_description:hover {
-    background: #0056b3;
+    background: #222;
+    color: #ffcc00;
 }
