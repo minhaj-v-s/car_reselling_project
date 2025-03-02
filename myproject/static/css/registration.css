@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0077B6;
+    background-color: #fff;
     position: relative;
 }
 
@@ -33,7 +33,7 @@
     justify-content: space-between;
     width: 800px;
     padding: 30px;
-    background-color: white;
+    background-color: #ffcc00;
     border-radius: 12px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     position: relative;
@@ -50,16 +50,16 @@
 .tagline {
     width: 40%;
     text-align: center;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: bold;
-    color: #0077B6;
+    color: #333;
     padding-left: 20px;
 }
 
 /* Form Heading */
 .form-div h2 {
     font-size: 24px;
-    color: #0077B6;
+    color: #333;
     margin-bottom: 20px;
 }
 
@@ -69,7 +69,7 @@ form label {
     font-weight: 600;
     text-align: left;
     margin-top: 10px;
-    color: #333;
+    color: #222;
 }
 
 form input {
@@ -83,17 +83,17 @@ form input {
 }
 
 form input:focus {
-    border: 1px solid #0077B6;
+    border: 1px solid #333;
     outline: none;
-    box-shadow: 0px 0px 5px rgba(0, 119, 182, 0.5);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* Submit Button */
 .form-div button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-top: 20px;
-    background-color: #0077B6;
+    background-color: #333;
     color: white;
     border: none;
     border-radius: 6px;
@@ -103,18 +103,18 @@ form input:focus {
 }
 
 .form-div button:hover {
-    background-color: #005A8D;
+    background-color: #222;
 }
 
 /* Login Link Styling */
 .login-text {
     margin-top: 15px;
     font-size: 14px;
-    color: #333;
+    color: #222;
 }
 
 .login-text a {
-    color: #0077B6;
+    color: #333;
     text-decoration: none;
     font-weight: 600;
     transition: 0.3s;
