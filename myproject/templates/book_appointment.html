@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="{% static 'css/book_appointment.css'%}">
+</head>
+<body>
+       <!-- Navigation Bar -->
+       <nav class="navbar">
+        <div class="logo">
+            <img src="../static/images/image (1).png" alt="Soorath Autos">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#" class="contact-btn">Contact Us</a></li>
+        </ul>
+    </nav>
+    <div class="master">
+        <!-- Vehicle Image Section -->
+        <div class="vehicle_img">
+            <img src="{% static 'images/WhatsApp Image 2025-02-23 at 14.35.13_aa62e211.png' %}" alt="car image">
+        </div>
+
+        <!-- Appointment Form Section -->
+        <div class="appointment_form">
+            <h2>Book a Test Drive</h2>
+            <form action="">
+                <label for="vehicle">Vehicle</label>
+                <input type="text" name="vehicle" placeholder="Enter vehicle model">
+
+                <label for="customer">Customer</label>
+                <input type="text" name="customer" placeholder="Enter your name">
+
+                <label for="app_date">Test Drive Date</label>
+                <input type="date" name="app_date">
+
+                <label for="app_time">Test Drive Time</label>
+                <input type="time" name="app_time">
+
+                <button type="submit">Book Test Drive</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -19,3 +19,6 @@ def cars(request):
 
 def car_description(request):
     return render(request,"car_description.html")
+
+def book_appointment(request):
+    return render(request,"book_appointment.html")
