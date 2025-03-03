@@ -134,3 +134,78 @@ form input:focus {
     background-color: green;
     background: url('../images/odometer.jpg') no-repeat center center/cover;
 }
+
+.error-text {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+/* Style for error messages */
+.error-text {
+    color: red;
+    font-size: 12px;
+    position: absolute; /* Keeps the layout intact */
+    margin-top: -18px;  /* Moves error up to prevent space expansion */
+    left: 10px;  /* Aligns properly under input */
+    width: 100%; /* Ensures it doesn’t overflow */
+}
+
+/* To ensure the form fields and labels don’t shift */
+.form-div {
+    position: relative;
+}
+
+/* Style for error messages */
+.error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px; /* Adds slight spacing without affecting layout */
+    display: block; /* Ensures it stays on a new line without pushing other elements */
+}
+
+/* Prevents form expansion */
+.form-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Prevents input fields from shifting due to error messages */
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;  /* Space between input and error message */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Keeps form wrapper consistent */
+.form-wrapper {
+    width: 800px; /* Maintain existing width */
+    padding: 30px;
+    background-color: #ffcc00;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Success message styling */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
