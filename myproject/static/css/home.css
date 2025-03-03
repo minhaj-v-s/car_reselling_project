@@ -63,6 +63,7 @@ body {
     text-align: center;
     padding: 20px;
     background-color: #fff;
+    height: 620px;
 }
 
 .hero h1 {
@@ -133,4 +134,12 @@ body {
     width: 450px;
     border-radius: 10px;
     box-shadow: 5px 5px 15px rgba(255, 204, 0, 0.3);
+}
+
+
+/* Slider Container */
+.slider-container {
+    position: relative;
+    width: 550px;
+    margin: 0 auto;
 }

@@ -10,46 +10,49 @@
 /* Navigation Bar */
 .navbar {
     background-color: #0e0f0e;
-    padding: 10px 20px;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo img {
-    height: 60px;
+    height: 70px;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 30px;
 }
 
 .nav-links a {
-    color: #fff;
+    color: white;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s;
+    font-size: 16px;
+    transition: color 0.3s ease-in-out;
 }
 
-.nav-links a:hover {
+.nav-links a.active, .nav-links a:hover {
     color: #ffcc00;
 }
 
 .contact-btn {
-    padding: 5px 15px;
-    border: 1px solid #ffcc00;
-    border-radius: 20px;
+    background-color: transparent;
     color: #ffcc00;
-    transition: background-color 0.3s;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 2px solid #ffcc00;
+    transition: all 0.3s ease-in-out;
 }
 
 .contact-btn:hover {
-    background-color: #0e0f0e;
-    color: #ffcc00;
+    background-color: #ffcc00;
+    color: #0e0f0e;
 }
-
 
 
 /* Master Container */
