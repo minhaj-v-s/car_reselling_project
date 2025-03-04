@@ -24,10 +24,15 @@
     </div>
     
     <ul class="nav-links">
-        <li><a href="#" class="active">Home</a></li>
+        <li><a href="{% url 'home' %}" class="active">Home</a></li>
         <li><a href="#about-us">About</a></li>
-        <li><a href="#">Sign Up</a></li>
-        <li><a href="#">Sign In</a></li>
+        {% if request.session.user_name %}
+        <li><a href="#">Welcome, {{ request.session.user_name }}</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    {% else %}
+        <li><a href="{% url 'register' %}">Sign Up</a></li>
+        <li><a href="{% url 'login' %}">Sign In</a></li>
+    {% endif %}
     </ul>
 
     <a href="#" class="contact-btn">CONTACT US</a>
@@ -65,7 +70,7 @@
         </div>
     </div>
 
-    <button class="view-more-btn">View More Cars</button>
+    <a style="text-decoration: none;" href="{% url 'cars' %}"><button class="view-more-btn">View More Cars</button></a>
 </section>
 
 <!-- About Us Section -->
