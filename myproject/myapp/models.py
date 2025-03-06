@@ -17,7 +17,10 @@ class Vehicle(models.Model):
     year=models.IntegerField(null=True)
     price=models.DecimalField(null=True,max_digits=10,decimal_places=2)
     options=[('petrol','Petrol'),('diesel','Diesel'),('electric','Electric')]
+    kilometers = models.IntegerField(null=True)
     fuel=models.CharField(max_length=10,choices=options,null=True)
+    transmission_options = [('manual', 'Manual'), ('automatic','Automatic'), ('semiAutomatic','Semi Automatic')]
+    transmission = models.CharField(max_length=30, choices=transmission_options,null=True)
     description=models.TextField(null=True)  
     image=models.ImageField(upload_to='images/',blank=True,null=True)  
     status_options=[('available','Available'),('sold','Sold')]

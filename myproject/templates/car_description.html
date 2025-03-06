@@ -34,16 +34,16 @@
     <!-- Car Description Section -->
     <section class="car-description">
         <div class="car-image">
-            <img src="../static/images/WhatsApp Image 2025-02-23 at 14.35.13_aa62e211.png" alt="Car Image">
+            <img src="{{thisCar.image.url}}" alt="Car Image">
         </div>
         <div class="car-details">
-            <h2>{{ vehicle.brand }} {{ vehicle.model }}</h2>
-            <p class="price">Price: ₹{{ vehicle.price }}</p>
-            <p><strong>Year:</strong> {{ vehicle.year }}</p>
-            <p><strong>Fuel Type:</strong> {{ vehicle.fuel_type }}</p>
-            <p><strong>Mileage:</strong> {{ vehicle.mileage }} km/l</p>
-            <p><strong>Status:</strong> {{ vehicle.status }}</p>
-            <p class="description">{{ vehicle.description }}</p>
+            <h2>{{ thisCar.brand }} {{ thisCar.model }}</h2>
+            <p class="price">Price: ₹{{ thisCar.price }}</p>
+            <p><strong>Year:</strong> {{ thisCar.year }}</p>
+            <p><strong>Fuel Type:</strong> {{ thisCar.fuel }}</p>
+            <!-- <p><strong>Mileage:</strong> {{ vehicle.mileage }} km/l</p> -->
+            <p><strong>Status:</strong> {{ thisCar.status }}</p>
+            <p class="description">{{ thisCar.description }}</p>
             <button class="appointment-btn">Book an Appointment</button>
             <button class="chat-btn">
                 <i class="fas fa-comments"></i> Chat with Dealer

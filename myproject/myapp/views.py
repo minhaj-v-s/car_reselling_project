@@ -8,6 +8,7 @@ from .models import User
 import re
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from .models import Vehicle
 # Create your views here.
 
 # def msg(request):
@@ -23,10 +24,12 @@ def login(request):
     return render(request,"login.html")
 
 def cars(request):
-    return render(request,"cars.html")
+    cars = Vehicle.objects.all()
+    return render(request,"cars.html",{'cars':cars})
 
-def car_description(request):
-    return render(request,"car_description.html")
+def car_description(request,pk):
+    thisCar = Vehicle.objects.get(id=pk)
+    return render(request,"car_description.html",{'thisCar':thisCar})
 
 def book_appointment(request):
     return render(request,"book_appointment.html")
