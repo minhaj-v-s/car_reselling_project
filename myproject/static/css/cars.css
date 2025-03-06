@@ -1,5 +1,9 @@
+/* General */
 body {
-    background-color: #fff9e6;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 /* Navigation Bar */
@@ -12,24 +16,26 @@ body {
 }
 
 .logo img {
-    height: 70px;
+    height: 60px;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
     gap: 30px;
+    padding: 0;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     transition: color 0.3s ease-in-out;
 }
 
-.nav-links a.active, .nav-links a:hover {
+.nav-links a.active,
+.nav-links a:hover {
     color: #ffcc00;
 }
 
@@ -78,23 +84,26 @@ body {
 /* Car Listings */
 .car_listing {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     padding: 20px;
+    justify-content: center;
 }
 
 /* Car Card */
 .car_card {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 15px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #ffcc00;
 }
 
 .car_card:hover {
     transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .car_card img {
@@ -104,8 +113,9 @@ body {
     border-radius: 10px;
 }
 
+/* Car Name */
 .car_name {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     margin: 10px 0;
     color: #222;
@@ -114,7 +124,7 @@ body {
 /* View Details Button */
 .view_description {
     background: #ffcc00;
-    color: #222;
+    color: #0e0f0e;
     border: none;
     padding: 10px 15px;
     border-radius: 6px;
@@ -125,6 +135,6 @@ body {
 }
 
 .view_description:hover {
-    background: #222;
+    background: #0e0f0e;
     color: #ffcc00;
 }

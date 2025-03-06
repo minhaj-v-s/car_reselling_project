@@ -71,7 +71,13 @@ body {
     font-weight: bold;
     color: #0e0f0e;
     text-shadow: 2px 2px 0px #ffcc00, 4px 4px 0px rgba(0, 0, 0, 0.3);
+    
 }
+
+.hero h1:hover {
+    text-shadow: 3px 3px 0px #ffcc00, 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
 
 .view-more-btn {
     padding: 10px 20px;
@@ -89,7 +95,7 @@ body {
 }
 
 /* About Us Section */
-.about-us {
+#about-us {
     display: flex;
     align-items: center;
     justify-content: center;

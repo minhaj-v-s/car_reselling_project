@@ -34,12 +34,14 @@
 .left-img {
     left: 10%;
     background-image: url('../images/login-page-image_3.jpg'); /* Replace with your image */
+    opacity: 0.8;
 }
 
 /* Right Image */
 .right-img {
     right: 10%;
     background-image: url('../images/login-page-image_2.jpg'); /* Replace with your image */
+    opacity: 0.8;
 }
 
 /* Login Form Wrapper */

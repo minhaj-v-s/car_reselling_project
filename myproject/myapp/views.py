@@ -69,7 +69,7 @@ def register(request):
                 name=name,
                 email=email,
                 phone=phone,
-                password=password  # ✅ Secure password storage
+                password=password  
             )
             messages.success(request, "Registration successful! You can now log in.")  # ✅ Success message
             return redirect("register")  # Reload form with success message
@@ -104,4 +104,4 @@ def login_view(request):
 
 def logout_view(request):
     request.session.flush()  # Clear session
-    return redirect("login")
+    return redirect("home")
