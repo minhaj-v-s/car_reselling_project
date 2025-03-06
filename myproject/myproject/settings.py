@@ -133,5 +133,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 JAZZMIN_SETTINGS = {
     'site_header' : "Soorath Autos",
     'site_brand'  : "Soorath Autos",
-    'site_logo'   : "D:\django_projects\mainproject\car_reselling_project\myproject\static\images\image (1).png"
+    'site_logo'   : "D:\AESTHETIX\Projects\Main_Project\car_reselling_project\myproject\static\images\image (1).png",
 }
