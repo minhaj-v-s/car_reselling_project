@@ -20,7 +20,8 @@
             <div class="form-div">
                 <h2>Welcome Back</h2>
                 <form action="{% url 'login' %}" method="POST">
-                    {%csrf_token%}
+                    {% csrf_token %}
+                    
                     <label for="username">Username</label>
                     <input type="text" name="username" placeholder="Enter your email" required>
 
@@ -36,7 +37,10 @@
                         {% endfor %}
                     </div>
                     {% endif %}
-                    
+
+                    <!-- Register Link -->
+                    <p class="register-link">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+
                 </form>
             </div>
         </div>

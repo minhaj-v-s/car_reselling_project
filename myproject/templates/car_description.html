@@ -22,10 +22,15 @@
         </div>
         
         <ul class="nav-links">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Sign Up</a></li>
-            <li><a href="#">Sign In</a></li>
+            <li><a href="{% url 'home' %}" class="active">Home</a></li>
+            <li><a href="#about-us">About</a></li>
+            {% if request.session.user_name %}
+            <li><a href="#">Welcome, {{ request.session.user_name }}</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}" class="login-btn">Sign In</a></li>
+    
+        {% endif %}
         </ul>
     
         <a href="#" class="contact-btn">CONTACT US</a>

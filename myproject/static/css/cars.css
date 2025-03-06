@@ -16,27 +16,54 @@ body {
 }
 
 .logo img {
-    height: 60px;
+    height: 70px;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
     gap: 30px;
-    padding: 0;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     transition: color 0.3s ease-in-out;
 }
 
-.nav-links a.active,
-.nav-links a:hover {
+.nav-links a.active, .nav-links a:hover {
     color: #ffcc00;
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+    75% { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.nav-links li:hover {
+    animation: wiggle 0.3s ease-in-out;
+}
+
+/* Style for Sign In Button */
+.nav-links li a.login-btn {
+    padding: 10px 15px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid #ffcc00;
+    border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.nav-links li a.login-btn:hover {
+    background-color: #ffcc00;
+    color: #0e0f0e;
+    transform: scale(1.1);
 }
 
 .contact-btn {

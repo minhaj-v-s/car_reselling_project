@@ -209,3 +209,31 @@ input {
     margin-bottom: 10px;
     text-align: center;
 }
+
+
+/* Car Animation */
+.moving-car {
+    width: 100px; /* Adjust size */
+    position: absolute;
+    bottom: 500px; /* Position above the text */
+    left: -150px; /* Start from outside the left */
+    animation: moveCar 2s linear infinite alternate; /* Smooth infinite movement */
+}
+
+/* Animation for moving car */
+@keyframes moveCar {
+    0% {
+        left: 80px; /* Start outside left */
+        transform: scaleX(1); /* Normal direction */
+    }
+    /* 50% {
+        left: 50%; 
+        transform: scaleX(1);
+    } */
+    100% {
+        left: calc(250px); /* Move outside right */
+        /* transform: scaleX(-1);  */
+        /* Flip car */
+    }
+}
+
