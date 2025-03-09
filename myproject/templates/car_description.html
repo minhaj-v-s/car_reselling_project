@@ -9,7 +9,33 @@
     <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+<style>
+    .car-images {
+        text-align: center;
+    }
+    .main-image img {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 5px;
+    }
+    .thumbnail-images {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    .thumbnail {
+        width: 80px;
+        height: 50px;
+        object-fit: cover;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .thumbnail:hover {
+        border-color: #007bff;
+    }
+</style>
 
 </head>
 <body>
@@ -37,10 +63,20 @@
     </nav>
 
     <!-- Car Description Section -->
-    <section class="car-description">
-        <div class="car-image">
-            <img src="{{thisCar.image.url}}" alt="Car Image">
-        </div>
+    <!-- Car Images Section -->
+<div class="car-images">
+    <div class="main-image">
+        <img id="mainCarImage" src="{{ thisCar.image.url }}" alt="Car Image">
+    </div>
+    <div class="thumbnail-images">
+        <img src="{{ thisCar.image.url }}" alt="Car Image" class="thumbnail" onclick="changeMainImage(this)">
+        {% for image in images %}
+            <img src="{{ image.image.url }}" alt="Car Image" class="thumbnail" onclick="changeMainImage(this)">
+        {% endfor %}
+    </div>
+</div>
+
+
         <div class="car-details">
             <h2>{{ thisCar.brand }} {{ thisCar.model }}</h2>
             <p class="price">Price: ₹{{ thisCar.price }}</p>
@@ -112,6 +148,11 @@
                 sendBtn.click();
             }
         });
+
+
+        function changeMainImage(imgElement) {
+        document.getElementById("mainCarImage").src = imgElement.src;
+    }
     </script> 
 </body>
 </html>
