@@ -16,14 +16,14 @@ class Vehicle(models.Model):
     model=models.CharField(max_length=200,null=True)
     year=models.IntegerField(null=True)
     price=models.DecimalField(null=True,max_digits=10,decimal_places=2)
-    options=[('petrol','Petrol'),('diesel','Diesel'),('electric','Electric')]
+    options=[('Petrol','Petrol'),('Diesel','Diesel'),('Electric','Electric')]
     kilometers = models.IntegerField(null=True)
     fuel=models.CharField(max_length=10,choices=options,null=True)
-    transmission_options = [('manual', 'Manual'), ('automatic','Automatic'), ('semiAutomatic','Semi Automatic')]
+    transmission_options = [('Manual', 'Manual'), ('Automatic','Automatic'), ('Semi Automatic','Semi Automatic')]
     transmission = models.CharField(max_length=30, choices=transmission_options,null=True)
     description=models.TextField(null=True)  
     image=models.ImageField(upload_to='images/',blank=True,null=True)  
-    status_options=[('available','Available'),('sold','Sold')]
+    status_options=[('Available','Available'),('Sold','Sold')]
     status=models.CharField(max_length=10,choices=status_options,null=True) 
 
     def __str__(self):
@@ -41,7 +41,7 @@ class Appointment(models.Model):
     customer=models.ForeignKey(User,on_delete=models.CASCADE,null=True,related_name='appointments')
     app_date=models.DateField(null=True)
     app_time=models.TimeField(null=True)
-    status_options=[('pending','Pending'),('confirmed','Confirmed'),('cancelled','Cancelled')]
+    status_options=[('Pending','Pending'),('Confirmed','Confirmed'),('Cancelled','Cancelled')]
     status=models.CharField(max_length=10,choices=status_options,null=True)
 
     def __str__(self):
@@ -52,7 +52,7 @@ class Purchase(models.Model):
     customer=models.ForeignKey(User,on_delete=models.CASCADE,null=True,related_name='purchases')
     purchase_date=models.DateField(null=True)
     price=models.DecimalField(null=True,max_digits=10,decimal_places=2)   
-    status_options=[('completed','Completed'),('cancelled','Cancelled')]
+    status_options=[('Completed','Completed'),('Cancelled','Cancelled')]
     status=models.CharField(max_length=10,choices=status_options,null=True)
 
     def __str__(self):

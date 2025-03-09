@@ -9,6 +9,7 @@ import re
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import Vehicle
+from django.db.models import Q
 # Create your views here.
 
 # def msg(request):
@@ -23,9 +24,39 @@ def registration(request):
 def login(request):
     return render(request,"login.html")
 
+# def cars(request):
+#     cars = Vehicle.objects.all()
+#     return render(request,"cars.html",{'cars':cars})
+
 def cars(request):
     cars = Vehicle.objects.all()
-    return render(request,"cars.html",{'cars':cars})
+
+    search_query = request.GET.get('search', '')
+    fuel_type = request.GET.get('fuel', '')
+    brand = request.GET.get('brand', '')
+    model = request.GET.get('model', '')
+    transmission = request.GET.get('transmission', '')
+
+    if search_query:
+        cars = cars.filter(
+            Q(brand__icontains=search_query) | 
+            Q(model__icontains=search_query)
+        )
+
+    if fuel_type:
+        cars = cars.filter(fuel=fuel_type)
+
+    if brand:
+        cars = cars.filter(brand=brand)
+
+    if model:
+        cars = cars.filter(model=model)
+
+    if transmission:
+        cars = cars.filter(transmission=transmission)
+
+    return render(request, "cars.html", {'cars': cars})
+
 
 def car_description(request,pk):
     thisCar = Vehicle.objects.get(id=pk)
