@@ -101,11 +101,21 @@ body {
     margin: 50px;
 }
 
+.description{
+    width: 500px;
+}
+
 .car-image img {
     width: 500px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.car-image{
+    position:  relative;
+    right: 100px;
+    top: 50px;
 }
 
 .car-details {
