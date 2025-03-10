@@ -1,0 +1,273 @@
+/* Navbar */
+.navbar {
+    background-color: #0e0f0e;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 70px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links a.active, .nav-links a:hover {
+    color: #ffcc00;
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+    75% { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.nav-links li:hover {
+    animation: wiggle 0.3s ease-in-out;
+}
+
+/* Style for Sign In Button */
+.nav-links li a.login-btn {
+    padding: 10px 15px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid #ffcc00;
+    border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.nav-links li a.login-btn:hover {
+    background-color: #ffcc00;
+    color: #0e0f0e;
+    transform: scale(1.1);
+}
+
+
+
+.contact-btn {
+    background-color: transparent;
+    color: #ffcc00;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 2px solid #ffcc00;
+    transition: all 0.3s ease-in-out;
+}
+
+.contact-btn:hover {
+    background-color: #ffcc00;
+    color: #0e0f0e;
+}
+
+
+/* Styling for the overall list container */
+.appointment-list {
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Individual appointment cards */
+.appointment-card {
+    background: #f8f9fa;
+    border-left: 5px solid #ffc107; /* Default yellow border */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Status-based styling */
+.status {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+/* Status color indicators */
+.status.pending {
+    color: #ff9800;  /* Orange */
+}
+
+.status.approved {
+    color: #4caf50;  /* Green */
+    border-left-color: #4caf50;
+}
+
+.status.rejected {
+    color: #f44336;  /* Red */
+    border-left-color: #f44336;
+}
+
+.appointment-list h1 {
+    text-align: center;
+}
+
+/* Styling for the overall list container */
+.appointment-list {
+    max-width: 700px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Your Bookings heading */
+.appointment-list h1 {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Underline effect for heading */
+.appointment-list h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: #ffcc00;
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+/* Individual appointment cards */
+.appointment-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8f9fa;
+    border-left: 6px solid #ffc107; /* Default yellow border */
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.appointment-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Appointment details section */
+.appointment-details {
+    flex: 1;
+    padding-right: 20px;
+}
+
+/* Vehicle Image */
+.vehicle-image {
+    width: 120px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+}
+
+.vehicle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Status-based styling */
+.status {
+    font-weight: bold;
+    text-transform: capitalize;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+/* Status color indicators */
+/* Status-based styling */
+.status {
+    font-weight: bold;
+    text-transform: capitalize;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+/* Pending - Yellow */
+.status.pending {
+    color: #ff9800;
+    background: rgba(255, 152, 0, 0.1);
+    border-left: 6px solid #ff9800;
+}
+
+/* Confirmed - Green */
+.status.confirmed {
+    color: #4caf50;
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 6px solid #4caf50;
+}
+
+/* Cancelled (acts as Rejected) - Red */
+.status.cancelled {
+    color: #f44336;  /* Red */
+    background: rgba(244, 67, 54, 0.1);
+    border-left: 6px solid #f44336;
+}
+
+
+/* Text inside appointment card */
+.appointment-card p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.appointment-card p strong {
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .appointment-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .appointment-details {
+        padding-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .vehicle-image {
+        width: 100%;
+        height: auto;
+        max-height: 120px;
+    }
+}
+
+    

@@ -1,50 +1,61 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Appointment</title>
     <link rel="stylesheet" href="{% static 'css/book_appointment.css'%}">
 </head>
+
 <body>
-       <!-- Navigation Bar -->
-       <nav class="navbar">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
         <div class="nav-left">
             <div class="logo">
                 <img src="{% static 'images/image (1).png' %}" alt="Soorath Autos">
             </div>
         </div>
-        
+
         <ul class="nav-links">
             <li><a href="{% url 'home' %}" class="active">Home</a></li>
             <li><a href="#about-us">About</a></li>
             {% if request.session.user_name %}
             <li><a href="#">Welcome, {{ request.session.user_name }}</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
-        {% else %}
-        <li><a href="{% url 'login' %}" class="login-btn">Sign In</a></li>
-    
-        {% endif %}
+            {% else %}
+            <li><a href="{% url 'login' %}" class="login-btn">Sign In</a></li>
+
+            {% endif %}
         </ul>
-    
+
         <a href="#" class="contact-btn">CONTACT US</a>
     </nav>
     <div class="master">
         <!-- Vehicle Image Section -->
         <div class="vehicle_img">
-            <img src="{% static 'images/WhatsApp Image 2025-02-23 at 14.35.13_aa62e211.png' %}" alt="car image">
+            <img src="{{thisCar.image.url}}" alt="car image">
         </div>
 
         <!-- Appointment Form Section -->
         <div class="appointment_form">
             <h2>Book a Test Drive</h2>
-            <form action="">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <form action="" method="POST">
+                {%csrf_token%}
                 <label for="vehicle">Vehicle</label>
-                <input type="text" name="vehicle" placeholder="Enter vehicle model">
+                <input type="text" name="vehicle" value="{{thisCar.brand}} {{thisCar.model}}" disabled>
 
                 <label for="customer">Customer</label>
-                <input type="text" name="customer" placeholder="Enter your name">
+                <input type="text" name="customer" value="{{user}}" disabled>
 
                 <label for="app_date">Test Drive Date</label>
                 <input type="date" name="app_date">
@@ -57,4 +68,5 @@
         </div>
     </div>
 </body>
+
 </html>

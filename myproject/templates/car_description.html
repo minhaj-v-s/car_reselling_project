@@ -49,7 +49,7 @@
             <!-- <p><strong>Mileage:</strong> {{ vehicle.mileage }} km/l</p> -->
             <p><strong>Status:</strong> {{ thisCar.status }}</p>
             <p class="description">{{ thisCar.description }}</p>
-            <button class="appointment-btn">Book an Appointment</button>
+            <a href="{% url 'book_appointment' thisCar.id %}" style="text-decoration: none;"><button class="appointment-btn">Book an Appointment</button></a>
             <button class="chat-btn">
                 <i class="fas fa-comments"></i> Chat with Dealer
             </button>

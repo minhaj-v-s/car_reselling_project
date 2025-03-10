@@ -42,10 +42,10 @@ class Appointment(models.Model):
     app_date=models.DateField(null=True)
     app_time=models.TimeField(null=True)
     status_options=[('Pending','Pending'),('Confirmed','Confirmed'),('Cancelled','Cancelled')]
-    status=models.CharField(max_length=10,choices=status_options,null=True)
+    status=models.CharField(max_length=10,choices=status_options,null=True,default='Pending')
 
     def __str__(self):
-        return self.vehicle.model
+        return f"{self.vehicle.model} - {self.status}" 
 
 class Purchase(models.Model):
     vehicle=models.ForeignKey(Vehicle,on_delete=models.CASCADE,null=True,related_name='purchases')

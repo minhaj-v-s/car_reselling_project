@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib import messages
-from .models import User
+from .models import User,Appointment
 import re
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -62,8 +62,25 @@ def car_description(request,pk):
     thisCar = Vehicle.objects.get(id=pk)
     return render(request,"car_description.html",{'thisCar':thisCar})
 
-def book_appointment(request):
-    return render(request,"book_appointment.html")
+def book_appointment(request,pk):
+    thisCar = Vehicle.objects.get(id=pk)
+    userName = request.session['user_name']
+    userId = request.session['user_id']
+    if request.method == "POST":
+        vehicle = Vehicle.objects.get(id=pk)
+        customer = User.objects.get(id=userId)
+        app_date = request.POST.get("app_date")
+        app_time = request.POST.get("app_time")
+
+        existing_appointment = Appointment.objects.filter(app_date=app_date, app_time=app_time).exists()
+
+        if existing_appointment:
+            messages.error(request, "This time slot is already taken. Please choose another time.")
+        else:
+            Appointment.objects.create(vehicle=vehicle, customer=customer, app_date=app_date, app_time=app_time)
+            messages.success(request, "Appointment booked successfully!")
+
+    return render(request,"book_appointment.html",{'thisCar':thisCar,'user':userName})
 
 def register(request):
     errors = {}
@@ -133,6 +150,17 @@ def login_view(request):
             messages.error(request, "User not found")
 
     return render(request, 'login.html')
+
+def user_dashboard(request):
+    return render(request,"user_dashboard.html")
+
+def user_appointments(request):
+    userId = request.session.get('user_id')
+    user = User.objects.get(id=userId)
+    appointments = Appointment.objects.filter(customer=user)
+    print("Appointments found:", appointments)
+    return render(request, 'user_dashboard.html', {'appointments': appointments})
+
 
 
 
