@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Description</title>
     <link rel="stylesheet" href="{% static 'css/car_description.css' %}">
-    <!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
+    
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -27,91 +28,81 @@
             {% if request.session.user_name %}
             <li><a href="#">Welcome, {{ request.session.user_name }}</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
-        {% else %}
-        <li><a href="{% url 'login' %}" class="login-btn">Sign In</a></li>
-    
-        {% endif %}
+            {% else %}
+            <li><a href="{% url 'login' %}" class="login-btn">Sign In</a></li>
+            {% endif %}
         </ul>
-    
+
         <a href="#" class="contact-btn">CONTACT US</a>
     </nav>
 
     <!-- Car Description Section -->
-    <section class="car-description">
-        <div class="car-image">
-            <img src="{{thisCar.image.url}}" alt="Car Image">
+    <div class="container car-description">
+        <div class="row">
+            <!-- Car Images with Bootstrap Carousel -->
+            <div class="col-md-6">
+                <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ thisCar.image.url }}" class="d-block w-100" alt="Car Image">
+                        </div>
+                        {% for image in images %}
+                        <div class="carousel-item">
+                            <img src="{{ image.image.url }}" class="d-block w-100" alt="Car Image">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Car Details -->
+            <div class="col-md-6 car-details">
+                <h2>{{ thisCar.brand }} {{ thisCar.model }}</h2>
+                <p class="price">Price: ₹{{ thisCar.price }}</p>
+                <p><strong>Year:</strong> {{ thisCar.year }}</p>
+                <p><strong>Fuel Type:</strong> {{ thisCar.fuel }}</p>
+                <p><strong>Status:</strong> {{ thisCar.status }}</p>
+                
+                <!-- Description with Bullet Points -->
+                <ul class="car-description-list">
+                    {% for line in description_list %}
+                        {% if line.strip %}
+                            <li>{{ line.strip }}.</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                
+
+                <button class="appointment-btn">Book an Appointment</button>
+
+<button class="chat-btn">
+    <i class="fas fa-comments"></i> Chat with Dealer
+</button>
+
+            </div>
+        </div>  
+
+    <!-- Chat Popup -->
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <h4>Chat with Dealer</h4>
+            <span class="close-chat-btn">&times;</span>
         </div>
-        <div class="car-details">
-            <h2>{{ thisCar.brand }} {{ thisCar.model }}</h2>
-            <p class="price">Price: ₹{{ thisCar.price }}</p>
-            <p><strong>Year:</strong> {{ thisCar.year }}</p>
-            <p><strong>Fuel Type:</strong> {{ thisCar.fuel }}</p>
-            <!-- <p><strong>Mileage:</strong> {{ vehicle.mileage }} km/l</p> -->
-            <p><strong>Status:</strong> {{ thisCar.status }}</p>
-            <p class="description">{{ thisCar.description }}</p>
-            <a href="{% url 'book_appointment' thisCar.id %}" style="text-decoration: none;"><button class="appointment-btn">Book an Appointment</button></a>
-            <button class="chat-btn">
-                <i class="fas fa-comments"></i> Chat with Dealer
-            </button>
-            <!-- Chat Popup -->
-<div class="chat-popup" id="chatPopup">
-    <div class="chat-header">
-        <h4>Chat with Dealer</h4>
-        <span class="close-chat-btn">&times;</span>
+        <div class="chat-body">
+            <div class="chat-messages" id="chatMessages"></div>
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button id="sendBtn">Send</button>
+        </div>
     </div>
-    <div class="chat-body">
-        <div class="chat-messages" id="chatMessages">
-            <!-- Chat messages will appear here -->
-        </div>
-        <input type="text" id="chatInput" placeholder="Type your message...">
-        <button id="sendBtn">Send</button>
-    </div>
-</div>
 
-            
-        </div>
-    </section>
-
-
-
-
-
-
-    <script>
-        const chatBtn = document.querySelector('.chat-btn');
-        const chatPopup = document.getElementById('chatPopup');
-        const closeChatBtn = document.querySelector('.close-chat-btn');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-        const sendBtn = document.getElementById('sendBtn');
-    
-        // Toggle Chat Popup
-        chatBtn.addEventListener('click', () => {
-            chatPopup.style.display = 'block';
-        });
-    
-        closeChatBtn.addEventListener('click', () => {
-            chatPopup.style.display = 'none';
-        });
-    
-        // Send Message
-        sendBtn.addEventListener('click', () => {
-            const message = chatInput.value.trim();
-            if (message) {
-                const newMessage = document.createElement('p');
-                newMessage.textContent = message;
-                chatMessages.appendChild(newMessage);
-                chatInput.value = '';
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-        });
-    
-        // Press Enter to Send
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendBtn.click();
-            }
-        });
-    </script> 
+    <!-- Bootstrap & External JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/car_description.js' %}"></script>
 </body>
 </html>

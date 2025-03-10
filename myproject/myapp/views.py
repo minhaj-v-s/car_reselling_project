@@ -167,3 +167,17 @@ def user_appointments(request):
 def logout_view(request):
     request.session.flush()  # Clear session
     return redirect("home")
+
+def car_description(request, pk):
+    thisCar = Vehicle.objects.get(id=pk)
+    images = thisCar.images.all()  # Fetch all images related to the car
+    
+    # Split the description into a list of sentences
+    description_list = thisCar.description.split('.')
+
+    return render(request, "car_description.html", {
+        'thisCar': thisCar,
+        'images': images,
+        'description_list': description_list
+    })
+

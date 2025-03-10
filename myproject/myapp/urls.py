@@ -14,3 +14,9 @@ urlpatterns =[
     path("logout/",views.logout_view, name="logout"),
     path("user_appointments",views.user_appointments,name="user_appointments"),
 ]
+
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
