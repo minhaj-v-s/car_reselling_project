@@ -1,37 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const chatBtn = document.querySelector('.chat-btn');
-    const chatPopup = document.getElementById('chatPopup');
-    const closeChatBtn = document.querySelector('.close-chat-btn');
-    const chatMessages = document.getElementById('chatMessages');
-    const chatInput = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendBtn');
+    const chatPopup = document.getElementById("chatPopup");
+    const openChat = document.getElementById("openChat");
+    const closeChatBtn = document.querySelector(".close-chat-btn");
+    const chatMessages = document.getElementById("chatMessages");
+    const chatInput = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendBtn");
 
-    // Open Chat Popup
-    chatBtn.addEventListener('click', () => {
-        chatPopup.style.display = 'block';
-    });
+    let socket = new WebSocket("ws://" + window.location.host + "/ws/chat/");
 
-    // Close Chat Popup
-    closeChatBtn.addEventListener('click', () => {
-        chatPopup.style.display = 'none';
-    });
+    // When a message is received from WebSocket
+    socket.onmessage = function (event) {
+        let messageData = JSON.parse(event.data);
+        let messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+        messageDiv.textContent = messageData.message;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to latest message
+    };
 
-    // Send Chat Message
-    sendBtn.addEventListener('click', () => {
-        const message = chatInput.value.trim();
+    // Send message
+    sendBtn.onclick = function () {
+        let message = chatInput.value.trim();
         if (message) {
-            const newMessage = document.createElement('p');
-            newMessage.textContent = message;
-            chatMessages.appendChild(newMessage);
-            chatInput.value = '';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            socket.send(JSON.stringify({ "message": message }));
+            chatInput.value = "";
         }
+    };
+
+    // Open chat popup
+    openChat.addEventListener("click", () => {
+        chatPopup.style.display = "block";
     });
 
-    // Enter Key to Send Message
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            sendBtn.click();
-        }
+    // Close chat popup
+    closeChatBtn.addEventListener("click", () => {
+        chatPopup.style.display = "none";
     });
 });

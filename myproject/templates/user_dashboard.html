@@ -42,6 +42,7 @@
                 <p><strong>Date:</strong> {{ appointment.app_date }}</p>
                 <p><strong>Time:</strong> {{ appointment.app_time }}</p>
                 <p class="status {{ appointment.status|lower }}"><strong>Status:</strong> {{ appointment.status }}</p>
+                <a class="delete-apmt" href="{% url 'delete_appointment' appointment.id %}"><button>Cancel Appointment</button></a>
             </div>
             <div class="vehicle-image">
                 <img src="{{ appointment.vehicle.image.url }}" alt="{{ appointment.vehicle.model }}">

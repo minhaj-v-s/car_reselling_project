@@ -251,6 +251,19 @@
     color: #333;
 }
 
+.delete-apmt{
+    position: relative;
+    left: 100px;
+}
+
+.delete-apmt button{
+    border-radius: 10px;
+    background-color: red;
+    color:white;
+    border: 0;
+    font-size: 20px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .appointment-card {
@@ -266,8 +279,6 @@
     .vehicle-image {
         width: 100%;
         height: auto;
-        max-height: 120px;
-    }
+        max-height:120px;
+    }
 }
-
-    
