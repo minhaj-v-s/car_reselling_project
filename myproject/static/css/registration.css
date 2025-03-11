@@ -220,6 +220,24 @@ input {
     animation: moveCar 2s linear infinite alternate; /* Smooth infinite movement */
 }
 
+/* Login Link Styling */
+.login-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.login-text a {
+    color: #0077B6;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.login-text a:hover {
+    text-decoration: underline;
+}
+
 /* Animation for moving car */
 @keyframes moveCar {
     0% {

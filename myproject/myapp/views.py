@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import Vehicle
 from django.db.models import Q
+
 # Create your views here.
 
 # def msg(request):
@@ -128,9 +129,7 @@ def register(request):
     return render(request, "registration.html", {"errors": errors})
 
 
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .models import User  # Import your custom User model
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -180,4 +179,12 @@ def car_description(request, pk):
         'images': images,
         'description_list': description_list
     })
+
+
+def delete_appointment(request,pk):
+    record_id = pk
+    record = Appointment.objects.get(id=record_id)
+    record.delete()
+
+    return render(request,"user_dashboard.html")
 
