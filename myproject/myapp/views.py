@@ -180,7 +180,6 @@ def car_description(request, pk):
         'description_list': description_list
     })
 
-
 def delete_appointment(request,pk):
     record_id = pk
     record = Appointment.objects.get(id=record_id)

@@ -250,6 +250,10 @@ body {
 }
 
 /* Chat Popup Styles */
+
+
+
+/* Chat Popup Styles */
 .chat-popup {
     display: none;
     position: fixed;
@@ -261,7 +265,6 @@ body {
     border-radius: 10px;
     z-index: 1000;
     overflow: hidden;
-    transition: transform 0.3s ease;
 }
 
 .chat-header {
@@ -273,15 +276,6 @@ body {
     align-items: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-}
-
-.chat-header h4 {
-    margin: 0;
-}
-
-.close-chat-btn {
-    cursor: pointer;
-    font-size: 1.2rem;
 }
 
 .chat-body {
