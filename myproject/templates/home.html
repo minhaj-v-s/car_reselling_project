@@ -11,85 +11,116 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+
 </head>
 
 <body>
 
-<!-- Navigation Bar -->
-<nav class="navbar">
-    <div class="nav-left">
-        <div class="logo">
-            <img src="{% static 'images/image (1).png' %}" alt="Soorath Autos">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <img src="{% static 'images/image (1).png' %}" alt="Soorath Autos">
+            </div>
         </div>
-    </div>
-    
-    <ul class="nav-links">
-        <li><a href="{% url 'home' %}" class="active">Home</a></li>
-        <li><a href="#about-us">About</a></li>
-        {% if request.session.user_name %}
-        <li><a href="#">Welcome, {{ request.session.user_name }}</a></li>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
-        <li><a href="{% url 'user_appointments' %}">Your Bookings</a></li>
-    {% else %}
-    <li><a href="{% url 'login' %}" class="login-btn">Sign In</a></li>
 
-    {% endif %}
-    </ul>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}" class="active">Home</a></li>
+            <li><a href="#about-us">About</a></li>
+            {% if request.session.user_name %}
+            <li><a href="#">Welcome, {{ request.session.user_name }}</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="{% url 'user_appointments' %}">Your Bookings</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}" class="login-btn">Sign In</a></li>
 
-    <a href="#" class="contact-btn">CONTACT US</a>
-</nav>
+            {% endif %}
+        </ul>
 
-<!-- Hero Section -->
-<section class="hero">
-    <h1>Quality Cars, Unbeatable Deals!</h1>
+        <a href="#" class="contact-btn">CONTACT US</a>
+    </nav>
 
-    <!-- Car Slider -->
-    <div class="slider-container">
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{% static 'images\kia_sonet_white_bg.png' %}" class="d-block w-100" alt="Car 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'images\nexon_white_bg.png' %}" class="d-block w-100" alt="Car 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'images\creta_white_bg.png' %}" class="d-block w-100" alt="Car 3">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'images\Baleno_white_bg-removebg-preview.png' %}" class="d-block w-100" alt="Car 4">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'images\ignis_white_bg.png' %}" class="d-block w-100" alt="Car 4">
+    <!-- Changes for home.html -->
+    <!-- Replace the Hero Section with the following code -->
+    <section class="hero">
+        <h1>Quality Cars, Unbeatable Deals!</h1>
+
+        <div class="hero-content">
+  <!-- Car Description Column -->
+<div class="car-description">
+    <h2>Discover Your Dream Car at Soorath Autos</h2>
+    <p class="car-text">Soorath Autos brings you a premium collection of vehicles blending style, performance, and reliability. Our meticulously inspected automobiles cater to every lifestyle, from spacious family cars to sleek city runners, all tailored to your budget with rigorous quality checks ensuring top standards.</p>
+</div>
+
+
+            <!-- Car Slider Column -->
+            <div class="slider-container">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel"
+                    data-bs-interval="2000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'images\kia_sonet_white_bg.png' %}" class="d-block w-100" alt="Car 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images\nexon_white_bg.png' %}" class="d-block w-100" alt="Car 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images\creta_white_bg.png' %}" class="d-block w-100" alt="Car 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images\Baleno_white_bg-removebg-preview.png' %}" class="d-block w-100"
+                                alt="Car 4">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images\ignis_white_bg.png' %}" class="d-block w-100" alt="Car 5">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-    </div>
 
-    <a style="text-decoration: none;" href="{% url 'cars' %}"><button class="view-more-btn">View More Cars</button></a>
-</section>
+        <a style="text-decoration: none;" href="{% url 'cars' %}"><button class="view-more-btn">View More
+                Cars</button></a>
+    </section>
 
-<!-- About Us Section -->
-<section id="about-us">
-    <div class="about-text">
-        <h2>About Soorath Autos</h2>
-        <p>Welcome to Soorath Autos, your trusted destination for high-quality used vehicles. With years of experience in the automobile industry, we take pride in offering a wide selection of well-maintained, reliable, and affordable vehicles to meet your needs.</p>
-        <p>At Soorath Autos, customer satisfaction is our top priority. Our commitment to transparency, quality, and fair pricing has earned us the trust of countless happy customers over the years. Whether you're looking for a car or a commercial vehicle, we ensure a smooth buying experience with expert guidance and hassle-free services.</p>
-        <p>Visit us today and drive home your perfect vehicle with confidence!</p>
-        <a href="#" class="about-btn">Learn More</a>
-    </div>
-    <div class="about-image">
-        <img src="{% static 'images/WhatsApp Image 2025-03-02 at 16.02.42_09731a6a.jpg' %}" alt="Soorath Autos Showroom">
-    </div>
-</section>
+
+    <!-- About Us Section -->
+    <section id="about-us">
+        <div class="about-text">
+            <h2>About Soorath Autos</h2>
+            <p>Welcome to Soorath Autos, your trusted destination for high-quality used vehicles. With years of
+                experience in the automobile industry, we take pride in offering a wide selection of well-maintained,
+                reliable, and affordable vehicles to meet your needs.</p>
+            <p>At Soorath Autos, customer satisfaction is our top priority. Our commitment to transparency, quality, and
+                fair pricing has earned us the trust of countless happy customers over the years. Whether you're looking
+                for a car or a commercial vehicle, we ensure a smooth buying experience with expert guidance and
+                hassle-free services.</p>
+            <p>Visit us today and drive home your perfect vehicle with confidence!</p>
+            <a href="#" class="about-btn">Learn More</a>
+        </div>
+        <div class="about-image">
+            <img src="{% static 'images/WhatsApp Image 2025-03-02 at 16.02.42_09731a6a.jpg' %}"
+                alt="Soorath Autos Showroom">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
 
 </body>
 
