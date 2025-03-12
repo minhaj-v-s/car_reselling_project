@@ -6,10 +6,10 @@ from django.core.exceptions import ValidationError
 from django.contrib import messages
 from .models import User,Appointment
 import re
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import Vehicle
 from django.db.models import Q
+
 
 # Create your views here.
 
@@ -123,6 +123,7 @@ def register(request):
                 phone=phone,
                 password=password  
             )
+            # User(name = name, email = email, phone = phone, password = password ).save()
             messages.success(request, "Registration successful! You can now log in.")  # ✅ Success message
             return redirect("register")  # Reload form with success message
 

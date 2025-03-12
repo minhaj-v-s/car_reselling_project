@@ -1,7 +1,7 @@
 
 # Register your models here.
 from django.contrib import admin
-from .models import Vehicle, VehicleImage,Appointment,Chat
+from .models import Vehicle, VehicleImage,Appointment,Chat,User
 
 class VehicleImageInline(admin.TabularInline):
     model = VehicleImage
@@ -15,3 +15,4 @@ admin.site.register(Vehicle, VehicleAdmin)  # Register Vehicle with VehicleAdmin
 admin.site.register(VehicleImage)  # Register VehicleImage separately
 admin.site.register(Appointment)
 admin.site.register(Chat)
+admin.site.register(User)
