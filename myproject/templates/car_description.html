@@ -1,10 +1,18 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Description</title>
+    <title>{{ thisCar.brand }} {{ thisCar.model }} | Soorath Motors</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/car_description.css' %}">
     
     <!-- Bootstrap CDN -->
@@ -12,104 +20,192 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-left">
-            <div class="logo">
-                <img src="{% static 'images/image (1).png' %}" alt="Soorath Autos">
-            </div>
-        </div>
-        
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}" class="active">Home</a></li>
-            <li><a href="#about-us">About</a></li>
-            {% if request.session.user_name %}
-            <li><a href="#">Welcome, {{ request.session.user_name }}</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'login' %}" class="login-btn">Sign In</a></li>
-            {% endif %}
-        </ul>
+    <!-- Navigation Bar - Keeping as is -->
+    {% include 'navbar.html' %}
 
-        <a href="#" class="contact-btn">CONTACT US</a>
-    </nav>
-
-    <!-- Car Description Section -->
+    <!-- Car Description Section - Enhanced -->
     <div class="container car-description">
         <div class="row">
-            <!-- Car Images with Bootstrap Carousel -->
-            <div class="col-md-6">
+            <!-- Car Images with Enhanced Carousel -->
+            <div class="col-md-6" data-aos="fade-right" data-aos-duration="1000">
                 <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        {% for image in images %}
+                            <button type="button" data-bs-target="#carCarousel" data-bs-slide-to="{{ forloop.counter }}" aria-label="Slide {{ forloop.counter|add:'1' }}"></button>
+                        {% endfor %}
+                    </div>
+                    
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ thisCar.image.url }}" class="d-block w-100" alt="Car Image">
+                            <img src="{{ thisCar.image.url }}" class="d-block w-100" alt="{{ thisCar.brand }} {{ thisCar.model }}">
                         </div>
                         {% for image in images %}
                         <div class="carousel-item">
-                            <img src="{{ image.image.url }}" class="d-block w-100" alt="Car Image">
+                            <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ thisCar.brand }} {{ thisCar.model }}">
                         </div>
                         {% endfor %}
                     </div>
+                    
                     <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Car Details -->
-            <div class="col-md-6 car-details">
+            <!-- Car Details Section - Redesigned -->
+            <div class="col-md-6 car-details" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
                 <h2>{{ thisCar.brand }} {{ thisCar.model }}</h2>
-                <p class="price">Price: ₹{{ thisCar.price }}</p>
-                <p><strong>Year:</strong> {{ thisCar.year }}</p>
-                <p><strong>Fuel Type:</strong> {{ thisCar.fuel }}</p>
-                <p><strong>Status:</strong> {{ thisCar.status }}</p>
+                <p class="price">₹{{ thisCar.price|floatformat:0|intcomma }}</p>
                 
-                <!-- Description with Bullet Points -->
+                <!-- Car Specifications Grid -->
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-calendar"></i>
+                        <span><strong>Year:</strong> {{ thisCar.year }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span><strong>Fuel:</strong> {{ thisCar.fuel }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span><strong>Status:</strong> <span class="badge bg-{% if thisCar.status == 'Available' %}success{% else %}warning{% endif %}">{{ thisCar.status }}</span></span>
+                    </div>
+                    {% if thisCar.transmission %}
+                    <div class="spec-item">
+                        <i class="fas fa-cogs"></i>
+                        <span><strong>Transmission:</strong> {{ thisCar.transmission }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Enhanced Description with Bullet Points -->
+                <h5 class="mt-4 mb-3">Key Highlights</h5>
                 <ul class="car-description-list">
                     {% for line in description_list %}
                         {% if line.strip %}
-                            <li>{{ line.strip }}.</li>
+                            <li>{{ line.strip }}</li>
                         {% endif %}
                     {% endfor %}
                 </ul>
                 
+                <!-- Enhanced Action Buttons -->
+                <div class="action-buttons">
+                    <a href="{% url 'book_appointment' thisCar.id %}" class="appointment-btn">
+                        <i class="far fa-calendar-alt"></i> Book an Appointment
+                    </a>
 
-                <a href="{% url 'book_appointment' thisCar.id %}" style="text-decoration: none;"><button class="appointment-btn">Book an Appointment</button></a>
-
-                <button id="openChat" class="chat-btn">
-                    <i class="fas fa-comments"></i> Chat with Dealer
-                </button>
-                
-                
-
+                    <button id="openChat" class="chat-btn">
+                        <i class="fas fa-comments"></i> Chat with Dealer
+                    </button>
+                </div>
             </div>
-        </div>  
-        <!-- Chat Popup -->
-<div class="chat-popup" id="chatPopup">
-    <div class="chat-header">
-        <h4>Chat with Dealer</h4>
-        <span class="close-chat-btn">&times;</span>
-    </div>
-    <div class="chat-body">
-        <div class="chat-messages" id="chatMessages"></div>
-        <div class="chat-input-container">
-            <input type="text" id="chatInput" placeholder="Type your message...">
-            <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>  
+
+    <!-- Enhanced Chat Popup -->
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <h4><i class="fas fa-headset me-2"></i> Chat with Dealer</h4>
+            <span class="close-chat-btn">&times;</span>
+        </div>
+        <div class="chat-body">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message receiver">
+                    Hello! How can I help you with the {{ thisCar.brand }} {{ thisCar.model }}?
+                </div>
+            </div>
+            <div class="message-input">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+            </div>
         </div>
     </div>
 </div>
 
    
 
-    <!-- Bootstrap & External JS -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'JS/car_description.js' %}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animation library
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init();
+        });
+        
+        // Chat popup functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const openChatBtn = document.getElementById('openChat');
+            const chatPopup = document.getElementById('chatPopup');
+            const closeChatBtn = document.querySelector('.close-chat-btn');
+            const sendBtn = document.getElementById('sendBtn');
+            const chatInput = document.getElementById('chatInput');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Open chat popup
+            openChatBtn.addEventListener('click', function() {
+                chatPopup.style.display = 'block';
+            });
+            
+            // Close chat popup
+            closeChatBtn.addEventListener('click', function() {
+                chatPopup.style.display = 'none';
+            });
+            
+            // Send message function
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message !== '') {
+                    // Create a message element
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('message', 'sender');
+                    messageDiv.textContent = message;
+                    chatMessages.appendChild(messageDiv);
+                    
+                    // Clear input
+                    chatInput.value = '';
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // Simulate dealer response after 1 second
+                    setTimeout(function() {
+                        const responseDiv = document.createElement('div');
+                        responseDiv.classList.add('message', 'receiver');
+                        responseDiv.textContent = "Thanks for your message. Our team will get back to you shortly.";
+                        chatMessages.appendChild(responseDiv);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                }
+            }
+            
+            // Send message on button click
+            sendBtn.addEventListener('click', sendMessage);
+            
+            // Send message on Enter key
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+
+    <!-- Remove the complex WebSocket Chat Script that might be causing issues -->
+
     
-    
+    {% include 'footer.html' %}
 </body>
 </html>

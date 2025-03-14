@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Admin Chat</h1>
+<div id="chatMessages">
+    {% for chat in chats %}
+    <div>
+        <strong>{{ chat.sender.username }}</strong> ({{ chat.timestamp }}): {{ chat.message }}
+    </div>
+    {% endfor %}
+</div>
+<input type="text" id="chatInput" placeholder="Type your message...">
+<select id="userSelect">
+    {% for user in users %}
+        <option value="{{ user.id }}">{{ user.name }}</option>
+    {% endfor %}
+</select>
+<button id="sendBtn">Send</button>
+
+<script>
+    const chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat/'
+    );
+
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        const chatMessages = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.innerHTML = `<strong>${data.sender}</strong> (${data.timestamp}): ${data.message}`;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
+
+    chatSocket.onclose = function (e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#sendBtn').onclick = function (e) {
+        const messageInputDom = document.querySelector('#chatInput');
+        const message = messageInputDom.value;
+        const senderId = "{{ request.user.id }}";
+        const receiverId = document.getElementById('userSelect').value;
+
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'sender_id': senderId,
+            'receiver_id': receiverId
+        }));
+
+        messageInputDom.value = '';
+    };
+</script>
+{% endblock %}

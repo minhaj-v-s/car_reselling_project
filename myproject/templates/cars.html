@@ -1,103 +1,199 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Soorath Autos - Find Your Perfect Car</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/cars.css' %}">
 </head>
-<body>
 
+<body>
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-left">
             <div class="logo">
                 <img src="{% static 'images/image (1).png' %}" alt="Soorath Autos">
             </div>
         </div>
-        
+
         <ul class="nav-links">
             <li><a href="{% url 'home' %}" class="active">Home</a></li>
             <li><a href="#about-us">About</a></li>
             {% if request.session.user_name %}
-            <li><a href="#">Welcome, {{ request.session.user_name }}</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-        {% else %}
-        <li><a href="{% url 'login' %}" class="login-btn">Sign In</a></li>
-    
-        {% endif %}
+            <li><a href="#"><i class="fas fa-user-circle me-2"></i> Welcome, {{ request.session.user_name }}</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}" class="login-btn"><i class="fas fa-sign-in-alt me-2"></i> Sign In</a></li>
+            {% endif %}
         </ul>
-    
-        <a href="#" class="contact-btn">CONTACT US</a>
+
+        <a href="#" class="contact-btn"><i class="fas fa-envelope me-2"></i> CONTACT US</a>
     </nav>
 
+    <!-- Main Content -->
     <div class="master">
+        <!-- Search Bar Section -->
         <div class="search_bar">
             <form action="{% url 'cars' %}" method="GET">
-                <input type="text" name="search" placeholder="Search for Cars" value="{{request.GET.search}}">
-                <button type="submit" class="searchBtn">Search</button>
+                <input type="text" name="search" placeholder="Search for brand, model, or features..."
+                    value="{{request.GET.search}}">
+                <button type="submit" class="searchBtn"><i class="fas fa-search me-2"></i> Search</button>
                 <button type="button" id="filterBtn" class="filter-btn"><i class="fa-solid fa-filter"></i></button>
             </form>
         </div>
 
+        <!-- Active Filters Display (New!) -->
+        {% if request.GET.fuel or request.GET.brand or request.GET.model or request.GET.transmission %}
+        <div class="active-filters">
+            <span class="filter-label">Active filters:</span>
+            {% if request.GET.brand %}
+            <span class="filter-tag">Brand: {{ request.GET.brand }} <a
+                    href="?{% for key, value in request.GET.items %}{% if key != 'brand' %}{{ key }}={{ value }}&{% endif %}{% endfor %}"
+                    class="remove-filter"><i class="fas fa-times"></i></a></span>
+            {% endif %}
 
+            {% if request.GET.model %}
+            <span class="filter-tag">Model: {{ request.GET.model }} <a
+                    href="?{% for key, value in request.GET.items %}{% if key != 'model' %}{{ key }}={{ value }}&{% endif %}{% endfor %}"
+                    class="remove-filter"><i class="fas fa-times"></i></a></span>
+            {% endif %}
+
+            {% if request.GET.fuel %}
+            <span class="filter-tag">Fuel: {{ request.GET.fuel }} <a
+                    href="?{% for key, value in request.GET.items %}{% if key != 'fuel' %}{{ key }}={{ value }}&{% endif %}{% endfor %}"
+                    class="remove-filter"><i class="fas fa-times"></i></a></span>
+            {% endif %}
+
+            {% if request.GET.transmission %}
+            <span class="filter-tag">Transmission: {{ request.GET.transmission }} <a
+                    href="?{% for key, value in request.GET.items %}{% if key != 'transmission' %}{{ key }}={{ value }}&{% endif %}{% endfor %}"
+                    class="remove-filter"><i class="fas fa-times"></i></a></span>
+            {% endif %}
+
+            <a href="{% url 'cars' %}" class="clear-all">Clear all</a>
+        </div>
+        {% endif %}
+
+        <!-- Filter Modal -->
         <div id="filterModal" class="filter-modal">
             <div class="filter-content">
                 <span class="close" id="closeFilter">&times;</span>
                 <h3>Filter Cars</h3>
                 <form action="{% url 'cars' %}" method="GET">
-                    <label for="fuel">Fuel Type:</label>
-                    <select name="fuel" id="">
+                    {% if request.GET.search %}
+                    <input type="hidden" name="search" value="{{ request.GET.search }}">
+                    {% endif %}
+
+                    <label for="fuel"><i class="fas fa-gas-pump me-2"></i> Fuel Type:</label>
+                    <select name="fuel" id="fuel">
                         <option value="">Any</option>
-                        <option value="Petrol">Petrol</option>
-                        <option value="Diesel">Diesel</option>
-                        <option value="Electric">Electric</option>
+                        <option value="Petrol" {% if request.GET.fuel == "Petrol" %}selected{% endif %}>Petrol</option>
+                        <option value="Diesel" {% if request.GET.fuel == "Diesel" %}selected{% endif %}>Diesel</option>
+                        <option value="Electric" {% if request.GET.fuel == "Electric" %}selected{% endif %}>Electric
+                        </option>
+                        <option value="Hybrid" {% if request.GET.fuel == "Hybrid" %}selected{% endif %}>Hybrid</option>
                     </select>
-                    <br>
-                    <label for="brand">Brand:</label>
-                    <input type="text" name="brand" placeholder="Enter brand name">
-                    <br>
-                    <label for="model">Model:</label>
-                    <input type="text" name="model" placeholder="Enter model name">
-                    <br>
-                    <label for="transmission">Transmission:</label>
-                    <select name="transmission" id="">
+
+                    <label for="brand"><i class="fas fa-trademark me-2"></i> Brand:</label>
+                    <input type="text" name="brand" id="brand" placeholder="Enter brand name"
+                        value="{{ request.GET.brand }}">
+
+                    <label for="model"><i class="fas fa-car me-2"></i> Model:</label>
+                    <input type="text" name="model" id="model" placeholder="Enter model name"
+                        value="{{ request.GET.model }}">
+
+                    <label for="transmission"><i class="fas fa-cog me-2"></i> Transmission:</label>
+                    <select name="transmission" id="transmission">
                         <option value="">Any</option>
-                        <option value="Manual">Manual</option>
-                        <option value="Automatic">Automatic</option>
-                        <option value="Semi Automatic">Semi Automatic</option>
+                        <option value="Manual" {% if request.GET.transmission == "Manual" %}selected{% endif %}>Manual</option>
+                        <option value="Automatic" {% if request.GET.transmission == "Automatic" %}selected{% endif %}>Automatic</option>
+                        <option value="Semi Automatic" {% if request.GET.transmission == "Semi Automatic" %}selected{% endif %}>Semi Automatic</option>
                     </select>
-                    <br>
-                    <button type="submit">Apply Filters</button>
+                    
+
+                    <div class="filter-actions">
+                        <button type="button" id="resetBtn" class="reset-btn">Reset</button>
+
+                        <button type="submit">Apply Filters</button>
+                    </div>
                 </form>
             </div>
         </div>
 
+        <!-- Car Listing -->
         <div class="car_listing">
+            {% if cars %}
             {% for i in cars %}
             <div class="car_card">
-                <img src="{{i.image.url}}" alt="Car Image"> 
-                <div class="car_name">{{i.brand}} {{i.model}}</div>
-                <a href="{% url 'car_description' i.id %}" style="text-decoration: none;" ><button class="view_description">View Details</button></a>
+                <img src="{{i.image.url}}" alt="{{ i.brand }} {{ i.model }}">
+                <div class="car_name">{{ i.brand }} {{ i.model }}</div>
+                <a href="{% url 'car_description' i.id %}" style="text-decoration: none;">
+                    <button class="view_description">
+                        <i class="fas fa-info-circle me-2"></i> View Details
+                    </button>
+                </a>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="no-results">
+                <i class="fas fa-search fa-3x mb-3"></i>
+                <h3>No cars found</h3>
+                <p>Try adjusting your search criteria or browse all cars</p>
+                <a href="{% url 'cars' %}" class="browse-all-btn">Browse All Cars</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 
-
-
     <script>
-        document.getElementById("filterBtn").addEventListener("click", function() {
+        // Show/hide filter modal
+        document.getElementById("filterBtn").addEventListener("click", function () {
             document.getElementById("filterModal").style.display = "flex";
         });
-    
-        document.getElementById("closeFilter").addEventListener("click", function() {
+
+        document.getElementById("closeFilter").addEventListener("click", function () {
             document.getElementById("filterModal").style.display = "none";
         });
+
+        // Close modal when clicking outside
+        window.addEventListener("click", function (event) {
+            if (event.target == document.getElementById("filterModal")) {
+                document.getElementById("filterModal").style.display = "none";
+            }
+        });
+
+        // Show currently selected filter values
+        document.addEventListener("DOMContentLoaded", function () {
+            // Add animation to car cards
+            const carCards = document.querySelectorAll('.car_card');
+            carCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('card-visible');
+                }, 100 * index);
+            });
+        });
+        document.getElementById("resetBtn").addEventListener("click", function () {
+            window.location.href = "{% url 'cars' %}"; // Reload page to reset filters
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            let searchResults = document.querySelectorAll(".search-results .car-card");
+            searchResults.forEach(card => {
+                card.classList.add("car-card"); // Ensures same styling
+            });
+        });
+
+
     </script>
-    
+
+    {% include 'footer.html' %}
 </body>
+
 </html>

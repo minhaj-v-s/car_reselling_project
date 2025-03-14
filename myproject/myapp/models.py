@@ -60,16 +60,31 @@ class Purchase(models.Model):
         return self.vehicle.model
     
 
+from django.db import models
+# from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+
 class Chat(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
-    message = models.TextField(null=True)
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages', null=True)
+    message = models.TextField(null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"Chat from {self.sender} to {self.receiver} at {self.timestamp}"
+
+    def clean(self):
+        if self.sender == self.receiver:
+            raise ValidationError("Sender and receiver cannot be the same user.")
+
     def save(self, *args, **kwargs):
-        self.receiver =User.objects.filter(is_superuser=True).first()
         super(Chat, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = 'Chat Message'
+        verbose_name_plural = 'Chat Messages'
 
 
 
