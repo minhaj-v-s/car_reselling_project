@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib import messages
@@ -9,6 +9,8 @@ import re
 from django.contrib.auth import authenticate
 from .models import Vehicle
 from django.db.models import Q
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -63,7 +65,14 @@ def car_description(request,pk):
     thisCar = Vehicle.objects.get(id=pk)
     return render(request,"car_description.html",{'thisCar':thisCar})
 
+
 def book_appointment(request,pk):
+
+
+    if 'user_id' not in request.session:
+        messages.error(request, "You must be logged in to book an appointment.")
+        return redirect("login") 
+    
     thisCar = Vehicle.objects.get(id=pk)
     userName = request.session['user_name']
     userId = request.session['user_id']
@@ -157,7 +166,7 @@ def user_dashboard(request):
 def user_appointments(request):
     userId = request.session.get('user_id')
     user = User.objects.get(id=userId)
-    appointments = Appointment.objects.filter(customer=user)
+    appointments = Appointment.objects.filter(customer=user).order_by('-app_date','-app_time')
     print("Appointments found:", appointments)
     return render(request, 'user_dashboard.html', {'appointments': appointments})
 
@@ -187,4 +196,41 @@ def delete_appointment(request,pk):
     record.delete()
 
     return render(request,"user_dashboard.html")
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from .models import Appointment, Cancellation
+
+def cancel_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    if request.method == "POST":
+        reason = request.POST.get("reason")
+        if reason:
+            Cancellation.objects.create(appointment=appointment, reason=reason)
+            appointment.status = "Cancelled"
+            appointment.save()
+            messages.success(request, "Appointment cancelled successfully.")
+        else:
+            messages.error(request, "Please provide a reason for cancellation.")
+
+    return render(request,"user_dashboard.html")  # Change to your actual user dashboard URL name
+
+
+
+from django.http import JsonResponse
+from .models import Chat
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def get_messages(request, username):
+    messages = Chat.objects.filter(sender__username=username) | Chat.objects.filter(receiver__username=username)
+    messages = messages.order_by('timestamp')
+
+    return JsonResponse({'messages': list(messages.values('sender__username', 'message', 'timestamp'))})
+
+
+
+
 

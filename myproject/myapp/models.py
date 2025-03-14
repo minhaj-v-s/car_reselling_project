@@ -44,6 +44,7 @@ class Appointment(models.Model):
     status_options=[('Pending','Pending'),('Confirmed','Confirmed'),('Cancelled','Cancelled')]
     status=models.CharField(max_length=10,choices=status_options,null=True,default='Pending')
 
+
     def __str__(self):
         return f"{self.vehicle.model} - {self.status}" 
 
@@ -71,3 +72,11 @@ class Chat(models.Model):
         super(Chat, self).save(*args, **kwargs)
 
 
+
+class Cancellation(models.Model):
+    appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE, related_name='cancellation')
+    reason = models.TextField()
+    cancelled_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Cancellation for {self.appointment.vehicle.model} - {self.appointment.customer.name}"

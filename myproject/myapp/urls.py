@@ -13,7 +13,10 @@ urlpatterns =[
     path("user_dashboard/<str:pk>",views.user_dashboard, name="user_dashboard"),
     path("logout/",views.logout_view, name="logout"),
     path("user_appointments",views.user_appointments,name="user_appointments"),
-    path("delete_appointment/<str:pk>",views.delete_appointment,name="delete_appointment")
+    path("delete_appointment/<str:pk>",views.delete_appointment,name="delete_appointment"),
+    path('cancel_appointment/<int:appointment_id>/', views.cancel_appointment, name='cancel_appointment'),
+    path('messages/<str:username>/', views.get_messages, name='get_messages'),
+
 ]
 
 
