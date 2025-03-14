@@ -14,6 +14,9 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User 
+
+
+
 # Create your views here.
 
 # def msg(request):
@@ -45,19 +48,24 @@ def cars(request):
         cars = cars.filter(
             Q(brand__icontains=search_query) | 
             Q(model__icontains=search_query)
+            
         )
 
     if fuel_type:
         cars = cars.filter(fuel=fuel_type)
 
     if brand:
-        cars = cars.filter(brand=brand)
+        cars = cars.filter(brand__icontains=brand)
+
+    if brand:
+        cars = cars.filter(brand__icontains=brand)  
 
     if model:
-        cars = cars.filter(model=model)
+        cars = cars.filter(model__icontains=model)  
 
     if transmission:
-        cars = cars.filter(transmission=transmission)
+        cars = cars.filter(transmission__icontains=transmission)    
+
 
     return render(request, "cars.html", {'cars': cars})
 
@@ -66,7 +74,12 @@ def car_description(request,pk):
     thisCar = Vehicle.objects.get(id=pk)
     return render(request,"car_description.html",{'thisCar':thisCar})
 
+
+
 def book_appointment(request,pk):
+    if 'user_id' not in request.session:
+        messages.error(request, "You must be logged in to book an appointment.")
+        return redirect("login")
     thisCar = Vehicle.objects.get(id=pk)
     userName = request.session['user_name']
     userId = request.session['user_id']
@@ -165,6 +178,8 @@ def user_appointments(request):
 
 
 
+
+
 def logout_view(request):
     request.session.flush()  # Clear session
     return redirect("home")
@@ -188,3 +203,16 @@ def delete_appointment(request,pk):
     record.delete()
 
     return render(request,"user_dashboard.html")
+
+
+# views.py
+
+from django.shortcuts import render
+from .models import Chat, User
+from django.contrib.auth.decorators import user_passes_test
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_chat(request):
+    chats = Chat.objects.all().order_by('timestamp')
+    users = User.objects.all()
+    return render(request, 'admin_chat.html', {'chats': chats, 'users': users})
