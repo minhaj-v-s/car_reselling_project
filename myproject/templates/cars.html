@@ -17,26 +17,9 @@
 
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-left">
-            <div class="logo">
-                <img src="{% static 'images/image (1).png' %}" alt="Soorath Autos">
-            </div>
-        </div>
+    {% include 'navbar.html' %}
 
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}" class="active">Home</a></li>
-            <li><a href="#about-us">About</a></li>
-            {% if request.session.user_name %}
-            <li><a href="#"><i class="fas fa-user-circle me-2"></i> Welcome, {{ request.session.user_name }}</a></li>
-            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'login' %}" class="login-btn"><i class="fas fa-sign-in-alt me-2"></i> Sign In</a></li>
-            {% endif %}
-        </ul>
-
-        <a href="#" class="contact-btn"><i class="fas fa-envelope me-2"></i> CONTACT US</a>
-    </nav>
+  
 
     <!-- Main Content -->
     <div class="master">

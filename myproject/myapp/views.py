@@ -1,3 +1,5 @@
+#views.py:
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, redirect,get_object_or_404
@@ -16,6 +18,15 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User 
+<<<<<<< HEAD
+=======
+from .models import Vehicle, Appointment, Cancellation
+from django.shortcuts import get_object_or_404
+
+
+
+
+>>>>>>> 53d13ec76c362c418aa0eceb66a80f32c86449ad
 # Create your views here.
 
 # def msg(request):
@@ -161,6 +172,8 @@ def login_view(request):
 
     return render(request, 'login.html')
 
+
+
 def user_dashboard(request):
     return render(request,"user_dashboard.html")
 
@@ -169,10 +182,22 @@ def user_appointments(request):
     user = User.objects.get(id=userId)
     appointments = Appointment.objects.filter(customer=user).order_by('-app_date','-app_time')
     print("Appointments found:", appointments)
-    return render(request, 'user_dashboard.html', {'appointments': appointments})
+    return render(request, "user_dashboard.html", {"appointments": appointments})
+    
+def cancel_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
 
+    if request.method == "POST":
+        reason = request.POST.get("reason")
+        if reason:
+            Cancellation.objects.create(appointment=appointment, reason=reason)
+            appointment.status = "Cancelled"
+            appointment.save()
+            messages.success(request, "Appointment cancelled successfully.")
+        else:
+            messages.error(request, "Please provide a reason for cancellation.")
 
-
+    return render(request,"user_dashboard.html")  # Change to your actual user dashboard URL name
 
 
 
@@ -216,14 +241,10 @@ def cancel_appointment(request, appointment_id):
 
     return render(request,"user_dashboard.html")  # Change to your actual user dashboard URL name
 
-
-from django.http import JsonResponse
-from .models import Chat
-from django.contrib.auth.decorators import login_required
-
-@login_required
-def get_messages(request, username):
-    messages = Chat.objects.filter(sender__username=username) | Chat.objects.filter(receiver__username=username)
-    messages = messages.order_by('timestamp')
-
-    return JsonResponse({'messages': list(messages.values('sender__username', 'message', 'timestamp'))})
+# In your view function
+def home_view(request):
+    context = {
+        'active_page': 'home',
+        # other context data
+    }
+    return render(request, 'home.html', context)
