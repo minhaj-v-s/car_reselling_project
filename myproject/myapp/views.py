@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib import messages
-from .models import User,Appointment
+from .models import User,Appointment,Cancellation
 import re
 from django.contrib.auth import authenticate
 from .models import Vehicle
@@ -199,3 +199,31 @@ def delete_appointment(request,pk):
     record.delete()
 
     return render(request,"user_dashboard.html")
+
+
+def cancel_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    if request.method == "POST":
+        reason = request.POST.get("reason")
+        if reason:
+            Cancellation.objects.create(appointment=appointment, reason=reason)
+            appointment.status = "Cancelled"
+            appointment.save()
+            messages.success(request, "Appointment cancelled successfully.")
+        else:
+            messages.error(request, "Please provide a reason for cancellation.")
+
+    return render(request,"user_dashboard.html")  # Change to your actual user dashboard URL name
+
+
+from django.http import JsonResponse
+from .models import Chat
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def get_messages(request, username):
+    messages = Chat.objects.filter(sender__username=username) | Chat.objects.filter(receiver__username=username)
+    messages = messages.order_by('timestamp')
+
+    return JsonResponse({'messages': list(messages.values('sender__username', 'message', 'timestamp'))})

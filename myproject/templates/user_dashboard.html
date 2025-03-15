@@ -57,16 +57,14 @@
         </div>
         {% empty %}
         <div class="no-appointments">
-            <p>You don't have any active bookings yet.</p>
+            <p>You don't have any bookings yet.</p>
             <a href="{% url 'cars' %}" class="book-now-btn">Book an Appointment</a>
         </div>
         {% endfor %}
     </div>
-    
-    
-    
-    
-   {% include 'footer.html' %}
+
+
+    {% include 'footer.html' %}
 
     <script>
         function showCancelForm(id) {
