@@ -5,45 +5,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Appointment</title>
+    <title>Book Test Drive - Soorath Autos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/book_appointment.css'%}">
 </head>
 
 <body>
     {% include 'navbar.html' %}
-    <div class="master">
-        <!-- Vehicle Image Section -->
-        <div class="vehicle_img">
-            <img src="{{thisCar.image.url}}" alt="car image">
+    
+    <div class="appointment-container">
+        <div class="page-header">
+            <h1>Book a Test Drive</h1>
+            <p>Experience the thrill of driving a {{thisCar.brand}} {{thisCar.model}}</p>
         </div>
 
-        <!-- Appointment Form Section -->
-        <div class="appointment_form">
-            <h2>Book a Test Drive</h2>
-            {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}" role="alert">
-                {{ message }}
+        <div class="appointment-content">
+            <!-- Vehicle Image Section -->
+            <div class="vehicle-preview">
+                <div class="vehicle-image">
+                    <img src="{{thisCar.image.url}}" alt="{{thisCar.brand}} {{thisCar.model}}">
+                </div>
+                <div class="vehicle-details">
+                    <h3>{{thisCar.brand}} {{thisCar.model}}</h3>
+                    <ul>
+                        <li><i class="fas fa-gas-pump"></i> {{thisCar.fuel}}</li>
+                        <li><i class="fas fa-cog"></i> {{thisCar.transmission}}</li>
+                        <li><i class="fas fa-tachometer-alt"></i> {{thisCar.mileage}} Km/L</li>
+                    </ul>
+                </div>
             </div>
-            {% endfor %}
-            {% endif %}
 
-            <form action="" method="POST">
-                {%csrf_token%}
-                <label for="vehicle">Vehicle</label>
-                <input type="text" name="vehicle" value="{{thisCar.brand}} {{thisCar.model}}" disabled>
+            <!-- Appointment Form Section -->
+            <div class="appointment-form-container">
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i> 
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
 
-                <label for="customer">Customer</label>
-                <input type="text" name="customer" value="{{user}}" disabled>
+                <div class="form-wrapper">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="vehicle"><i class="fas fa-car"></i> Vehicle</label>
+                            <input type="text" name="vehicle" value="{{thisCar.brand}} {{thisCar.model}}" disabled>
+                        </div>
 
-                <label for="app_date">Test Drive Date</label>
-                <input type="date" name="app_date">
+                        <div class="form-group">
+                            <label for="customer"><i class="fas fa-user"></i> Customer</label>
+                            <input type="text" name="customer" value="{{user}}" disabled>
+                        </div>
 
-                <label for="app_time">Test Drive Time</label>
-                <input type="time" name="app_time">
+                        <div class="form-group">
+                            <label for="app_date"><i class="fas fa-calendar-alt"></i> Test Drive Date</label>
+                            <input type="date" name="app_date" required min="{% now 'Y-m-d' %}">
+                        </div>
 
-                <button type="submit">Book Test Drive</button>
-            </form>
+                        <div class="form-group">
+                            <label for="app_time"><i class="fas fa-clock"></i> Test Drive Time</label>
+                            <input type="time" name="app_time" required min="09:00" max="18:00">
+                            <small class="time-hint">Available time: 9:00 AM - 6:00 PM</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-book">
+                                <i class="fas fa-calendar-check"></i> Book Test Drive
+                            </button>
+                            <a href="{% url 'car_description' thisCar.id %}" class="btn-cancel">
+                                <i class="fas fa-arrow-left"></i> Back to Details
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

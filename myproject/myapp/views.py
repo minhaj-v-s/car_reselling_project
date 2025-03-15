@@ -1,3 +1,5 @@
+#views.py:
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -14,6 +16,9 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User 
+from .models import Vehicle, Appointment, Cancellation
+from django.shortcuts import get_object_or_404
+
 
 
 
@@ -165,18 +170,32 @@ def login_view(request):
 
     return render(request, 'login.html')
 
+
+
 def user_dashboard(request):
     return render(request,"user_dashboard.html")
 
 def user_appointments(request):
     userId = request.session.get('user_id')
     user = User.objects.get(id=userId)
-    appointments = Appointment.objects.filter(customer=user)
+    appointments = Appointment.objects.filter(customer=user).order_by('-app_date','-app_time')
     print("Appointments found:", appointments)
-    return render(request, 'user_dashboard.html', {'appointments': appointments})
+    return render(request, "user_dashboard.html", {"appointments": appointments})
+    
+def cancel_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
 
+    if request.method == "POST":
+        reason = request.POST.get("reason")
+        if reason:
+            Cancellation.objects.create(appointment=appointment, reason=reason)
+            appointment.status = "Cancelled"
+            appointment.save()
+            messages.success(request, "Appointment cancelled successfully.")
+        else:
+            messages.error(request, "Please provide a reason for cancellation.")
 
-
+    return render(request,"user_dashboard.html")  # Change to your actual user dashboard URL name
 
 
 
@@ -216,3 +235,11 @@ def admin_chat(request):
     chats = Chat.objects.all().order_by('timestamp')
     users = User.objects.all()
     return render(request, 'admin_chat.html', {'chats': chats, 'users': users})
+
+# In your view function
+def home_view(request):
+    context = {
+        'active_page': 'home',
+        # other context data
+    }
+    return render(request, 'home.html', context)

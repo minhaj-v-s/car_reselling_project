@@ -85,4 +85,10 @@ class Chat(models.Model):
         verbose_name = 'Chat Message'
         verbose_name_plural = 'Chat Messages'
 
+class Cancellation(models.Model):
+    appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE, related_name='cancellation')
+    reason = models.TextField()
+    cancelled_at = models.DateTimeField(auto_now_add=True)
 
+    def _str_(self):
+        return f"Cancellation for {self.appointment.vehicle.model} - {self.appointment.customer.name}"

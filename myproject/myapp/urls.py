@@ -1,3 +1,4 @@
+#urls.py:
 from django.urls import path
 from . import views 
 
@@ -15,6 +16,7 @@ urlpatterns =[
     path("user_appointments",views.user_appointments,name="user_appointments"),
     path("delete_appointment/<str:pk>",views.delete_appointment,name="delete_appointment"),
     path('admin/chat/', views.admin_chat, name='admin_chat'),
+    path('cancel_appointment/<str:pk>', views.cancel_appointment, name='cancel_appointment'),
 ]
 
 

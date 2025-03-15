@@ -6,16 +6,13 @@
     font-family: 'Poppins', sans-serif;
 }
 
-
 body {
     background-color: #f8f9fa;
-    font-family: 'Poppins', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     color: #333;
+    line-height: 1.6;
 }
 
-/* Navigation Bar */
+/* Keep existing navbar and footer styles */
 .navbar {
     background-color: #0e0f0e;
     padding: 15px 40px;
@@ -50,156 +47,263 @@ body {
     color: #ffcc00;
 }
 
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: #ffcc00;
-    transition: width 0.3s ease;
-}
+/* ... keep existing code (navbar styles) */
 
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-@keyframes wiggle {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(-3deg); }
-    50% { transform: rotate(3deg); }
-    75% { transform: rotate(-3deg); }
-    100% { transform: rotate(0deg); }
-}
-
-.nav-links li:hover {
-    animation: wiggle 0.3s ease-in-out;
-}
-
-/* Style for Sign In Button */
-.nav-links li a.login-btn {
-    padding: 10px 15px;
-    background-color: transparent;
+/* Footer Styles */
+.footer {
+    background-color: #0e0f0e;
     color: white;
-    border: 2px solid #ffcc00;
+    padding: 50px 0 20px;
+}
+
+/* ... keep existing code (footer styles) */
+
+/* New Appointment Page Styles */
+.appointment-container {
+    max-width: 1200px;
+    margin: 120px auto 60px;
+    padding: 0 20px;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 36px;
+    color: #222;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.page-header p {
+    font-size: 18px;
+    color: #666;
+}
+
+.appointment-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    background: white;
     border-radius: 15px;
-    transition: all 0.3s ease-in-out;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 40px;
 }
 
-/* Hover Effect */
-.nav-links li a.login-btn:hover {
-    background-color: #ffcc00;
-    color: #0e0f0e;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+/* Vehicle Preview Section */
+.vehicle-preview {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
 }
 
-.contact-btn {
-    background-color: transparent;
-    color: #ffcc00;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    text-decoration: none;
-    border: 2px solid #ffcc00;
-    transition: all 0.3s ease-in-out;
-    letter-spacing: 0.5px;
+.vehicle-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.contact-btn:hover {
-    background-color: #ffcc00;
-    color: #0e0f0e;
-    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
-}
-
-
-/* Master Container */
-.master {
+.vehicle-image img {
     width: 100%;
-    height: 100vh;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.vehicle-image:hover img {
+    transform: scale(1.03);
+}
+
+.vehicle-details {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.vehicle-details h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    border-left: 4px solid #ffcc00;
+    padding-left: 10px;
+}
+
+.vehicle-details ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.vehicle-details li {
+    flex: 1;
+    min-width: 100px;
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    position: relative;
+    font-size: 14px;
 }
 
-/* Vehicle Image */
-.vehicle_img img {
-    width: 420px;
-    height: auto;
-    position: absolute;
-    left: 10%;
-    top: 40%;
-    transform: translateY(-50%);
-    border-radius: 10px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+.vehicle-details li i {
+    color: #ffcc00;
+    margin-right: 8px;
+    font-size: 16px;
 }
 
-/* Appointment Form */
-.appointment_form {
-    width: 450px;
-    padding: 30px;
-    background-color: #ffcc00;
-    border-radius: 12px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    position: absolute;
-    right: 25%;
-    top: 40%;
-    transform: translateY(-50%);
+/* Form Container */
+.appointment-form-container {
+    flex: 1;
+    min-width: 340px;
 }
 
-/* Form Heading */
-.appointment_form h2 {
-    font-size: 22px;
-    color: #333;
+.messages {
     margin-bottom: 20px;
 }
 
-/* Form Labels */
-form label {
-    display: block;
-    text-align: left;
-    font-weight: 600;
-    margin-top: 10px;
-    color: #333;
+.alert {
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
 }
 
-/* Form Inputs */
+.alert i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.alert-success {
+    background-color: #e6f7e6;
+    color: #2e7d32;
+    border-left: 4px solid #2e7d32;
+}
+
+.alert-error {
+    background-color: #fdecea;
+    color: #d32f2f;
+    border-left: 4px solid #d32f2f;
+}
+
+.form-wrapper {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+form label i {
+    color: #ffcc00;
+    margin-right: 8px;
+}
+
 form input {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     font-size: 16px;
-    transition: 0.3s ease-in-out;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+form input:disabled {
+    background-color: #f9f9f9;
+    color: #666;
+    cursor: not-allowed;
 }
 
 form input:focus {
-    border: 1px solid #333;
+    border-color: #ffcc00;
+    box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.2);
     outline: none;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Submit Button */
-button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-size: 18px;
+.time-hint {
+    display: block;
+    color: #888;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-book, .btn-cancel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
-button:hover {
-    background-color: #222;
+.btn-book {
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    flex: 2;
+}
+
+.btn-book:hover {
+    background-color: #e6b800;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+}
+
+.btn-cancel {
+    background-color: #f1f1f1;
+    color: #555;
+    border: none;
+    flex: 1;
+}
+
+.btn-cancel:hover {
+    background-color: #e6e6e6;
+}
+
+.btn-book i, .btn-cancel i {
+    margin-right: 8px;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+    .appointment-content {
+        flex-direction: column;
+    }
+    
+    .vehicle-preview, .appointment-form-container {
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -212,132 +316,43 @@ button:hover {
         margin: 15px 0;
     }
     
-}
-
-
-/* Footer Styles */
-.footer {
-    background-color: #0e0f0e;
-    color: white;
-    padding: 50px 0 20px;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0 40px;
-}
-
-.footer-logo {
-    flex-basis: 25%;
-    min-width: 250px;
-    margin-bottom: 30px;
-}
-
-.footer-logo img {
-    height: 70px;
-    margin-bottom: 15px;
-}
-
-.footer-logo p {
-    color: #ccc;
-    font-size: 14px;
-}
-
-.footer-links, .footer-contact, .footer-social {
-    flex-basis: 20%;
-    min-width: 200px;
-    margin-bottom: 30px;
-}
-
-.footer h3 {
-    color: #ffcc00;
-    margin-bottom: 20px;
-    font-size: 18px;
-    position: relative;
-}
-
-.footer h3:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    width: 50px;
-    height: 2px;
-    background-color: #ffcc00;
-}
-
-.footer-links ul {
-    list-style: none;
-}
-
-.footer-links ul li {
-    margin-bottom: 10px;
-}
-
-.footer-links ul li a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links ul li a:hover {
-    color: #ffcc00;
-}
-
-.footer-contact p {
-    margin-bottom: 10px;
-    color: #ccc;
-}
-
-.social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: #222;
-    border-radius: 50%;
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-    background-color: #ffcc00;
-    color: #0e0f0e;
-    transform: translateY(-3px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 30px;
-    border-top: 1px solid #333;
-    margin-top: 20px;
-}
-
-.footer-bottom p {
-    color: #888;
-    font-size: 14px;
-}
-
-/* Make footer responsive */
-@media (max-width: 768px) {
-    .footer-container {
+    .appointment-container {
+        margin-top: 160px;
+    }
+    
+    .page-header h1 {
+        font-size: 28px;
+    }
+    
+    .page-header p {
+        font-size: 16px;
+    }
+    
+    .appointment-content {
+        padding: 25px;
+    }
+    
+    .form-actions {
         flex-direction: column;
     }
     
-    .footer-logo, .footer-links, .footer-contact, .footer-social {
-        flex-basis: 100%;
-        margin-bottom: 30px;
+    .btn-book, .btn-cancel {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .appointment-container {
+        margin-top: 130px;
+        padding: 0 15px;
+    }
+    
+    .vehicle-details ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .vehicle-details li {
+        min-width: auto;
     }
 }

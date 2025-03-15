@@ -20,15 +20,20 @@
         </div>
         
         <ul class="nav-links">
-            <li><a href="{% url 'home' %}" class="active">Home</a></li>
-            <li><a href="#about-us">About</a></li>
+            <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+            <li><a href="#about-us" class="{% if 'about' in request.path %}active{% endif %}">About</a></li>
+            <li><a href="{% url 'cars' %}" class="{% if 'cars' in request.path %}active{% endif %}">Cars</a></li>
             {% if request.session.user_name %}
             <li><a href="#"><i class="fas fa-user-circle me-2"></i> Welcome, {{ request.session.user_name }}</a></li>
+            <li><a href="{% url 'user_appointments' %}">Your Bookings</a></li>
             <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
             {% else %}
-            <li><a href="{% url 'login' %}" class="login-btn"><i class="fas fa-sign-in-alt me-2"></i> Sign In</a></li>
+            <li><a href="{% url 'login' %}" class="login-btn {% if 'login' in request.path %}active{% endif %}"><i class="fas fa-sign-in-alt me-2"></i> Sign In</a></li>
             {% endif %}
         </ul>
+        
+        
+        
     
         <a href="#" class="contact-btn"><i class="fas fa-envelope me-2"></i> CONTACT US</a>
     </nav>

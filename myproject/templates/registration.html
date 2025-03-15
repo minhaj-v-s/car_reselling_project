@@ -5,78 +5,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Register - Soorath Autos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/registration.css' %}">
 </head>
 
 <body>
+    <div class="register-container">
+        <!-- Left Side - Registration Form -->
+        <div class="register-form-container">
+            <div class="register-header">
+                <a href="{% url 'home' %}" class="logo-link">
+                    <i class="fas fa-car-side"></i>
+                    <span>Soorath Autos</span>
+                </a>
+                <h1>Create Your Account</h1>
+                <p>Join us and unlock premium car experiences</p>
+            </div>
 
-    <div class="master">
-        <div class="side-bg"></div>
+            {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
 
-        <div class="form-wrapper">
-            <!-- Registration Form -->
-            <div class="form-div">
-                <h2>Register</h2>
+            <div class="form-wrapper">
                 <form method="POST">
-                    {%csrf_token%}
-                    {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-success">
-                        {{ message }}
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        {% if errors.name %}
+                        <p class="error-text"><i class="fas fa-exclamation-circle"></i> {{ errors.name }}</p>
+                        {% endif %}
                     </div>
-                    {% endfor %}
-                    {% endif %}
 
-                    <label for="name">Full Name</label>
-                    <input type="text" name="name" placeholder="Enter your name">
-                    {% if errors.name %}
-                    <p class="error-text">{{ errors.name }}</p>
-                    {% endif %}
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        {% if errors.email %}
+                        <p class="error-text"><i class="fas fa-exclamation-circle"></i> {{ errors.email }}</p>
+                        {% endif %}
+                    </div>
 
-                    <label for="email">Email</label>
-                    <input type="email" name="email" placeholder="Enter your email">
-                    {% if errors.email %}
-                    <p class="error-text">{{ errors.email }}</p>
-                    {% endif %}
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your 10-digit phone number" required>
+                        {% if errors.phone %}
+                        <p class="error-text"><i class="fas fa-exclamation-circle"></i> {{ errors.phone }}</p>
+                        {% endif %}
+                    </div>
 
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" name="phone" placeholder="Enter your phone number">
-                    {% if errors.phone %}
-                    <p class="error-text">{{ errors.phone }}</p>
-                    {% endif %}
+                    <div class="form-group">
+                        <label for="cpassword"><i class="fas fa-lock"></i> Create Password</label>
+                        <div class="password-input-container">
+                            <input type="password" id="cpassword" name="cpassword" placeholder="Create a secure password" required>
+                            <span class="toggle-password" onclick="togglePasswordVisibility('cpassword')">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        {% if errors.cpassword %}
+                        <p class="error-text"><i class="fas fa-exclamation-circle"></i> {{ errors.cpassword }}</p>
+                        {% endif %}
+                        <p class="password-hint">
+                            <i class="fas fa-info-circle"></i> Password must be at least 8 characters with uppercase, number, and special character
+                        </p>
+                    </div>
 
-                    <label for="cpassword">Create Password</label>
-                    <input type="password" name="cpassword" placeholder="Create a password">
-                    {% if errors.cpassword %}
-                    <p class="error-text">{{ errors.cpassword }}</p>
-                    {% endif %}
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Confirm Password</label>
+                        <div class="password-input-container">
+                            <input type="password" id="password" name="password" placeholder="Confirm your password" required>
+                            <span class="toggle-password" onclick="togglePasswordVisibility('password')">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        {% if errors.password %}
+                        <p class="error-text"><i class="fas fa-exclamation-circle"></i> {{ errors.password }}</p>
+                        {% endif %}
+                    </div>
 
-                    <label for="password">Confirm Password</label>
-                    <input type="password" name="password" placeholder="Confirm your password">
-                    {% if errors.password %}
-                    <p class="error-text">{{ errors.password }}</p>
-                    {% endif %}
+                    <div class="terms-container">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
 
-                    <button type="submit">Register</button>
-
-                    <!-- Login Link -->
-                    <p class="login-text">Already registered? <a href="/login">Login here</a></p>
+                    <button type="submit" class="btn-register">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                    
+                    <div class="login-link">
+                        <p>Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+                    </div>
                 </form>
             </div>
-
-            <!-- Tagline Section -->
-            <div class="tagline">
-                <img src="../static/images/freepik__adjust__81686.png" alt="Car" class="moving-car">
-                <p>""Find It. Test It. Drive It. Own It!""</p>
-            </div>
-            
         </div>
 
-        <div class="right_bg"></div>
+        <!-- Right Side - Car Image -->
+        <div class="register-image-container">
+            <div class="image-overlay"></div>
+            <div class="register-content">
+                <h2>Premium Car Experience</h2>
+                <p class="tagline">"Find It. Test It. Drive It. Own It!"</p>
+                <div class="benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-car"></i>
+                        <span>Premium Selection</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Easy Test Drives</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Verified Quality</span>
+                    </div>
+                </div>
+                <a href="{% url 'cars' %}" class="explore-btn">View Cars</a>
+            </div>
+        </div>
     </div>
 
+    <script>
+        function togglePasswordVisibility(fieldId) {
+            const passwordInput = document.getElementById(fieldId);
+            const toggleIcon = document.querySelector(`#${fieldId} + .toggle-password i, .password-input-container:has(#${fieldId}) .toggle-password i`);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 
 </html>
