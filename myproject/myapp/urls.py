@@ -17,7 +17,7 @@ urlpatterns =[
     path("delete_appointment/<str:pk>",views.delete_appointment,name="delete_appointment"),
     path('cancel_appointment/<int:appointment_id>/', views.cancel_appointment, name='cancel_appointment'),
     path('mark_as_purchased/<int:appointment_id>/', views.mark_as_purchased, name="mark_as_purchased"),
-    # path('submit_feedback/<int:purchase_id>/', views.submit_feedback, name="submit_feedback"),
+    path('submit_feedback/<int:purchase_id>/', views.submit_feedback, name="submit_feedback"),
     path('clear-messages/', views.clear_messages, name='clear_messages'),
 ]
 
