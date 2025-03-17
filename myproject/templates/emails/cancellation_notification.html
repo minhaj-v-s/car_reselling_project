@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Cancelled</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .email-container {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #0e0f0e;
+            color: #f44336;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            background-color: #fff;
+        }
+        .appointment-info {
+            background-color: #f8f9fa;
+            border-left: 4px solid #f44336;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .appointment-info p {
+            margin: 8px 0;
+        }
+        .footer {
+            background-color: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .reason-box {
+            background-color: #fff9f9;
+            border: 1px solid #ffebee;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .customer-details {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Booking Cancelled</h1>
+        </div>
+        <div class="content">
+            <p>Hello Admin,</p>
+            <p>A test drive appointment has been cancelled by the customer.</p>
+            
+            <div class="appointment-info">
+                <h3>Appointment Details:</h3>
+                <p><strong>Date:</strong> {{ appointment.app_date }}</p>
+                <p><strong>Time:</strong> {{ appointment.app_time }}</p>
+                <p><strong>Vehicle:</strong> {{ appointment.vehicle.brand }} {{ appointment.vehicle.model }} ({{ appointment.vehicle.year }})</p>
+            </div>
+            
+            <div class="reason-box">
+                <h3>Cancellation Reason:</h3>
+                <p>{{ reason }}</p>
+                <p><strong>Cancelled at:</strong> {{ cancellation_time }}</p>
+            </div>
+            
+            <div class="customer-details">
+                <h3>Customer Information:</h3>
+                <p><strong>Name:</strong> {{ appointment.customer.name }}</p>
+                <p><strong>Email:</strong> {{ appointment.customer.email }}</p>
+                <p><strong>Phone:</strong> {{ appointment.customer.phone }}</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>This is an automated email from Soorath Autos. Please do not reply to this email.</p>
+        </div>
+    </div>
+</body>
+</html>

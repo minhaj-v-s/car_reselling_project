@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Feedback - Soorath Autos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .feedback-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feedback-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .feedback-container h1::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: #ffcc00;
+            margin: 10px auto 0;
+            border-radius: 4px;
+        }
+        
+        .vehicle-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 5px solid #ffcc00;
+        }
+        
+        .vehicle-image {
+            width: 100px;
+            height: 70px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-right: 15px;
+            border: 2px solid #f0f0f0;
+        }
+        
+        .vehicle-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .vehicle-details {
+            flex: 1;
+        }
+        
+        .vehicle-details h3 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        
+        .vehicle-details p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .rating-group {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            direction: rtl;
+        }
+        
+        .rating-group input {
+            display: none;
+        }
+        
+        .rating-group label {
+            font-size: 30px;
+            color: #ddd;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+        
+        .rating-group label:hover,
+        .rating-group label:hover ~ label,
+        .rating-group input:checked ~ label {
+            color: #ffcc00;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffcc00;
+            box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.2);
+        }
+        
+        .submit-btn {
+            background-color: #ffcc00;
+            color: #0e0f0e;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 204, 0, 0.3);
+        }
+        
+        .rating-text {
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="feedback-container">
+        <h1>Share Your Experience</h1>
+        
+        <div class="vehicle-info">
+            <div class="vehicle-image">
+                <img src="{{ purchase.vehicle.image.url }}" alt="{{ purchase.vehicle.model }}">
+            </div>
+            <div class="vehicle-details">
+                <h3>{{ purchase.vehicle.brand }} {{ purchase.vehicle.model }}</h3>
+                <p>{{ purchase.vehicle.year }} • {{ purchase.vehicle.transmission }} • {{ purchase.vehicle.fuel }}</p>
+            </div>
+        </div>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <p class="rating-text">How would you rate your experience?</p>
+            
+            <div class="rating-group">
+                <input type="radio" name="rating" id="star5" value="5" required>
+                <label for="star5"><i class="fas fa-star"></i></label>
+                
+                <input type="radio" name="rating" id="star4" value="4">
+                <label for="star4"><i class="fas fa-star"></i></label>
+                
+                <input type="radio" name="rating" id="star3" value="3">
+                <label for="star3"><i class="fas fa-star"></i></label>
+                
+                <input type="radio" name="rating" id="star2" value="2">
+                <label for="star2"><i class="fas fa-star"></i></label>
+                
+                <input type="radio" name="rating" id="star1" value="1">
+                <label for="star1"><i class="fas fa-star"></i></label>
+            </div>
+            
+            <div class="form-group">
+                <label for="comment">Share your thoughts about your purchase:</label>
+                <textarea name="comment" id="comment" placeholder="Tell us about your experience with the vehicle and our service..." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Feedback</button>
+        </form>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script>
+        // Script to update rating text based on selection
+        const ratingLabels = document.querySelectorAll('.rating-group label');
+        const ratingText = document.querySelector('.rating-text');
+        const ratingTexts = [
+            "How would you rate your experience?",
+            "Poor - Disappointed with the experience",
+            "Fair - Below expectations",
+            "Good - Met expectations",
+            "Very Good - Above expectations",
+            "Excellent - Extremely satisfied"
+        ];
+        
+        ratingLabels.forEach((label, index) => {
+            label.addEventListener('click', () => {
+                const ratingValue = 5 - index;
+                ratingText.textContent = ratingTexts[ratingValue];
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -23,6 +23,17 @@
 
     {% include 'navbar.html' %}
 
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i> 
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <!-- Changes for home.html -->
     <!-- Replace the Hero Section with the following code -->
     <section class="hero">
@@ -110,6 +121,7 @@
 </section>
 
     <!-- Testimonials Section - Add this between About Us and Footer in your home.html -->
+<!-- Testimonials Section - Now with dynamic testimonials -->
 <section id="testimonials" class="testimonials-section">
     <div class="testimonials-container">
         <div class="testimonials-header">
@@ -117,35 +129,75 @@
             <h2>Our Happy Customers</h2>
             <div class="testimonials-divider"></div>
         </div>
-
         <div class="testimonials-carousel">
             <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner">
-                    <!-- Testimonial 1 -->
-                    <div class="carousel-item active">
-                        <div class="testimonial-content">
-                            <div class="testimonial-image-container">
-                                <img src="{% static 'images/WhatsApp Image 2025-03-13 at 16.13.24_b872eff9.jpg' %}" alt="Satisfied Customer" class="testimonial-image">
-                                <div class="testimonial-name-badge">
-                                    <div class="customer-name">Satisfied Customer</div>
-                                    <div class="customer-car">Suzuki Swift</div>
+                    {% if testimonials %}
+                        {% for testimonial in testimonials %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="testimonial-content">
+                                    <div class="testimonial-image-container">
+                                        {% if testimonial.image %}
+                                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.customer.name }}" class="testimonial-image">
+                                        {% else %}
+                                            <img src="{% static 'images/WhatsApp Image 2025-03-13 at 16.13.24_b872eff9.jpg' %}" alt="Customer" class="testimonial-image">
+                                        {% endif %}
+                                        <div class="testimonial-name-badge">
+                                            <div class="customer-name">{{ testimonial.customer.name }}</div>
+                                            <div class="customer-car">{{ testimonial.purchase.vehicle.brand }} {{ testimonial.purchase.vehicle.model }}</div>
+                                        </div>
+                                    </div>
+                                 
+                                    <div class="testimonial-quote-container">
+                                        <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                        </svg>
+                                        <p class="testimonial-text">
+                                            "{{ testimonial.comment }}"
+                                        </p>
+                                        <div class="testimonial-rating">
+                                            {% for i in "12345" %}
+                                                {% if forloop.counter <= testimonial.rating %}
+                                                    <i class="fas fa-star"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="testimonial-verified">
+                                            <div class="verified-line"></div>
+                                            <div class="verified-text">Verified Purchase</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="testimonial-quote-container">
-                                <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                </svg>
-                                <p class="testimonial-text">
-                                    "Soorath Autos provided me with exceptional service. Their team was professional and helped me find the perfect car that fits my needs and budget."
-                                </p>
-                                <div class="testimonial-verified">
-                                    <div class="verified-line"></div>
-                                    <div class="verified-text">Verified Purchase</div>
+                        {% endfor %}
+                    {% else %}
+                        <!-- Fallback testimonials if no dynamic ones available -->
+                        <div class="carousel-item active">
+                            <div class="testimonial-content">
+                                <div class="testimonial-image-container">
+                                    <img src="{% static 'images/WhatsApp Image 2025-03-13 at 16.13.24_b872eff9.jpg' %}" alt="Satisfied Customer" class="testimonial-image">
+                                    <div class="testimonial-name-badge">
+                                        <div class="customer-name">Satisfied Customer</div>
+                                        <div class="customer-car">Suzuki Swift</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="testimonial-quote-container">
+                                    <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                    </svg>
+                                    <p class="testimonial-text">
+                                        "Soorath Autos provided me with exceptional service. Their team was professional and helped me find the perfect car that fits my needs and budget."
+                                    </p>
+                                    <div class="testimonial-verified">
+                                        <div class="verified-line"></div>
+                                        <div class="verified-text">Verified Purchase</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
                     <!-- Testimonial 2 -->
                     <div class="carousel-item">
@@ -224,34 +276,69 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
 
                 <!-- Navigation dots -->
-                <div class="carousel-indicators testimonial-indicators">
-                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    
+                    <div class="carousel-indicators testimonial-indicators">
+                        {% if testimonials %}
+                            {% for testimonial in testimonials %}
+                                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+                            {% endfor %}
+                        {% else %}
+                            <!-- Fallback indicators if no dynamic testimonials -->
+                            <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        {% endif %}
+                    </div>
+                    <!-- Navigation arrows -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-
-                <!-- Navigation arrows -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
     <!-- Footer -->
     {% include 'footer.html' %}
 
+
+
+    <script>
+        // Script to automatically clear messages after they've been displayed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if there are messages
+            const messagesContainer = document.querySelector('.messages');
+            if (messagesContainer) {
+                // Add auto-hide functionality for messages
+                setTimeout(function() {
+                    messagesContainer.style.opacity = '0';
+                    setTimeout(function() {
+                        messagesContainer.style.display = 'none';
+                    }, 500);
+                 
+                    // Send request to clear messages from session
+                    fetch('{% url "clear_messages" %}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    }).catch(error => console.error('Error clearing messages:', error));
+                }, 5000); // Hide after 5 seconds
+            }
+        });
+
+    </script>
 </body>
 
 </html>

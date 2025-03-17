@@ -539,3 +539,37 @@ body {
         margin-bottom: 30px;
     }
 }
+
+
+/* Add these styles for sold cars */
+
+.car_card.sold {
+
+    position: relative;
+
+}
+
+
+
+.car_card.sold img {
+
+    filter: blur(3px) grayscale(50%);
+
+}
+
+
+
+.car_card.sold::after {
+    content: "SOLD";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 0, 0, 0.7);
+    color: white;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 24px;
+    z-index: 10;
+}

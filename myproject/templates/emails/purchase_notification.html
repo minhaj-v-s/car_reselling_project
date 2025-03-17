@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Purchase Notification</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .email-container {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #0e0f0e;
+            color: #4caf50;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            background-color: #fff;
+        }
+        .purchase-info {
+            background-color: #f8f9fa;
+            border-left: 4px solid #4caf50;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .purchase-info p {
+            margin: 8px 0;
+        }
+        .footer {
+            background-color: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .feedback-box {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .feedback-stars {
+            color: #ffcc00;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .customer-details {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #4caf50;
+            color: white !important;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .sold-label {
+            display: inline-block;
+            background-color: #4caf50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Vehicle Purchase Confirmation</h1>
+        </div>
+        <div class="content">
+            <p>Hello Admin,</p>
+            <p>A vehicle has been purchased by a customer. The vehicle has been marked as <span class="sold-label">SOLD</span> in the system.</p>
+            
+            <div class="purchase-info">
+                <h3>Purchase Details:</h3>
+                <p><strong>Vehicle:</strong> {{ purchase.vehicle.brand }} {{ purchase.vehicle.model }} ({{ purchase.vehicle.year }})</p>
+                <p><strong>Price:</strong> ${{ purchase.price }}</p>
+                <!-- <p><strong>Purchase Date:</strong> {{ purchase.purchase_date }}</p>
+                <p><strong>Status:</strong> {{ purchase.status }}</p> -->
+            </div>
+            
+            <div class="feedback-box">
+                <h3>Customer Feedback:</h3>
+                <div class="feedback-stars">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= feedback.rating %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                    ({{ feedback.rating }}/5)
+                </div>
+                <p><strong>Comment:</strong> "{{ feedback.comment }}"</p>
+            </div>
+            
+            <div class="customer-details">
+                <h3>Customer Information:</h3>
+                <p><strong>Name:</strong> {{ purchase.customer.name }}</p>
+                <p><strong>Email:</strong> {{ purchase.customer.email }}</p>
+                <p><strong>Phone:</strong> {{ purchase.customer.phone }}</p>
+            </div>
+            
+            <p style="margin-top: 25px;">Please update your inventory accordingly.</p>
+            
+            <a href="{{ admin_url }}" class="btn">Go to Admin Dashboard</a>
+        </div>
+        <div class="footer">
+            <p>This is an automated email from Soorath Autos. Please do not reply to this email.</p>
+            <p>For any queries, please contact tech support.</p>
+        </div>
+    </div>
+</body>
+</html>

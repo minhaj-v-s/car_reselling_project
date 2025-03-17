@@ -707,6 +707,21 @@ body {
     background-color: #ffcc00 !important;
 }
 
+/* Star rating styling - new */
+.testimonial-rating {
+    margin-bottom: 15px;
+}
+
+.testimonial-rating .fas.fa-star {
+    color: #ffcc00;
+    margin-right: 3px;
+}
+
+.testimonial-rating .far.fa-star {
+    color: #ddd;
+    margin-right: 3px;
+}
+
 /* Custom carousel controls */
 .testimonials-carousel .carousel-control-prev,
 .testimonials-carousel .carousel-control-next {

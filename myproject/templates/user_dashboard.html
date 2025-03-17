@@ -33,12 +33,25 @@
                 <p><strong>Time:</strong> {{ appointment.app_time }}</p>
                 <p><span class="status {{ appointment.status|lower }}">{{ appointment.status }}</span></p>
                 
-                {% if appointment.status != "Cancelled" %}
-                <button class="cancel-btn" onclick="showCancelForm({{ appointment.id }})">
-                    <i class="fas fa-times-circle"></i> Cancel Appointment
-                </button>
+                <div class="action-buttons">
+                    {% if appointment.status == "Confirmed" %}
+                        <form action="{% url 'mark_as_purchased' appointment.id %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="purchase-btn">
+                                <i class="fas fa-check-circle"></i> Mark as Purchased
+                            </button>
+                        </form>
+                    {% endif %}
+                 
+                    {% if appointment.status != "Cancelled" and appointment.status != "Completed" %}
+                        <button class="cancel-btn" onclick="showCancelForm({{ appointment.id }})">
+                            <i class="fas fa-times-circle"></i> Cancel Appointment
+                        </button>
+                    {% endif %}
+                </div>
 
                 <!-- Hidden Form for Cancellation Reason -->
+                {% if appointment.status != "Cancelled" and appointment.status != "Completed" %}
                 <div id="cancel-form-{{ appointment.id }}" class="cancel-form" style="display: none;">
                     <form action="{% url 'cancel_appointment' appointment.id %}" method="POST">
                         {% csrf_token %}
@@ -51,8 +64,11 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="vehicle-image">
+            <div class="vehicle-image {% if appointment.vehicle.id in purchased_vehicles %}purchased-vehicle{% endif %}">
                 <img src="{{ appointment.vehicle.image.url }}" alt="{{ appointment.vehicle.model }}">
+                {% if appointment.vehicle.id in purchased_vehicles %}
+                <div class="purchased-overlay">PURCHASED</div>
+                {% endif %}
             </div>
         </div>
         {% empty %}
@@ -60,6 +76,7 @@
             <p>You don't have any bookings yet.</p>
             <a href="{% url 'cars' %}" class="book-now-btn">Book an Appointment</a>
         </div>
+                
         {% endfor %}
     </div>
 
@@ -74,6 +91,29 @@
         function hideCancelForm(id) {
             document.getElementById(`cancel-form-${id}`).style.display = "none";
         }
+
+         // Script to automatically clear messages after they've been displayed
+         document.addEventListener('DOMContentLoaded', function() {
+            // Check if there are messages
+            const messagesContainer = document.querySelector('.messages');
+            if (messagesContainer) {
+                // Add auto-hide functionality for messages
+                setTimeout(function() {
+                    messagesContainer.style.opacity = '0';
+                    setTimeout(function() {
+                        messagesContainer.style.display = 'none';
+                    }, 500);
+                 
+                    // Send request to clear messages from session
+                    fetch('{% url "clear_messages" %}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    }).catch(error => console.error('Error clearing messages:', error));
+                }, 5000); // Hide after 5 seconds
+            }
+        });
     </script>
 </body>
 

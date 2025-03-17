@@ -85,6 +85,7 @@
     </div>
 
     <script>
+        
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.querySelector('.toggle-password i');
@@ -99,6 +100,29 @@
                 toggleIcon.classList.add('fa-eye');
             }
         }
+        
+        // Script to automatically clear messages after they've been displayed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if there are messages
+            const messagesContainer = document.querySelector('.messages-container');
+            if (messagesContainer) {
+                // Add auto-hide functionality for messages
+                setTimeout(function() {
+                    messagesContainer.style.opacity = '0';
+                    setTimeout(function() {
+                        messagesContainer.style.display = 'none';
+                    }, 500);
+                    
+                    // Send request to clear messages from session
+                    fetch('{% url "clear_messages" %}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    }).catch(error => console.error('Error clearing messages:', error));
+                }, 5000); // Hide after 5 seconds
+            }
+        });
     </script>
 </body>
 

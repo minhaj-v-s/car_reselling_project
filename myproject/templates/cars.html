@@ -113,18 +113,32 @@
 
         <!-- Car Listing -->
         <div class="car_listing">
-            {% if cars %}
-            {% for i in cars %}
-            <div class="car_card">
-                <img src="{{i.image.url}}" alt="{{ i.brand }} {{ i.model }}">
-                <div class="car_name">{{ i.brand }} {{ i.model }}</div>
-                <a href="{% url 'car_description' i.id %}" style="text-decoration: none;">
-                    <button class="view_description">
-                        <i class="fas fa-info-circle me-2"></i> View Details
-                    </button>
-                </a>
-            </div>
-            {% endfor %}
+            {% if cars or sold_cars %}
+                <!-- Available Cars -->
+                {% for i in cars %}
+                <div class="car_card">
+                    <img src="{{i.image.url}}" alt="{{ i.brand }} {{ i.model }}">
+                    <div class="car_name">{{ i.brand }} {{ i.model }}</div>
+                    <a href="{% url 'car_description' i.id %}" style="text-decoration: none;">
+                        <button class="view_description">
+                            <i class="fas fa-info-circle me-2"></i> View Details
+                        </button>
+                    </a>
+                </div>
+                {% endfor %}
+                
+                <!-- Sold Cars -->
+                {% for i in sold_cars %}
+                <div class="car_card sold">
+                    <img src="{{i.image.url}}" alt="{{ i.brand }} {{ i.model }}">
+                    <div class="car_name">{{ i.brand }} {{ i.model }}</div>
+                    <a href="{% url 'car_description' i.id %}" style="text-decoration: none;">
+                        <button class="view_description">
+                            <i class="fas fa-info-circle me-2"></i> View Details
+                        </button>
+                    </a>
+                </div>
+                {% endfor %}
             {% else %}
             <div class="no-results">
                 <i class="fas fa-search fa-3x mb-3"></i>
