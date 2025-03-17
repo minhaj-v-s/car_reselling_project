@@ -1,4 +1,16 @@
-/* General Styles */
+/* car_description.css */
+
+/* Base Styles */
+:root {
+    --soorath-yellow: #FFCC00;
+    --soorath-orange: #FF6B00;
+    --soorath-dark: #0E0F0E;
+    --soorath-green: #25D366;
+    --soorath-black: #1C1C1C;
+    --soorath-grey: #F7F9FC;
+    --soorath-lightgrey: #F9F9F9;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,261 +18,429 @@
 }
 
 body {
-    background-color: #f7f9fc;
-    font-family: 'Poppins', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--soorath-grey);
     color: #333;
+    line-height: 1.6;
 }
 
-/* Navigation Bar - Keeping this unchanged as per requirement */
-.navbar {
-    background-color: #0e0f0e;
-    padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-// ... keep existing code (all navbar styling) the same
-
-/* Car Description Section - Revised */
-.container.car-description {
+.container {
     max-width: 1200px;
-    padding: 0;
-    margin: 40px auto;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-.row {
+/* User dropdown styles */
+.user-dropdown {
+    position: relative;
+}
+
+.user-toggle {
+    cursor: pointer;
+}
+
+.small-icon {
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 200px;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    margin: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    margin-top: 10px;
+    display: none;
+    padding: 8px 0;
+    z-index: 100;
 }
 
-/* Car Carousel Enhancements */
-#carCarousel {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    margin: 20px 0;
+.dropdown-menu.show {
+    display: block;
+    animation: fadeIn 0.2s ease;
 }
 
-#carCarousel .carousel-item {
-    height: 400px;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 20px;
+    width: 10px;
+    height: 10px;
+    background: white;
+    transform: rotate(45deg);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #333 !important;
+    transition: background 0.3s ease;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 5px 0;
+}
+
+.logout-item {
+    color: #f44336 !important;
+}
+
+.logout-item:hover {
+    background-color: rgba(244, 67, 54, 0.1) !important;
+}
+
+/* Main Content Styles */
+.main-content {
+    padding: 3rem 0;
+}
+
+.car-details-card {
+    background-color: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.car-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .car-details-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Car Carousel Styles */
+.car-carousel {
+    padding: 1.5rem;
+}
+
+.main-image-container {
     position: relative;
     overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
 }
 
-#carCarousel .carousel-item img {
-    object-fit: cover;
-    height: 100%;
+.main-image {
+    height: 350px;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    background-color: #f3f4f6;
+}
+
+.main-image img {
     width: 100%;
-    transition: transform 0.6s ease;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+    cursor: zoom-in;
 }
 
-#carCarousel .carousel-item:hover img {
-    transform: scale(1.03);
+.main-image img:hover {
+    transform: scale(1.05);
 }
 
-.carousel-control-prev, .carousel-control-next {
-    width: 40px;
-    height: 40px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
+.nav-button {
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    opacity: 0.7;
-}
-
-.carousel-control-prev {
-    left: 15px;
-}
-
-.carousel-control-next {
-    right: 15px;
-}
-
-.carousel-control-prev:hover, .carousel-control-next:hover {
-    opacity: 1;
-    background: rgba(0, 0, 0, 0.8);
-}
-
-/* Car Details Section - Redesigned */
-.car-details {
-    padding: 30px 40px;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-button {
+    left: 0.75rem;
+}
+
+.next-button {
+    right: 0.75rem;
+}
+
+.thumbnails {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
     justify-content: center;
 }
 
-.car-details h2 {
-    color: #1c1c1c;
-    margin-bottom: 15px;
-    font-size: 2.5rem;
+.thumbnail-button {
+    height: 4rem;
+    width: 4rem;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 2px solid transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+@media (min-width: 768px) {
+    .thumbnail-button {
+        height: 5rem;
+        width: 5rem;
+    }
+}
+
+.thumbnail-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s;
+}
+
+.thumbnail-button img:hover {
+    opacity: 0.9;
+}
+
+.thumbnail-button.active {
+    border-color: var(--soorath-yellow);
+    box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.5);
+}
+
+/* Car Info Styles */
+.car-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.car-title {
+    font-size: 1.875rem;
     font-weight: 700;
-    letter-spacing: -0.5px;
+    color: var(--soorath-black);
     position: relative;
     display: inline-block;
+    margin-bottom: 2rem;
 }
 
-.car-details h2:after {
-    content: '';
+@media (min-width: 768px) {
+    .car-title {
+        font-size: 2.25rem;
+    }
+}
+
+.title-underline {
     position: absolute;
     left: 0;
-    bottom: -8px;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, #ffcc00, #ffa500);
-    border-radius: 2px;
+    bottom: -0.75rem;
+    height: 0.25rem;
+    width: 4rem;
+    background: linear-gradient(to right, var(--soorath-yellow), var(--soorath-orange));
 }
 
-.car-details .price {
-    font-size: 1.8rem;
+.car-price {
+    font-size: 1.875rem;
     font-weight: 700;
-    color: #ffcc00;
-    margin-bottom: 20px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    background: -webkit-linear-gradient(#ffcc00, #ff6b00);
+    background: linear-gradient(to right, var(--soorath-yellow), var(--soorath-orange));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1.5rem;
 }
 
-.car-details p {
-    margin-bottom: 12px;
-    line-height: 1.6;
-    color: #666;
-    font-size: 1.05rem;
+@media (min-width: 768px) {
+    .car-price {
+        font-size: 2.25rem;
+    }
 }
 
-.car-details p strong {
-    color: #333;
-    font-weight: 600;
-    margin-right: 10px;
-    display: inline-block;
-    min-width: 80px;
-}
-
-/* Specs Grid */
-.car-specs {
+/* Specs Container Styles */
+.specs-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin: 20px 0;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 10px;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.25rem;
+    background-color: var(--soorath-lightgrey);
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .specs-container {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .spec-item {
     display: flex;
     align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
 }
 
-.spec-item i {
-    color: #ffcc00;
-    margin-right: 10px;
-    font-size: 1.2rem;
+.spec-item.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Enhanced Bullet Points */
-.car-description-list {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 25px 0;
+.spec-icon {
+    color: var(--soorath-yellow);
 }
 
-.car-description-list li {
-    position: relative;
-    padding-left: 25px;
-    margin-bottom: 12px;
-    line-height: 1.6;
-    color: #555;
-    font-size: 1rem;
-}
-
-.car-description-list li:before {
-    content: '•';
-    color: #ffcc00;
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-    top: -2px;
-    font-size: 1.5rem;
-}
-
-/* Enhanced Action Buttons */
-.action-buttons {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-    flex-wrap: wrap;
-}
-
-.appointment-btn, .chat-btn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 50px;
+.spec-label {
     font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    display: inline-flex;
+    color: var(--soorath-black);
+}
+
+.spec-value {
+    margin-left: 0.5rem;
+    color: #4b5563;
+}
+
+.status-badge {
+    margin-left: 0.5rem;
+    color: white;
+    font-size: 0.875rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+}
+
+.status-badge.available {
+    background-color: #10b981;
+}
+
+.status-badge.reserved {
+    background-color: #f59e0b;
+}
+
+/* Highlights Section Styles */
+.highlights-section {
+    margin-bottom: 1.5rem;
+}
+
+.highlights-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.highlights-list {
+    list-style: none;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-bullet {
+    color: var(--soorath-yellow);
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+    margin-top: 0.125rem;
+}
+
+.highlight-text {
+    color: #4b5563;
+}
+
+/* Action Buttons Styles */
+.action-buttons {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .action-buttons {
+        flex-direction: row;
+    }
+}
+
+.appointment-button,
+.whatsapp-button {
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    gap: 0.5rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    text-decoration: none;
 }
 
-.appointment-btn {
-    background: linear-gradient(135deg, #ffcc00, #ff6b00);
-    color: #fff;
+.appointment-button {
+    background: linear-gradient(to right, var(--soorath-yellow), var(--soorath-orange));
+    color: white;
 }
 
-.chat-btn {
-    background: #ffffff;
-    color: #333;
-    border: 2px solid #eaeaea;
+.whatsapp-button {
+    background-color: var(--soorath-green);
+    color: white;
 }
 
-.appointment-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(255, 204, 0, 0.3);
+.appointment-button:hover,
+.whatsapp-button:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-.chat-btn:hover {
-    transform: translateY(-3px);
-    border-color: #ffcc00;
-    background: #f9f9f9;
-    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.05);
-}
-
-.chat-btn i {
-    font-size: 1.2rem;
-    color: #ffcc00;
-    transition: transform 0.3s;
-}
-
-.chat-btn:hover i {
-    transform: scale(1.2);
-}
-
-/* Revised Chat Popup */
-.chat-popup {
-    display: none;
+/* WhatsApp Popup Styles */
+.whatsapp-popup {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 2.5rem;
+    right: 2.5rem;
     width: 350px;
-    background: #fff;
-    border-radius: 15px;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    z-index: 50;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    transition: all 0.3s ease;
-    animation: slideUp 0.4s ease-out;
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease-out;
+}
+
+.whatsapp-popup.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: slideUp 0.4s ease-out forwards;
 }
 
 @keyframes slideUp {
@@ -274,193 +454,126 @@ body {
     }
 }
 
-.chat-header {
-    background: linear-gradient(135deg, #ffcc00, #ff6b00);
-    color: #fff;
-    padding: 15px 20px;
+.popup-header {
+    background-color: var(--soorath-green);
+    color: white;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.chat-header h4 {
-    margin: 0;
-    font-size: 1.2rem;
+.popup-title {
+    font-size: 1.25rem;
     font-weight: 600;
+    display: flex;
+    align-items: center;
 }
 
-.close-chat-btn {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
+.popup-title i {
+    margin-right: 0.5rem;
+}
+
+.close-popup-button {
+    width: 1.75rem;
+    height: 1.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
     cursor: pointer;
     transition: all 0.3s;
 }
 
-.close-chat-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
+.close-popup-button:hover {
+    background-color: rgba(255, 255, 255, 0.4);
     transform: rotate(90deg);
 }
 
-.chat-body {
-    padding: 20px;
+.popup-content {
+    padding: 1.5rem;
+    text-align: center;
 }
 
-.chat-messages {
-    height: 250px;
-    overflow-y: auto;
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 15px;
+.popup-message {
+    margin-bottom: 1.5rem;
 }
 
-.chat-messages::-webkit-scrollbar {
-    width: 6px;
+.popup-message p {
+    color: #4b5563;
+    margin-bottom: 1rem;
 }
 
-.chat-messages::-webkit-scrollbar-thumb {
-    background: #ddd;
-    border-radius: 3px;
-}
-
-.message {
-    margin-bottom: 15px;
-    padding: 10px 15px;
-    border-radius: 15px;
-    max-width: 80%;
-    clear: both;
-}
-
-.sender {
-    background: #ffcc00;
-    color: #333;
-    float: right;
-    border-bottom-right-radius: 0;
-}
-
-.receiver {
-    background: #eee;
-    color: #333;
-    float: left;
-    border-bottom-left-radius: 0;
-}
-
-.message-input {
-    display: flex;
-    gap: 10px;
-}
-
-#chatInput {
-    flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #eee;
-    border-radius: 30px;
-    outline: none;
-    font-size: 0.95rem;
-    transition: all 0.3s;
-}
-
-#chatInput:focus {
-    border-color: #ffcc00;
-    box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.1);
-}
-
-#sendBtn {
-    border: none;
-    background: linear-gradient(135deg, #ffcc00, #ff6b00);
-    color: white;
-    border-radius: 30px;
-    width: 50px;
-    height: 44px;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
+.open-whatsapp-button {
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--soorath-green);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s;
+}
+
+.open-whatsapp-button:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.qr-code-section p {
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.qr-code-container {
+    display: flex;
     justify-content: center;
 }
 
-#sendBtn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 10px rgba(255, 204, 0, 0.2);
+.qr-code-container img {
+    border-radius: 0.5rem;
 }
 
-#sendBtn i {
-    font-size: 1.2rem;
+/* Lightbox Styles */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    display: none;
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-    .car-details h2 {
-        font-size: 2.2rem;
-    }
-    
-    .car-details .price {
-        font-size: 1.6rem;
-    }
+.close-lightbox-button {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    color: white;
+    font-size: 2.25rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
-@media (max-width: 768px) {
-    .container.car-description {
-        margin: 20px;
-    }
-    
-    .navbar {
-        flex-direction: column;
-        padding: 15px;
-    }
-    
-    .nav-links {
-        margin: 15px 0;
-    }
-    
-    .row {
-        margin: 0;
-    }
-    
-    .car-details {
-        padding: 25px 20px;
-    }
-    
-    .car-details h2 {
-        font-size: 1.8rem;
-    }
-    
-    .car-specs {
-        grid-template-columns: 1fr;
-    }
-    
-    #carCarousel .carousel-item {
-        height: 300px;
-    }
-    
-    .chat-popup {
-        width: 90%;
-        right: 5%;
-        left: 5%;
-    }
+.close-lightbox-button:hover {
+    color: #d1d5db;
 }
 
-@media (max-width: 480px) {
-    .action-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .appointment-btn, .chat-btn {
-        width: 100%;
-    }
-    
-    .car-details h2 {
-        font-size: 1.6rem;
-    }
+.lightbox-image {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
 }
-
 
 /* Footer Styles */
 .footer {
@@ -587,4 +700,15 @@ body {
         flex-basis: 100%;
         margin-bottom: 30px;
     }
+}
+
+
+/* Animation Classes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
 }

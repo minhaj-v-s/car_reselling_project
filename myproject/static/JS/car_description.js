@@ -1,88 +1,164 @@
-/**
- * Car Description Page JavaScript
- * Enhanced user interactions for the car details page
- */
-
+// Initialize AOS (Animate on Scroll)
 document.addEventListener('DOMContentLoaded', function() {
-    // Image gallery behavior
-    const carouselItems = document.querySelectorAll('.carousel-item img');
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        once: true,
+        mirror: false
+    });
+
+    // DOM Elements
+    const mainCarImage = document.getElementById('mainCarImage');
+    const thumbnailButtons = document.querySelectorAll('.thumbnail-button');
+    const nextButton = document.getElementById('prevButton');
+    const prevButton = document.getElementById('nextButton');
+    const whatsappButton = document.getElementById('whatsappButton');
+    const whatsappPopup = document.getElementById('whatsappPopup');
+    const closePopupButton = document.getElementById('closePopupButton');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const closeLightboxButton = document.getElementById('closeLightboxButton');
+    const specsContainer = document.getElementById('specsContainer');
+    const specItems = document.querySelectorAll('.spec-item');
     
-    carouselItems.forEach(item => {
-        item.addEventListener('mouseover', function() {
-            this.style.transform = 'scale(1.03)';
-            this.style.transition = 'transform 0.5s ease';
-        });
-        
-        item.addEventListener('mouseout', function() {
-            this.style.transform = 'scale(1)';
-        });
+    // Variables
+    let activeSlide = 0;
+    let imageUrls = [];
+    
+    // Collect all image URLs
+    thumbnailButtons.forEach(button => {
+        const img = button.querySelector('img');
+        if (img) {
+            imageUrls.push(img.src);
+        }
     });
     
-    // Animate specifications on scroll
-    const specs = document.querySelectorAll('.spec-item');
-    
-    function animateSpecs() {
-        specs.forEach((spec, index) => {
-            setTimeout(() => {
-                spec.style.opacity = '1';
-                spec.style.transform = 'translateY(0)';
-            }, 100 * index);
+    // Functions
+    function setActiveSlide(index) {
+        activeSlide = index;
+        mainCarImage.src = imageUrls[index];
+        
+        thumbnailButtons.forEach((button, i) => {
+            if (i === index) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
         });
     }
     
-    // Set initial state
-    specs.forEach(spec => {
-        spec.style.opacity = '0';
-        spec.style.transform = 'translateY(20px)';
-        spec.style.transition = 'all 0.5s ease';
-    });
+    function nextSlide() {
+        let newIndex = activeSlide + 1;
+        if (newIndex >= imageUrls.length) {
+            newIndex = 0;
+        }
+        setActiveSlide(newIndex);
+    }
     
-    // Call animation when element is in viewport
-    const specsContainer = document.querySelector('.car-specs');
+    function prevSlide() {
+        let newIndex = activeSlide - 1;
+        if (newIndex < 0) {
+            newIndex = imageUrls.length - 1;
+        }
+        setActiveSlide(newIndex);
+    }
     
-    if (specsContainer) {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateSpecs();
-                    observer.unobserve(entry.target);
-                }
-            });
+    function openWhatsAppPopup() {
+        whatsappPopup.classList.add('active');
+        
+        // Generate QR code
+        const qrCodeContainer = document.getElementById('qrCodeContainer');
+        qrCodeContainer.innerHTML = ''; // Clear previous QR code
+        
+        const openWhatsAppLink = document.getElementById('openWhatsAppLink');
+        const whatsappUrl = openWhatsAppLink.href;
+        
+        // Create QR code
+        new QRCode(qrCodeContainer, {
+            text: whatsappUrl,
+            width: 180,
+            height: 180,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+    
+    function closeWhatsAppPopup() {
+        whatsappPopup.classList.remove('active');
+    }
+    
+    function openLightbox(imageUrl) {
+        lightboxImage.src = imageUrl;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Create Intersection Observer for specs animation
+    function setupSpecsObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                specItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('show');
+                    }, index * 100);
+                });
+                observer.disconnect();
+            }
         }, { threshold: 0.5 });
         
-        observer.observe(specsContainer);
+        if (specsContainer) {
+            observer.observe(specsContainer);
+        }
     }
     
-    // Button hover effects
-    const buttons = document.querySelectorAll('.appointment-btn, .chat-btn');
+    // Event Listeners
+    nextButton.addEventListener('click', nextSlide);
+    prevButton.addEventListener('click', prevSlide);
     
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-3px)';
-            this.style.boxShadow = '0 7px 20px rgba(0, 0, 0, 0.15)';
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+    thumbnailButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            setActiveSlide(index);
         });
     });
     
-    // Chat popup functionality - Simplified version
-    const chatPopup = document.getElementById('chatPopup');
-    const openChatBtn = document.getElementById('openChat');
-    const closeChatBtn = document.querySelector('.close-chat-btn');
+    mainCarImage.addEventListener('click', () => {
+        openLightbox(mainCarImage.src);
+    });
     
-    if (openChatBtn && chatPopup) {
-        openChatBtn.addEventListener('click', function() {
-            chatPopup.style.display = 'block';
-            chatPopup.style.animation = 'slideUp 0.4s ease-out forwards';
-        });
-    }
+    whatsappButton.addEventListener('click', openWhatsAppPopup);
+    closePopupButton.addEventListener('click', closeWhatsAppPopup);
+    closeLightboxButton.addEventListener('click', closeLightbox);
     
-    if (closeChatBtn) {
-        closeChatBtn.addEventListener('click', function() {
-            chatPopup.style.display = 'none';
-        });
-    }
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        } else {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'Escape' && whatsappPopup.classList.contains('active')) {
+                closeWhatsAppPopup();
+            }
+        }
+    });
+    
+    // Initialize
+    setupSpecsObserver();
 });

@@ -96,7 +96,7 @@
                         <label for="terms">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
                     </div>
 
-                    <button type="submit" class="btn-register">
+                    <button type="submit" class="btn-register" >
                         <i class="fas fa-user-plus"></i> Create Account
                     </button>
                     
@@ -134,6 +134,7 @@
 
     <script>
         function togglePasswordVisibility(fieldId) {
+            
             const passwordInput = document.getElementById(fieldId);
             const toggleIcon = document.querySelector(`#${fieldId} + .toggle-password i, .password-input-container:has(#${fieldId}) .toggle-password i`);
             
@@ -147,6 +148,8 @@
                 toggleIcon.classList.add('fa-eye');
             }
         }
+
+        
     </script>
 </body>
 

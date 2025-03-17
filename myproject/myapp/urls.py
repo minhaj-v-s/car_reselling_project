@@ -8,14 +8,13 @@ urlpatterns =[
     # path("login/",views.login,name="login"),
     path("cars/",views.cars,name="cars"),
     path("cardescription/<str:pk>",views.car_description,name="car_description"),
-    path("book_appointment/<str:pk>",views.book_appointment,name="book_appointment"),
+    path("book_appointment/<int:pk>",views.book_appointment,name="book_appointment"),
     path("register/",views.register,name="register"),
     path("login/",views.login_view,name="login"),
     path("user_dashboard/<str:pk>",views.user_dashboard, name="user_dashboard"),
     path("logout/",views.logout_view, name="logout"),
     path("user_appointments",views.user_appointments,name="user_appointments"),
     path("delete_appointment/<str:pk>",views.delete_appointment,name="delete_appointment"),
-    path('admin/chat/', views.admin_chat, name='admin_chat'),
     path('cancel_appointment/<str:pk>', views.cancel_appointment, name='cancel_appointment'),
 ]
 

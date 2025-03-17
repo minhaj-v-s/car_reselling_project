@@ -1,3 +1,4 @@
+/* user_dashboard.css */
 /* General Styles */
 * {
     margin: 0;
@@ -9,109 +10,54 @@
 body {
     background-color: #f5f7fa;
     color: #333;
+    line-height: 1.6;
 }
 
-/* Navbar */
-.navbar {
-    background-color: #0e0f0e;
-    padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: sticky;
+/* Navbar styles are in your original CSS */
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.dashboard-header {
+    background: linear-gradient(to right, #0e0f0e, #1a1b1a);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header::before {
+    content: '';
+    position: absolute;
     top: 0;
-    z-index: 100;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(255, 204, 0, 0.05) 0%, transparent 50%);
 }
 
-.logo img {
-    height: 70px;
-    transition: transform 0.3s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.05);
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links a {
+.dashboard-header h1 {
     color: white;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    padding: 8px 12px;
-    border-radius: 6px;
-}
-
-.nav-links a.active, 
-.nav-links a:hover {
-    color: #ffcc00;
-    background-color: rgba(255, 204, 0, 0.1);
-}
-
-@keyframes wiggle {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(-2deg); }
-    50% { transform: rotate(2deg); }
-    75% { transform: rotate(-2deg); }
-    100% { transform: rotate(0deg); }
-}
-
-.nav-links li:hover {
-    animation: wiggle 0.3s ease-in-out;
-}
-
-/* Style for Sign In Button */
-.nav-links li a.login-btn {
-    padding: 10px 15px;
-    background-color: transparent;
-    color: white;
-    border: 2px solid #ffcc00;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-}
-
-/* Hover Effect */
-.nav-links li a.login-btn:hover {
-    background-color: #ffcc00;
-    color: #0e0f0e;
-    transform: scale(1.05);
-}
-
-.contact-btn {
-    background-color: transparent;
-    color: #ffcc00;
-    padding: 10px 20px;
-    border-radius: 8px;
+    font-size: 28px;
     font-weight: 600;
-    text-decoration: none;
-    border: 2px solid #ffcc00;
-    transition: all 0.3s ease;
-    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    position: relative;
 }
 
-.contact-btn:hover {
-    background-color: #ffcc00;
-    color: #0e0f0e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(255, 204, 0, 0.3);
+.dashboard-header p {
+    color: #cccccc;
+    font-size: 16px;
+    position: relative;
 }
 
 /* Appointment List Styling */
 .appointment-list {
-    max-width: 800px;
-    margin: 40px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
     background: #ffffff;
     padding: 30px;
     border-radius: 16px;
@@ -119,30 +65,46 @@ body {
     transition: transform 0.3s ease;
 }
 
-.appointment-list:hover {
-    transform: translateY(-5px);
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
 }
 
-/* Your Bookings heading */
-.appointment-list h1 {
-    text-align: center;
-    font-size: 32px;
+.list-header h2 {
+    font-size: 24px;
     font-weight: 700;
     color: #222;
     position: relative;
-    padding-bottom: 12px;
-    margin-bottom: 25px;
 }
 
-/* Underline effect for heading */
-.appointment-list h1::after {
-    content: "";
-    display: block;
-    width: 100px;
-    height: 4px;
+.book-new-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f8f9fa;
+    color: #0e0f0e;
+    border: 2px solid #ffcc00;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.book-new-btn:hover {
     background-color: #ffcc00;
-    margin: 10px auto 0;
-    border-radius: 4px;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 204, 0, 0.3);
+}
+
+.appointments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* Individual appointment cards */
@@ -150,12 +112,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #f8f9fa;
-    border-left: 6px solid #ffc107;
+    background: #ffffff;
+    border-left: 6px solid #4caf50;
     padding: 24px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     position: relative;
 }
 
@@ -170,6 +132,7 @@ body {
 
 .appointment-card.cancelled {
     border-left: 6px solid #f44336;
+    opacity: 0.8;
 }
 
 /* Hover effect */
@@ -182,6 +145,12 @@ body {
 .appointment-details {
     flex: 1;
     padding-right: 25px;
+}
+
+.vehicle-model {
+    font-size: 18px;
+    margin-bottom: 12px !important;
+    color: #222 !important;
 }
 
 /* Vehicle Image */
@@ -234,23 +203,21 @@ body {
     display: inline-block;
     padding: 6px 12px;
     border-radius: 8px;
-    margin-top: 5px;
+    margin-top: 10px;
     position: relative;
 }
 
-/* Pending - Orange */
+/* Status colors */
 .status.pending {
     color: #ff9800;
     background: rgba(255, 152, 0, 0.1);
 }
 
-/* Confirmed - Green */
 .status.confirmed {
     color: #4caf50;
     background: rgba(76, 175, 80, 0.1);
 }
 
-/* Cancelled - Red */
 .status.cancelled {
     color: #f44336;
     background: rgba(244, 67, 54, 0.1);
@@ -289,6 +256,7 @@ body {
     position: relative;
     border-top: 4px solid #f44336;
     animation: fadeIn 0.3s ease-out;
+    z-index: 10;
 }
 
 @keyframes fadeIn {
@@ -312,10 +280,6 @@ body {
     outline: none;
     border-color: #f44336;
     box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.2);
-}
-
-.cancel-form textarea::placeholder {
-    color: #aaa;
 }
 
 .form-buttons {
@@ -359,22 +323,40 @@ body {
 /* No appointments styling */
 .no-appointments {
     text-align: center;
-    padding: 30px;
+    padding: 40px 20px;
     background: #f8f9fa;
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+}
+
+.empty-icon {
+    font-size: 48px;
+    color: #cccccc;
+    margin-bottom: 20px;
+    background: #f0f0f0;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .no-appointments p {
     font-size: 18px;
     color: #666;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .book-now-btn {
     display: inline-block;
     background-color: #ffcc00;
     color: #0e0f0e;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
@@ -391,7 +373,7 @@ body {
     list-style: none;
     padding: 0;
     margin: 0 auto 20px;
-    max-width: 800px;
+    max-width: 1000px;
 }
 
 .messages li {
@@ -400,29 +382,51 @@ body {
     border-radius: 8px;
     color: white;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.messages li::before {
+    margin-right: 10px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
 }
 
 .messages .success {
     background-color: rgba(76, 175, 80, 0.9);
 }
 
+.messages .success::before {
+    content: "\f058"; /* checkmark icon */
+}
+
 .messages .error {
     background-color: rgba(244, 67, 54, 0.9);
 }
 
+.messages .error::before {
+    content: "\f057"; /* times circle icon */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        padding: 15px;
+    .dashboard-container {
+        padding: 0 15px;
     }
     
-    .nav-links {
-        margin: 15px 0;
+    .dashboard-header {
+        padding: 20px;
     }
     
     .appointment-card {
         flex-direction: column;
+    }
+    
+    .list-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
     }
     
     .appointment-details {
@@ -449,148 +453,4 @@ body {
         width: 100%;
         margin-bottom: 10px;
     }
-}
-
-
-/* Footer Styles */
-.footer {
-    background-color: #0e0f0e;
-    color: white;
-    padding: 50px 0 20px;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0 40px;
-}
-
-.footer-logo {
-    flex-basis: 25%;
-    min-width: 250px;
-    margin-bottom: 30px;
-}
-
-.footer-logo img {
-    height: 70px;
-    margin-bottom: 15px;
-}
-
-.footer-logo p {
-    color: #ccc;
-    font-size: 14px;
-}
-
-.footer-links, .footer-contact, .footer-social {
-    flex-basis: 20%;
-    min-width: 200px;
-    margin-bottom: 30px;
-}
-
-.footer h3 {
-    color: #ffcc00;
-    margin-bottom: 20px;
-    font-size: 18px;
-    position: relative;
-}
-
-.footer h3:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    width: 50px;
-    height: 2px;
-    background-color: #ffcc00;
-}
-
-.footer-links ul {
-    list-style: none;
-}
-
-.footer-links ul li {
-    margin-bottom: 10px;
-}
-
-.footer-links ul li a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links ul li a:hover {
-    color: #ffcc00;
-}
-
-.footer-contact p {
-    margin-bottom: 10px;
-    color: #ccc;
-}
-
-.social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: #222;
-    border-radius: 50%;
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-    background-color: #ffcc00;
-    color: #0e0f0e;
-    transform: translateY(-3px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 30px;
-    border-top: 1px solid #333;
-    margin-top: 20px;
-}
-
-.footer-bottom p {
-    color: #888;
-    font-size: 14px;
-}
-
-/* Make footer responsive */
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-    }
-    
-    .footer-logo, .footer-links, .footer-contact, .footer-social {
-        flex-basis: 100%;
-        margin-bottom: 30px;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        padding: 15px;
-    }
-    
-    .nav-links {
-        margin: 15px 0;
-    }
-    
-    .nav-links a {
-        font-size: 14px;
-    }
 }

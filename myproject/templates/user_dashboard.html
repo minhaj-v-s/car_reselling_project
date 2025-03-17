@@ -1,3 +1,4 @@
+<!-- user_dashboard.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,6 @@
     <title>User Dashboard - Soorath Autos</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
-    <!-- Optional: Add FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
@@ -23,46 +23,64 @@
     </div>
     {% endif %}
 
-    <div class="appointment-list">
-        <h1>Your Bookings</h1>
-        {% for appointment in appointments %}
-        <div class="appointment-card {% if appointment.status %}{{ appointment.status|lower }}{% endif %}">
-            <div class="appointment-details">
-                <p><strong>Vehicle:</strong> {{ appointment.vehicle.model }}</p>
-                <p><strong>Date:</strong> {{ appointment.app_date }}</p>
-                <p><strong>Time:</strong> {{ appointment.app_time }}</p>
-                <p><span class="status {{ appointment.status|lower }}">{{ appointment.status }}</span></p>
-                
-                {% if appointment.status != "Cancelled" %}
-                <button class="cancel-btn" onclick="showCancelForm({{ appointment.id }})">
-                    <i class="fas fa-times-circle"></i> Cancel Appointment
-                </button>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Welcome back, {{ request.session.user_name }}</h1>
+            <p>Manage your bookings and schedule new appointments</p>
+        </div>
 
-                <!-- Hidden Form for Cancellation Reason -->
-                <div id="cancel-form-{{ appointment.id }}" class="cancel-form" style="display: none;">
-                    <form action="{% url 'cancel_appointment' appointment.id %}" method="POST">
-                        {% csrf_token %}
-                        <textarea name="reason" placeholder="Please provide a reason for cancellation..." required></textarea>
-                        <div class="form-buttons">
-                            <button type="button" class="close-btn" onclick="hideCancelForm({{ appointment.id }})">Close</button>
-                            <button type="submit" class="submit-btn">Confirm Cancellation</button>
+        <div class="appointment-list">
+            <div class="list-header">
+                <h2>Your Bookings</h2>
+                <a href="{% url 'cars' %}" class="book-new-btn">
+                    <i class="fas fa-calendar-plus"></i> Book New
+                </a>
+            </div>
+
+            {% if appointments %}
+            <div class="appointments-container">
+                {% for appointment in appointments %}
+                <div class="appointment-card {% if appointment.status %}{{ appointment.status|lower }}{% endif %}">
+                    <div class="appointment-details">
+                        <p class="vehicle-model"><strong>Vehicle:</strong> {{ appointment.vehicle.model }}</p>
+                        <p><strong>Date:</strong> {{ appointment.app_date }}</p>
+                        <p><strong>Time:</strong> {{ appointment.app_time }}</p>
+                        <p><span class="status {{ appointment.status|lower }}">{{ appointment.status }}</span></p>
+                        
+                        {% if appointment.status != "Cancelled" %}
+                        <button class="cancel-btn" onclick="showCancelForm({{ appointment.id }})">
+                            <i class="fas fa-times-circle"></i> Cancel Appointment
+                        </button>
+
+                        <div id="cancel-form-{{ appointment.id }}" class="cancel-form" style="display: none;">
+                            <form action="{% url 'cancel_appointment' appointment.id %}" method="POST">
+                                {% csrf_token %}
+                                <textarea name="reason" placeholder="Please provide a reason for cancellation..." required></textarea>
+                                <div class="form-buttons">
+                                    <button type="button" class="close-btn" onclick="hideCancelForm({{ appointment.id }})">Close</button>
+                                    <button type="submit" class="submit-btn">Confirm Cancellation</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                        {% endif %}
+                    </div>
+                    <div class="vehicle-image">
+                        <img src="{{ appointment.vehicle.image.url }}" alt="{{ appointment.vehicle.model }}">
+                    </div>
                 </div>
-                {% endif %}
+                {% endfor %}
             </div>
-            <div class="vehicle-image">
-                <img src="{{ appointment.vehicle.image.url }}" alt="{{ appointment.vehicle.model }}">
+            {% else %}
+            <div class="no-appointments">
+                <div class="empty-icon">
+                    <i class="fas fa-calendar-times"></i>
+                </div>
+                <p>You don't have any bookings yet.</p>
+                <a href="{% url 'cars' %}" class="book-now-btn">Book an Appointment</a>
             </div>
+            {% endif %}
         </div>
-        {% empty %}
-        <div class="no-appointments">
-            <p>You don't have any bookings yet.</p>
-            <a href="{% url 'cars' %}" class="book-now-btn">Book an Appointment</a>
-        </div>
-        {% endfor %}
     </div>
-
 
     {% include 'footer.html' %}
 
@@ -70,7 +88,7 @@
         function showCancelForm(id) {
             document.getElementById(`cancel-form-${id}`).style.display = "block";
         }
-    
+        
         function hideCancelForm(id) {
             document.getElementById(`cancel-form-${id}`).style.display = "none";
         }
