@@ -412,3 +412,38 @@ form input:focus {
         padding: 0.8rem;
     }
 }
+
+
+
+// ... keep existing code (root, logo, animations, card, docs styles)
+
+/* Login Page Modifications - Flex Direction Reversed */
+.login-container {
+  flex-direction: row-reverse;
+}
+
+/* Registration Page Modifications - Flex Direction Reversed */
+.register-container {
+  flex-direction: row-reverse;
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 992px) {
+  .login-container {
+    flex-direction: column-reverse;
+  }
+  
+  .login-image-container {
+    display: block;
+    height: 30vh;
+  }
+  
+  .register-container {
+    flex-direction: column-reverse;
+  }
+  
+  .register-image-container {
+    display: block;
+    height: 30vh;
+  }
+}

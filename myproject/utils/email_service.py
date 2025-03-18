@@ -14,7 +14,7 @@ def send_booking_email(appointment):
     # Context for the template
     context = {
         'appointment': appointment,
-        'admin_url': f"{settings.SITE_URL}/admin/",
+        'admin_url': f"{settings.SITE_URL}admin/",
     }
     
     # Render HTML content
@@ -86,7 +86,7 @@ def send_purchase_notification_email(purchase, feedback):
     context = {
         'purchase': purchase,
         'feedback': feedback,
-        'admin_url': f"{settings.SITE_URL}/admin/",
+        'admin_url': f"{settings.SITE_URL}admin/",
     }
     
     # Render HTML content

@@ -19,6 +19,7 @@ urlpatterns =[
     path('mark_as_purchased/<int:appointment_id>/', views.mark_as_purchased, name="mark_as_purchased"),
     path('submit_feedback/<int:purchase_id>/', views.submit_feedback, name="submit_feedback"),
     path('clear-messages/', views.clear_messages, name='clear_messages'),
+    path('contactUs/', views.contactUs, name='contactUs'),
 ]
 
 

@@ -111,9 +111,14 @@ def cars(request):
 #     return render(request,"car_description.html",{'car':car})
 
 def book_appointment(request,pk):
+
+    if 'user_id' not in request.session:
+        messages.error(request, "You must be logged in to book an appointment.")
+        return redirect("login") 
     thisCar = Vehicle.objects.get(id=pk)
     userName = request.session['user_name']
     userId = request.session['user_id']
+    
     if request.method == "POST":
         vehicle = Vehicle.objects.get(id=pk)
         customer = User.objects.get(id=userId)
@@ -406,3 +411,5 @@ def clear_messages(request):
     return JsonResponse({'status': 'success'})
 
 
+def contactUs(request):
+    return render(request, 'contactUs.html')
