@@ -24,18 +24,47 @@
             <li><a href="#about-us" class="{% if 'about' in request.path %}active{% endif %}">About</a></li>
             <li><a href="{% url 'cars' %}" class="{% if 'cars' in request.path %}active{% endif %}">Cars</a></li>
             {% if request.session.user_name %}
-            <li><a href="#"><i class="fas fa-user-circle me-2"></i> Welcome, {{ request.session.user_name }}</a></li>
-            <li><a href="{% url 'user_appointments' %}">Your Bookings</a></li>
-            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+            <li class="user-dropdown">
+                <a href="#" class="user-toggle">
+                    <i class="fas fa-user-circle me-2"></i> {{ request.session.user_name }} <i class="fas fa-chevron-down ms-1 small-icon"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="{% url 'user_appointments' %}">
+                        <i class="fas fa-calendar-check me-2"></i> Your Bookings
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'logout' %}" class="logout-item">
+                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </a>
+                </div>
+            </li>
             {% else %}
             <li><a href="{% url 'login' %}" class="login-btn {% if 'login' in request.path %}active{% endif %}"><i class="fas fa-sign-in-alt me-2"></i> Sign In</a></li>
             {% endif %}
         </ul>
         
-        
-        
-    
         <a href="#" class="contact-btn"><i class="fas fa-envelope me-2"></i> CONTACT US</a>
     </nav>
+
+    <script>
+        // User dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const userToggle = document.querySelector('.user-toggle');
+            if (userToggle) {
+                userToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.nextElementSibling.classList.toggle('show');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.user-dropdown')) {
+                        const dropdowns = document.querySelectorAll('.dropdown-menu');
+                        dropdowns.forEach(d => d.classList.remove('show'));
+                    }
+                });
+            }
+        });
+    </script>
 </body>
-</html>  
+</html>

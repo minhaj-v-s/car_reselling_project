@@ -106,9 +106,9 @@ def cars(request):
     })
 
 
-def car_description(request,pk):
-    thisCar = Vehicle.objects.get(id=pk)
-    return render(request,"car_description.html",{'thisCar':thisCar})
+# def car_description(request,pk):
+#     car = Vehicle.objects.get(id=pk)
+#     return render(request,"car_description.html",{'car':car})
 
 def book_appointment(request,pk):
     thisCar = Vehicle.objects.get(id=pk)
@@ -264,17 +264,24 @@ def logout_view(request):
     return redirect("home")
 
 def car_description(request, pk):
-    thisCar = Vehicle.objects.get(id=pk)
+    thisCar = get_object_or_404(Vehicle, id=pk)
     images = thisCar.images.all()  # Fetch all images related to the car
+
+    # Process description into points
+    description_text = thisCar.description or ""
+    description_points = []
     
-    # Split the description into a list of sentences
-    description_list = thisCar.description.split('.')
+    # Split by periods and filter out empty strings
+    raw_points = [p.strip() for p in description_text.split('.') if p.strip()]
+    description_points = raw_points
 
     return render(request, "car_description.html", {
-        'thisCar': thisCar,
+        'car': thisCar,
+        'thisCar': thisCar,  # You use both variable names in your template
         'images': images,
-        'description_list': description_list
+        'description_points': description_points  # Match the variable name in your template
     })
+
 
 def delete_appointment(request,pk):
     record_id = pk

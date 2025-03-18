@@ -176,7 +176,8 @@ SITE_URL = 'http://127.0.0.1:8000/'
 JAZZMIN_SETTINGS = {
     'site_header' : "Soorath Autos",
     'site_brand'  : "Soorath Autos",
-    # 'site_logo'   : "D:\AESTHETIX\Projects\Main_Project\car_reselling_project\myproject\static\images\image (1).png",
+    # 'site_logo'   : "static/images/lg.png",
+    # 'login_logo'  : "static/images/lg.png",
     'welcome_title' : "Welcome to Soorath Autos",
     'search_model' : 'myapp.Vehicle',
     'user_avatar' : 'user__avatar',
@@ -194,6 +195,7 @@ JAZZMIN_SETTINGS = {
 
 }
 JAZZMIN_UI_TWEAKS = {
+    "footer_credit": "Soorath Autos",
     "navbar_small_text": True,
     "footer_small_text": True,
     "body_small_text": True,
@@ -223,4 +225,5 @@ JAZZMIN_UI_TWEAKS = {
         "danger": "btn-danger",
         "success": "btn-success"
     }
+    
 }
