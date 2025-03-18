@@ -21,7 +21,8 @@
         
         <ul class="nav-links">
             <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
-            <li><a href="#about-us" class="{% if 'about' in request.path %}active{% endif %}">About</a></li>
+            <li><a href="{% url 'home' %}#about-us" class="{% if 'about' in request.path %}active{% endif %}">About</a></li>
+
             <li><a href="{% url 'cars' %}" class="{% if 'cars' in request.path %}active{% endif %}">Cars</a></li>
             {% if request.session.user_name %}
             <li class="user-dropdown">
@@ -43,7 +44,7 @@
             {% endif %}
         </ul>
         
-        <a href="#" class="contact-btn"><i class="fas fa-envelope me-2"></i> CONTACT US</a>
+        <a href="{% url 'contactUs' %}" class="contact-btn"><i class="fas fa-phone me-2"></i> CONTACT US</a>
     </nav>
 
     <script>

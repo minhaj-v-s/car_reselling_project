@@ -29,11 +29,14 @@
         <h1>Quality Cars, Unbeatable Deals!</h1>
 
         <div class="hero-content">
-  <!-- Car Description Column -->
-<div class="car-description">
-    <h2>Discover Your Dream Car at Soorath Autos</h2>
-    <p class="car-text">Soorath Autos brings you a premium collection of vehicles blending style, performance, and reliability. Our meticulously inspected automobiles cater to every lifestyle, from spacious family cars to sleek city runners, all tailored to your budget with rigorous quality checks ensuring top standards.</p>
-</div>
+            <!-- Car Description Column -->
+            <div class="car-description">
+                <h2>Discover Your Dream Car at Soorath Autos</h2>
+                <p class="car-text">Soorath Autos brings you a premium collection of vehicles blending style,
+                    performance, and reliability. Our meticulously inspected automobiles cater to every lifestyle, from
+                    spacious family cars to sleek city runners, all tailored to your budget with rigorous quality checks
+                    ensuring top standards.</p>
+            </div>
 
 
             <!-- Car Slider Column -->
@@ -78,180 +81,247 @@
 
 
     <!-- About Us Section -->
-<section id="about-us" class="about-section">
-    <div class="about-container">
-        <div class="about-content">
-            <div class="about-text-container">
-                <span class="about-badge">ABOUT US</span>
-                <h2 class="about-heading">About Soorath Autos</h2>
-                <div class="about-divider"></div>
-                
-                <div class="about-description">
-                    <p>Welcome to Soorath Autos, your trusted destination for high-quality used vehicles. With years of experience in the automobile industry, we take pride in offering a wide selection of well-maintained, reliable, and affordable vehicles to meet your needs.</p>
-                    
-                    <p>At Soorath Autos, customer satisfaction is our top priority. Our commitment to transparency, quality, and fair pricing has earned us the trust of countless happy customers over the years. Whether you're looking for a car or a commercial vehicle, we ensure a smooth buying experience with expert guidance and hassle-free services.</p>
-                    
-                    <p>Visit us today and drive home your perfect vehicle with confidence!</p>
+    <section id="about-us" class="about-section">
+        <div class="about-container">
+            <div class="about-content">
+                <div class="about-text-container">
+                    <span class="about-badge">ABOUT US</span>
+                    <h2 class="about-heading">About Soorath Autos</h2>
+                    <div class="about-divider"></div>
+
+                    <div class="about-description">
+                        <p>Welcome to Soorath Autos, your trusted destination for high-quality used vehicles. With years
+                            of experience in the automobile industry, we take pride in offering a wide selection of
+                            well-maintained, reliable, and affordable vehicles to meet your needs.</p>
+
+                        <p>At Soorath Autos, customer satisfaction is our top priority. Our commitment to transparency,
+                            quality, and fair pricing has earned us the trust of countless happy customers over the
+                            years. Whether you're looking for a car or a commercial vehicle, we ensure a smooth buying
+                            experience with expert guidance and hassle-free services.</p>
+
+                        <p>Visit us today and drive home your perfect vehicle with confidence!</p>
+                    </div>
+
+                    <a href="{% url 'home' %}" class="about-btn">Learn More <i class="fas fa-arrow-right about-btn-icon"></i></a>
                 </div>
-                
-                <a href="#" class="about-btn">Learn More <i class="fas fa-arrow-right about-btn-icon"></i></a>
-            </div>
-            
-            <div class="about-image-container">
-                <div class="about-image-wrapper">
-                    <img src="{% static 'images/WhatsApp Image 2025-03-02 at 16.02.42_09731a6a.jpg' %}" 
-                        alt="Soorath Autos Showroom" class="about-img">
-                    <div class="about-image-overlay"></div>
-                    <div class="about-image-decoration"></div>
+
+                <div class="about-image-container">
+                    <div class="about-image-wrapper">
+                        <img src="{% static 'images/WhatsApp Image 2025-03-02 at 16.02.42_09731a6a.jpg' %}"
+                            alt="Soorath Autos Showroom" class="about-img">
+                        <div class="about-image-overlay"></div>
+                        <div class="about-image-decoration"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Testimonials Section - Add this between About Us and Footer in your home.html -->
-<section id="testimonials" class="testimonials-section">
-    <div class="testimonials-container">
-        <div class="testimonials-header">
-            <span class="testimonials-badge">TESTIMONIALS</span>
-            <h2>Our Happy Customers</h2>
-            <div class="testimonials-divider"></div>
-        </div>
+    <section id="testimonials" class="testimonials-section">
+        <div class="testimonials-container">
+            <div class="testimonials-header">
+                <span class="testimonials-badge">TESTIMONIALS</span>
+                <h2>Our Happy Customers</h2>
+                <div class="testimonials-divider"></div>
+            </div>
 
-        <div class="testimonials-carousel">
-            <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                <div class="carousel-inner">
-                    <!-- Testimonial 1 -->
-                    <div class="carousel-item active">
-                        <div class="testimonial-content">
-                            <div class="testimonial-image-container">
-                                <img src="{% static 'images/WhatsApp Image 2025-03-13 at 16.13.24_b872eff9.jpg' %}" alt="Satisfied Customer" class="testimonial-image">
-                                <div class="testimonial-name-badge">
-                                    <div class="customer-name">Satisfied Customer</div>
-                                    <div class="customer-car">Suzuki Swift</div>
+            <div class="testimonials-carousel">
+                <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-inner">
+                        <!-- Testimonial 1 -->
+                        <div class="carousel-item active">
+                            <div class="testimonial-content">
+                                <div class="testimonial-image-container">
+                                    <img src="{% static 'images/WhatsApp Image 2025-03-13 at 16.13.24_b872eff9.jpg' %}"
+                                        alt="Satisfied Customer" class="testimonial-image">
+                                    <div class="testimonial-name-badge">
+                                        <div class="customer-name">Satisfied Customer</div>
+                                        <div class="customer-car">Suzuki Swift</div>
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-quote-container">
+                                    <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                    </svg>
+                                    <p class="testimonial-text">
+                                        "Soorath Autos provided me with exceptional service. Their team was professional
+                                        and helped me find the perfect car that fits my needs and budget."
+                                    </p>
+                                    <div class="testimonial-verified">
+                                        <div class="verified-line"></div>
+                                        <div class="verified-text">Verified Purchase</div>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="testimonial-quote-container">
-                                <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                </svg>
-                                <p class="testimonial-text">
-                                    "Soorath Autos provided me with exceptional service. Their team was professional and helped me find the perfect car that fits my needs and budget."
-                                </p>
-                                <div class="testimonial-verified">
-                                    <div class="verified-line"></div>
-                                    <div class="verified-text">Verified Purchase</div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="carousel-item">
+                            <div class="testimonial-content">
+                                <div class="testimonial-image-container">
+                                    <img src="{% static 'images/WhatsApp Image 2025-03-13 at 16.13.25_17f6040c.jpg' %}"
+                                        alt="Happy Client" class="testimonial-image">
+                                    <div class="testimonial-name-badge">
+                                        <div class="customer-name">Happy Client</div>
+                                        <div class="customer-car">Toyota Innova</div>
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-quote-container">
+                                    <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                    </svg>
+                                    <p class="testimonial-text">
+                                        "I was amazed by the quality of vehicles at Soorath Autos. The buying process
+                                        was smooth and transparent. Highly recommend!"
+                                    </p>
+                                    <div class="testimonial-verified">
+                                        <div class="verified-line"></div>
+                                        <div class="verified-text">Verified Purchase</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div class="carousel-item">
+                            <div class="testimonial-content">
+                                <div class="testimonial-image-container">
+                                    <img src="{% static 'images/WhatsApp Image 2025-03-13 at 16.13.25_06264f63.jpg' %}"
+                                        alt="Loyal Customer" class="testimonial-image">
+                                    <div class="testimonial-name-badge">
+                                        <div class="customer-name">Loyal Customer</div>
+                                        <div class="customer-car">Kia Seltos</div>
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-quote-container">
+                                    <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                    </svg>
+                                    <p class="testimonial-text">
+                                        "The team at Soorath Autos went above and beyond to ensure I drove away with a
+                                        reliable vehicle. Their after-sales support is truly commendable."
+                                    </p>
+                                    <div class="testimonial-verified">
+                                        <div class="verified-line"></div>
+                                        <div class="verified-text">Verified Purchase</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 4 -->
+                        <div class="carousel-item">
+                            <div class="testimonial-content">
+                                <div class="testimonial-image-container">
+                                    <img src="../static/images/WhatsApp Image 2025-03-13 at 16.13.25_04068bc7.jpg"
+                                        alt="New Owner" class="testimonial-image">
+                                    <div class="testimonial-name-badge">
+                                        <div class="customer-name">New Owner</div>
+                                        <div class="customer-car">Mahindra Thar</div>
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-quote-container">
+                                    <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                    </svg>
+                                    <p class="testimonial-text">
+                                        "From inspection to paperwork, everything was handled professionally. I'm
+                                        extremely satisfied with my purchase from Soorath Autos."
+                                    </p>
+                                    <div class="testimonial-verified">
+                                        <div class="verified-line"></div>
+                                        <div class="verified-text">Verified Purchase</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Testimonial 2 -->
-                    <div class="carousel-item">
-                        <div class="testimonial-content">
-                            <div class="testimonial-image-container">
-                                <img src="{% static 'images/WhatsApp Image 2025-03-13 at 16.13.25_17f6040c.jpg' %}" alt="Happy Client" class="testimonial-image">
-                                <div class="testimonial-name-badge">
-                                    <div class="customer-name">Happy Client</div>
-                                    <div class="customer-car">Toyota Innova</div>
-                                </div>
-                            </div>
-                            
-                            <div class="testimonial-quote-container">
-                                <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                </svg>
-                                <p class="testimonial-text">
-                                    "I was amazed by the quality of vehicles at Soorath Autos. The buying process was smooth and transparent. Highly recommend!"
-                                </p>
-                                <div class="testimonial-verified">
-                                    <div class="verified-line"></div>
-                                    <div class="verified-text">Verified Purchase</div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Navigation dots -->
+                    <div class="carousel-indicators testimonial-indicators">
+                        <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="3"
+                            aria-label="Slide 4"></button>
                     </div>
 
-                    <!-- Testimonial 3 -->
-                    <div class="carousel-item">
-                        <div class="testimonial-content">
-                            <div class="testimonial-image-container">
-                                <img src="{% static 'images/WhatsApp Image 2025-03-13 at 16.13.25_06264f63.jpg' %}" alt="Loyal Customer" class="testimonial-image">
-                                <div class="testimonial-name-badge">
-                                    <div class="customer-name">Loyal Customer</div>
-                                    <div class="customer-car">Kia Seltos</div>
-                                </div>
-                            </div>
-                            
-                            <div class="testimonial-quote-container">
-                                <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                </svg>
-                                <p class="testimonial-text">
-                                    "The team at Soorath Autos went above and beyond to ensure I drove away with a reliable vehicle. Their after-sales support is truly commendable."
-                                </p>
-                                <div class="testimonial-verified">
-                                    <div class="verified-line"></div>
-                                    <div class="verified-text">Verified Purchase</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 4 -->
-                    <div class="carousel-item">
-                        <div class="testimonial-content">
-                            <div class="testimonial-image-container">
-                                <img src="../static/images/WhatsApp Image 2025-03-13 at 16.13.25_04068bc7.jpg" alt="New Owner" class="testimonial-image">
-                                <div class="testimonial-name-badge">
-                                    <div class="customer-name">New Owner</div>
-                                    <div class="customer-car">Mahindra Thar</div>
-                                </div>
-                            </div>
-                            
-                            <div class="testimonial-quote-container">
-                                <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                </svg>
-                                <p class="testimonial-text">
-                                    "From inspection to paperwork, everything was handled professionally. I'm extremely satisfied with my purchase from Soorath Autos."
-                                </p>
-                                <div class="testimonial-verified">
-                                    <div class="verified-line"></div>
-                                    <div class="verified-text">Verified Purchase</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Navigation arrows -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-
-                <!-- Navigation dots -->
-                <div class="carousel-indicators testimonial-indicators">
-                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                </div>
-
-                <!-- Navigation arrows -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
     <!-- Footer -->
     {% include 'footer.html' %}
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all links with hash tags
+            const anchorLinks = document.querySelectorAll('a[href*="#"]');
+
+            anchorLinks.forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    // Only prevent default if the href contains a hash and points to the current page
+                    const href = this.getAttribute('href');
+
+                    if (href.includes('#') && (href.startsWith('#') || window.location.pathname === '/')) {
+                        e.preventDefault();
+
+                        // Get the target element
+                        const targetId = href.split('#')[1];
+                        const targetElement = document.getElementById(targetId);
+
+                        if (targetElement) {
+                            // Smooth scroll to the element
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80, // Offset for navbar height
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Check if URL has a hash on page load
+            if (window.location.hash) {
+                setTimeout(function () {
+                    const targetElement = document.getElementById(window.location.hash.substring(1));
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 300);
+            }
+        });
+
+    </script>
 </body>
 
 </html>

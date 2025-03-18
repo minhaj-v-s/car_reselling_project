@@ -16,6 +16,7 @@ urlpatterns =[
     path("user_appointments",views.user_appointments,name="user_appointments"),
     path("delete_appointment/<str:pk>",views.delete_appointment,name="delete_appointment"),
     path('cancel_appointment/<str:pk>', views.cancel_appointment, name='cancel_appointment'),
+    path('contactUs/', views.contactUs, name='contactUs'),
 ]
 
 

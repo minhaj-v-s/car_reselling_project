@@ -238,3 +238,7 @@ def home_view(request):
         # other context data
     }
     return render(request, 'home.html', context)
+
+
+def contactUs(request):
+    return render(request, 'contactUs.html')
