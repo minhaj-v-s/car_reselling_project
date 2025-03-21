@@ -4,47 +4,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Soorath Autos - Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Footer Styles */
+        .footer {
+            background-color: #0e0f0e;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 20px;
+            gap: 30px;
+        }
+
+        .footer-logo {
+            flex: 1 1 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo img {
+            height: 70px;
+            margin-bottom: 15px;
+            max-width: 100%;
+        }
+
+        .footer-logo p {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .footer-links, .footer-contact, .footer-social {
+            flex: 1 1 200px;
+            margin-bottom: 30px;
+        }
+
+        .footer h3 {
+            color: #ffcc00;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #ffcc00;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links ul li a:hover {
+            color: #ffcc00;
+            transform: translateX(5px);
+        }
+
+        .footer-contact p {
+            margin-bottom: 15px;
+            color: #ccc;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .footer-contact p i {
+            color: #ffcc00;
+            font-size: 16px;
+            margin-top: 3px;
+            min-width: 16px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #222;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: #ffcc00;
+            color: #0e0f0e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .footer-container {
+                gap: 40px;
+            }
+            
+            .footer-logo, .footer-links, .footer-contact, .footer-social {
+                flex-basis: calc(50% - 40px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 0 20px;
+            }
+            
+            .footer-container {
+                gap: 30px;
+            }
+            
+            .footer-logo {
+                flex-basis: 100%;
+                text-align: center;
+            }
+            
+            .footer-logo img {
+                height: 60px;
+            }
+            
+            .footer-logo h3:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-links, .footer-contact, .footer-social {
+                flex-basis: 100%;
+            }
+            
+            .footer h3 {
+                text-align: center;
+            }
+            
+            .footer h3:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-links ul {
+                text-align: center;
+            }
+            
+            .footer-contact p {
+                justify-content: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+            
+            .footer-bottom {
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- footer.html -->
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-logo">
-            <img src="{% static 'images/image (1).png' %}" alt="Soorath Autos">
-            <p>Your trusted destination for quality used vehicles.</p>
-        </div>
-        
-        <div class="footer-links">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="#about-us">About Us</a></li>
-                <li><a href="{% url 'cars' %}">Our Cars</a></li>
-                <li><a href="#">Services</a></li>
-            </ul>
-        </div>
-        
-        <div class="footer-contact">
-            <h3>Contact Us</h3>
-            <p><i class="fas fa-map-marker-alt"></i> S Valavu, Pezhakkapilly, Muvattupuzha, Kerala</p>
-            <p><i class="fas fa-phone"></i> +91 7306794846</p>
-            <p><i class="fas fa-envelope"></i> soorath786@gmail.com</p>
-        </div>
-        
-        <div class="footer-social">
-            <h3>Follow Us</h3>
-            <div class="social-icons">
-                <a href="https://www.instagram.com/soorathautos?igsh=ZjB6NWRwY3M4cXE5" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="{% static 'images/image (1).png' %}" alt="Soorath Autos">
+                <p>Your trusted destination for quality used vehicles.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'home' %}#about-us">About Us</a></li>
+                    <li><a href="{% url 'cars' %}">Our Cars</a></li>
+                    <li><a href="{% url 'contactUs' %}">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> <span>S Valavu, Pezhakkapilly, Muvattupuzha, Kerala</span></p>
+                <p><i class="fas fa-phone"></i> <span>+91 7306794846</span></p>
+                <p><i class="fas fa-envelope"></i> <span>soorath786@gmail.com</span></p>
+            </div>
+            
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/soorathautos?igsh=ZjB6NWRwY3M4cXE5" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/917306794846" class="social-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:soorath786@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://maps.app.goo.gl/tM5xbGZ3HMSFy2ne9?g_st=aw" class="social-icon" title="Location"><i class="fas fa-map-pin"></i></a>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="footer-bottom">
-        <p>&copy; 2024 Soorath Autos. All Rights Reserved.</p>
-    </div>
-</footer>
-
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Soorath Autos. All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

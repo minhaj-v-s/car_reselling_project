@@ -763,3 +763,157 @@ body {
 }
 
 
+/* Enhanced Media Queries for Better Responsiveness */
+
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 2rem;
+        text-shadow: 1px 1px 0px #ffcc00, 2px 2px 0px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-content {
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+    
+    .car-description h2 {
+        font-size: 1.5rem;
+    }
+    
+    .car-text {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .slider-container {
+        height: 250px;
+        width: 100%;
+    }
+    
+    .view-more-btn {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+    
+    /* About section adjustments */
+    .about-section {
+        padding: 40px 0;
+    }
+    
+    .about-heading {
+        font-size: 1.8rem;
+    }
+    
+    .about-description p {
+        font-size: 0.9rem;
+    }
+    
+    /* Testimonials adjustments */
+    .testimonials-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .testimonial-image-container {
+        height: 250px;
+    }
+    
+    .testimonial-text {
+        font-size: 0.9rem;
+    }
+    
+    .customer-name {
+        font-size: 1rem;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .hero h1 {
+        font-size: 2.3rem;
+    }
+    
+    .hero-content {
+        flex-direction: column-reverse;
+        gap: 30px;
+    }
+    
+    .slider-container {
+        height: 300px;
+        width: 100%;
+    }
+    
+    /* About section adjustments */
+    .about-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .hero-content {
+        flex-direction: column-reverse;
+        gap: 40px;
+    }
+    
+    .car-description, .slider-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    /* About section adjustments */
+    .about-content {
+        gap: 30px;
+    }
+    
+    .about-text-container, .about-image-container {
+        flex: 1;
+    }
+}
+
+/* Additional navbar responsiveness */
+@media (max-width: 767px) {
+    /* You'll need to implement a mobile menu in your navbar.html template */
+    .navbar-toggler {
+        display: block;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+/* Testimonial responsiveness */
+@media (max-width: 767px) {
+    .testimonial-content {
+        flex-direction: column;
+    }
+    
+    .testimonial-image-container,
+    .testimonial-quote-container {
+        width: 100%;
+    }
+}
+
+/* General improvements */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 10%;
+}
+
+.alert {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 300px;
+    opacity: 0.9;
+}
