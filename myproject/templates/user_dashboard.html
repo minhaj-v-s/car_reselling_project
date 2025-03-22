@@ -80,6 +80,18 @@
         {% endfor %}
     </div>
 
+    <!-- Email Loading Overlay -->
+<div id="emailLoaderOverlay" class="email-loader-overlay">
+    <div class="car-container">
+        <div class="road-line"></div>
+        <div class="car-animation">
+            <i class="fas fa-car car-icon"></i>
+        </div>
+    </div>
+    <div class="email-loader-text">Processing your request...</div>
+</div>
+
+
 
     {% include 'footer.html' %}
 
@@ -116,6 +128,61 @@
                 }, 5000); // Hide after 5 seconds
             }
         });
+
+
+        // Function to show email loader
+function showEmailLoader(message = "Processing your request...") {
+    const loader = document.getElementById('emailLoaderOverlay');
+    if (loader) {
+        const textElement = loader.querySelector('.email-loader-text');
+        if (textElement) {
+            textElement.textContent = message;
+        }
+        loader.classList.add('active');
+    }
+}
+
+// Function to hide email loader
+function hideEmailLoader() {
+    const loader = document.getElementById('emailLoaderOverlay');
+    if (loader) {
+        loader.classList.remove('active');
+    }
+}
+
+// For use with forms
+document.addEventListener('DOMContentLoaded', function() {
+    // Add loading animation to cancellation forms
+    const cancellationForms = document.querySelectorAll('form[action*="cancel_appointment"]');
+    cancellationForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (this.checkValidity()) {
+                showEmailLoader("Processing your cancellation...");
+            }
+        });
+    });
+
+    // Add loading animation to purchase forms
+    const purchaseForms = document.querySelectorAll('form[action*="mark_as_purchased"]');
+    purchaseForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (this.checkValidity()) {
+                showEmailLoader("Processing your purchase...");
+            }
+        });
+    });
+
+    // Add loading animation to feedback forms
+    const feedbackForms = document.querySelectorAll('.feedback-container form');
+    feedbackForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (this.checkValidity()) {
+                showEmailLoader("Submitting your feedback...");
+            }
+        });
+    });
+});
+
     </script>
     
 </body>

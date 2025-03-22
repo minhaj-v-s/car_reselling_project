@@ -152,6 +152,79 @@
             font-weight: 500;
             color: #555;
         }
+
+        /* Email Loading Animation */
+@keyframes drive {
+    0% { 
+        transform: translateX(-100%);
+    }
+    100% { 
+        transform: translateX(100vw);
+    }
+}
+
+.email-loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.email-loader-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.car-container {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.car-animation {
+    position: absolute;
+    animation: drive 3s linear infinite;
+}
+
+.car-icon {
+    color: #ffcc00;
+    font-size: 36px;
+    filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.8));
+}
+
+.email-loader-text {
+    font-size: 1.25rem;
+    margin-top: 20px;
+    color: #ffcc00;
+    font-weight: 500;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.road-line {
+    position: absolute;
+    height: 4px;
+    background-color: #ffcc00;
+    width: 80%;
+    bottom: 5px;
+    left: 10%;
+    opacity: 0.5;
+}
+
     </style>
 </head>
 
@@ -210,6 +283,17 @@
         </form>
     </div>
 
+           <!-- Email Loading Overlay -->
+<div id="emailLoaderOverlay" class="email-loader-overlay">
+    <div class="car-container">
+        <div class="road-line"></div>
+        <div class="car-animation">
+            <i class="fas fa-car car-icon"></i>
+        </div>
+    </div>
+    <div class="email-loader-text">Processing your request...</div>
+</div>
+
     {% include 'footer.html' %}
 
     <script>
@@ -231,6 +315,65 @@
                 ratingText.textContent = ratingTexts[ratingValue];
             });
         });
+
+
+        // Function to show email loader
+function showEmailLoader(message = "Processing your request...") {
+    const loader = document.getElementById('emailLoaderOverlay');
+    if (loader) {
+        const textElement = loader.querySelector('.email-loader-text');
+        if (textElement) {
+            textElement.textContent = message;
+        }
+        loader.classList.add('active');
+    }
+}
+
+// Function to hide email loader
+function hideEmailLoader() {
+    const loader = document.getElementById('emailLoaderOverlay');
+    if (loader) {
+        loader.classList.remove('active');
+    }
+}
+
+// For use with forms
+document.addEventListener('DOMContentLoaded', function() {
+    // Add loading animation to cancellation forms
+    const cancellationForms = document.querySelectorAll('form[action*="cancel_appointment"]');
+    cancellationForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (this.checkValidity()) {
+                showEmailLoader("Processing your cancellation...");
+            }
+        });
+    });
+
+    // Add loading animation to purchase forms
+    const purchaseForms = document.querySelectorAll('form[action*="mark_as_purchased"]');
+    purchaseForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (this.checkValidity()) {
+                showEmailLoader("Processing your purchase...");
+            }
+        });
+    });
+
+    // Add loading animation to feedback forms
+    const feedbackForms = document.querySelectorAll('.feedback-container form');
+    feedbackForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (this.checkValidity()) {
+                showEmailLoader("Submitting your feedback...");
+            }
+        });
+    });
+});
+
+        
+
+
+ 
     </script>
 </body>
 

@@ -649,3 +649,387 @@ body {
     font-size: 24px;
     z-index: 10;
 }
+
+
+
+/* Responsive adjustment for mobile */
+@media (max-width: 992px) {
+  .login-container,
+  .register-container {
+    flex-direction: column-reverse;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .login-image-container,
+  .register-image-container {
+    display: block;
+    height: 35vh;
+    width: 100%;
+  }
+  
+  .login-form-container,
+  .register-form-container {
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+  
+  .login-content,
+  .register-content {
+    padding: 1.5rem;
+  }
+}
+
+/* Enhanced responsive car listings adjustments */
+@media (max-width: 768px) {
+  .car_listing {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
+  }
+  
+  .car_card {
+    width: 100% !important;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .car_card img {
+    height: 180px;
+  }
+  
+  .car_name {
+    font-size: 1.1rem;
+    margin: 10px 0;
+  }
+  
+  .view_description {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .search_bar form {
+    flex-wrap: wrap;
+  }
+  
+  .search_bar input {
+    margin-bottom: 10px;
+  }
+  
+  .filter-btn, .searchBtn {
+    margin-top: 5px;
+  }
+  
+  /* Navbar responsive adjustments */
+  .navbar {
+    flex-direction: column;
+    padding: 15px;
+  }
+  
+  .nav-links {
+    margin: 15px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .logo img {
+    height: 50px;
+  }
+  
+  .contact-btn {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    padding: 8px 15px;
+  }
+  
+  /* Filter modal adjustments */
+  .filter-content {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+  }
+  
+  .filter-content h3 {
+    font-size: 20px;
+  }
+  
+  .filter-content select,
+  .filter-content input {
+    padding: 10px;
+  }
+  
+  /* Footer responsive adjustments */
+  .footer-container {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+  
+  .footer-logo, .footer-links, .footer-contact, .footer-social {
+    flex-basis: 100%;
+    margin-bottom: 25px;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+/* Small devices (phones) */
+@media (max-width: 576px) {
+  .nav-links {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .nav-links a {
+    font-size: 14px;
+  }
+  
+  .car_listing {
+    grid-template-columns: 1fr;
+  }
+  
+  .search_bar {
+    margin: 15px auto;
+    padding: 10px;
+  }
+  
+  .master {
+    padding: 15px;
+  }
+  
+  .active-filters {
+    flex-wrap: wrap;
+  }
+  
+  .filter-tag {
+    margin-bottom: 8px;
+  }
+  
+  /* Enhance small device adjustments */
+  .car_card {
+    width: 100%;
+  }
+  
+  .filter-content {
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .filter-content h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  
+  .filter-content label {
+    font-size: 14px;
+  }
+  
+  .filter-content select,
+  .filter-content input {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .filter-content button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .close {
+    top: 10px;
+    right: 15px;
+  }
+  
+  /* Footer further adjustments */
+  .footer {
+    padding: 30px 0 15px;
+  }
+  
+  .footer h3 {
+    font-size: 16px;
+  }
+  
+  .footer-logo p,
+  .footer-contact p,
+  .footer-links ul li a,
+  .footer-bottom p {
+    font-size: 13px;
+  }
+  
+  .social-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 400px) {
+  .nav-links {
+    gap: 10px;
+  }
+  
+  .nav-links a {
+    font-size: 13px;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .search_bar input {
+    padding: 10px 15px;
+  }
+  
+  .searchBtn, .filter-btn {
+    padding: 10px;
+  }
+  
+  .car_card img {
+    height: 160px;
+  }
+  
+  .car_name {
+    font-size: 1rem;
+  }
+  
+  .view_description {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Additional responsive fixes for active filters */
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 20px;
+  justify-content: center;
+}
+
+.filter-tag {
+  background: #f5f5f5;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.remove-filter {
+  margin-left: 5px;
+  color: #666;
+}
+
+.clear-all {
+  color: #ff6b6b;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.no-results {
+  width: 100%;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.browse-all-btn {
+  display: inline-block;
+  background: #ffcc00;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.browse-all-btn:hover {
+  background: #0e0f0e;
+  color: #ffcc00;
+}
+
+/* Active filters improved responsive design */
+@media (max-width: 576px) {
+  .active-filters {
+    padding: 0 10px;
+  }
+  
+  .filter-tag {
+    font-size: 12px;
+    padding: 4px 8px;
+    margin-bottom: 5px;
+  }
+  
+  .filter-label {
+    width: 100%;
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  
+  .clear-all {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+  }
+  
+  .no-results h3 {
+    font-size: 18px;
+  }
+  
+  .no-results p {
+    font-size: 14px;
+  }
+  
+  .browse-all-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+}
+
+/* Card animation enhancements */
+.card-visible {
+  animation: cardFadeIn 0.5s ease forwards;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* User dropdown responsive improvements */
+@media (max-width: 768px) {
+  .user-dropdown .dropdown-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    margin-top: 0;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+  }
+  
+  .dropdown-menu::before {
+    display: none;
+  }
+  
+  .dropdown-menu a {
+    padding: 15px;
+    text-align: center;
+  }
+}
