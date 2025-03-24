@@ -20,6 +20,7 @@ urlpatterns =[
     path('submit_feedback/<int:purchase_id>/', views.submit_feedback, name="submit_feedback"),
     path('clear-messages/', views.clear_messages, name='clear_messages'),
     path('contactUs/', views.contactUs, name='contactUs'),
+    path('page_not_found_view/', views.page_not_found_view, name='page_not_found_view'),
 ]
 
 

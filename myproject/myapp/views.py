@@ -13,7 +13,7 @@ from .models import Vehicle
 from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import User 
 from django.core.mail import send_mail
@@ -22,6 +22,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+
 # Create your views here.
 
 # def msg(request):
@@ -413,3 +414,6 @@ def clear_messages(request):
 
 def contactUs(request):
     return render(request, 'contactUs.html')
+
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404, context={'exception': exception})

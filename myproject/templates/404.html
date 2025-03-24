@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Soorath Autos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .error-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, #000000, #222222);
+            padding: 1rem;
+        }
+        
+        .error-card {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .error-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            color: #ffcc00;
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .error-code {
+            color: #ffcc00;
+        }
+        
+        .error-message {
+            font-size: 1.25rem;
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .button-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+        
+        .home-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background-color: #ffcc00;
+            color: #0e0f0e;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        @media (min-width: 640px) {
+            .home-button {
+                width: auto;
+            }
+        }
+        
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 204, 0, 0.3);
+        }
+        
+        .cars-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background-color: transparent;
+            border: 2px solid #ffcc00;
+            color: #ffcc00;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        @media (min-width: 640px) {
+            .cars-button {
+                width: auto;
+            }
+        }
+        
+        .cars-button:hover {
+            background-color: rgba(255, 204, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .support-text {
+            margin-top: 2rem;
+            color: #a0a0a0;
+            font-size: 0.875rem;
+        }
+        
+        .support-link {
+            color: #ffcc00;
+        }
+        
+        .support-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    
+    <div class="error-container">
+        <div class="error-card">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-circle fa-4x"></i>
+            </div>
+            
+            <h1 class="error-title">
+                <span class="error-code">404</span> Error
+            </h1>
+            
+            <p class="error-message">
+                Oops! The page you're looking for doesn't exist.
+            </p>
+            
+            <div class="button-container">
+                <a href="{% url 'home' %}" class="home-button">
+                    <i class="fas fa-home"></i>
+                    Return Home
+                </a>
+                
+                <a href="{% url 'cars' %}" class="cars-button">
+                    <i class="fas fa-car"></i>
+                    Browse Cars
+                </a>
+            </div>
+        </div>
+        
+        <div class="support-text">
+            Need assistance? <a href="{% url 'contactUs' %}" class="support-link">Contact our support team</a>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>
