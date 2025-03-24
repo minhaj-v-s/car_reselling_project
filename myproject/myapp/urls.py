@@ -20,6 +20,9 @@ urlpatterns =[
     path('submit_feedback/<int:purchase_id>/', views.submit_feedback, name="submit_feedback"),
     path('clear-messages/', views.clear_messages, name='clear_messages'),
     path('contactUs/', views.contactUs, name='contactUs'),
+    path('forgot-password/',views.forgot_password, name="forgot_password"),
+    path('verify-otp/',views.verify_otp, name="verify_otp"),
+    path('reset-password/',views.reset_password, name='reset_password',)
 ]
 
 

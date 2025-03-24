@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Cancelled</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .email-container {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #0e0f0e;
+            color: #ffcc00;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            background-color: #fff;
+        }
+        .appointment-info {
+            background-color: #f8f9fa;
+            border-left: 4px solid #ffcc00;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .appointment-info p {
+            margin: 8px 0;
+        }
+        .footer {
+            background-color: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .reason-box {
+            background-color: #fff9f9;
+            border: 1px solid #ffebee;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .btn-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #000;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #e6b800;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Appointment Cancelled</h1>
+        </div>
+        <div class="content">
+            <p>Hello {{ appointment.customer.name }},</p>
+            <p>We regret to inform you that your test drive appointment has been cancelled.</p>
+            
+            <div class="appointment-info">
+                <h3>Appointment Details:</h3>
+                <p><strong>Date:</strong> {{ appointment.app_date }}</p>
+                <p><strong>Time:</strong> {{ appointment.app_time }}</p>
+                <p><strong>Vehicle:</strong> {{ appointment.vehicle.brand }} {{ appointment.vehicle.model }} ({{ appointment.vehicle.year }})</p>
+            </div>
+            
+            {% if reason %}
+            <div class="reason-box">
+                <h3>Cancellation Reason:</h3>
+                <p>{{ reason }}</p>
+            </div>
+            {% endif %}
+            
+            <p>We apologize for any inconvenience this may have caused. You are welcome to schedule another test drive at your convenience.</p>
+            
+            <div class="btn-container">
+                <a href="{{ website_url }}" class="btn">Book Another Test Drive</a>
+            </div>
+            
+        </div>
+        <div class="footer">
+            <p>This is an automated email from Soorath Autos. Please do not reply to this email.</p>
+            <p>If you have any questions, please contact our customer service.</p>
+        </div>
+    </div>
+</body>
+</html>

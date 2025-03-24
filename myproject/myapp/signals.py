@@ -2,7 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 from .models import Appointment, Cancellation,Purchase,Vehicle
-from utils.email_service import send_confirmation_email,send_purchase_notification_email
+from utils.email_service import send_confirmation_email,send_purchase_notification_email,send_admin_cancellation_email
 
 @receiver(post_save, sender=Appointment)
 def appointment_status_changed(sender, instance, created, **kwargs):
@@ -15,8 +15,12 @@ def appointment_status_changed(sender, instance, created, **kwargs):
         # Send confirmation email to customer
         send_confirmation_email(instance)
 
-@receiver(post_save, sender=Purchase)
+    # Detect when an admin cancels an appointment
+    elif not created and instance.status == 'Cancelled':
+        send_admin_cancellation_email(instance)
 
+
+@receiver(post_save, sender=Purchase)
 def vehicle_purchased(sender, instance, created, **kwargs):
     """
     Signal to detect when a purchase is created and update the vehicle status
