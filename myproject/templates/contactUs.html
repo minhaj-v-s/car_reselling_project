@@ -72,9 +72,11 @@
             </div>
 
             <div class="map-container">
-                <div class="map" id="map"></div>
-                <div class="map-overlay">
-                    <div class="pulse"></div>
+                <div class="map">
+                    <img src="{% static 'images/Screenshot 2025-03-24 161611 .png' %}" alt="Map Fallback Image">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.951818218858!2d76.55769817461568!3d10.020834890085677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07e77fb853a0cb%3A0x65cdeb93d7a2eb98!2sSoorath%20Autos!5e0!3m2!1sen!2sin!4v1742813846179!5m2!1sen!2sin"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -82,119 +84,26 @@
 
     <!-- Footer -->
     {% include 'footer.html' %}
-    <!-- Map Script -->
+
+    <!-- Fallback script for iframe loading -->
     <script>
-        function initMap() {
-            // Coordinates for Soorath Autos in Kerala (corrected coordinates)
-            const showroomLocation = { lat: 9.977329, lng: 76.573613 };
-
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 15,
-                center: showroomLocation,
-                styles: [
-                    { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-                    { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-                    { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-                    {
-                        featureType: "administrative.locality",
-                        elementType: "labels.text.fill",
-                        stylers: [{ color: "#d59563" }],
-                    },
-                    {
-                        featureType: "poi",
-                        elementType: "labels.text.fill",
-                        stylers: [{ color: "#d59563" }],
-                    },
-                    {
-                        featureType: "poi.park",
-                        elementType: "geometry",
-                        stylers: [{ color: "#263c3f" }],
-                    },
-                    {
-                        featureType: "poi.park",
-                        elementType: "labels.text.fill",
-                        stylers: [{ color: "#6b9a76" }],
-                    },
-                    {
-                        featureType: "road",
-                        elementType: "geometry",
-                        stylers: [{ color: "#38414e" }],
-                    },
-                    {
-                        featureType: "road",
-                        elementType: "geometry.stroke",
-                        stylers: [{ color: "#212a37" }],
-                    },
-                    {
-                        featureType: "road",
-                        elementType: "labels.text.fill",
-                        stylers: [{ color: "#9ca5b3" }],
-                    },
-                    {
-                        featureType: "road.highway",
-                        elementType: "geometry",
-                        stylers: [{ color: "#746855" }],
-                    },
-                    {
-                        featureType: "road.highway",
-                        elementType: "geometry.stroke",
-                        stylers: [{ color: "#1f2835" }],
-                    },
-                    {
-                        featureType: "road.highway",
-                        elementType: "labels.text.fill",
-                        stylers: [{ color: "#f3d19c" }],
-                    },
-                    {
-                        featureType: "transit",
-                        elementType: "geometry",
-                        stylers: [{ color: "#2f3948" }],
-                    },
-                    {
-                        featureType: "transit.station",
-                        elementType: "labels.text.fill",
-                        stylers: [{ color: "#d59563" }],
-                    },
-                    {
-                        featureType: "water",
-                        elementType: "geometry",
-                        stylers: [{ color: "#17263c" }],
-                    },
-                    {
-                        featureType: "water",
-                        elementType: "labels.text.fill",
-                        stylers: [{ color: "#515c6d" }],
-                    },
-                    {
-                        featureType: "water",
-                        elementType: "labels.text.stroke",
-                        stylers: [{ color: "#17263c" }],
-                    },
-                ],
-            });
-
-            // Add marker for Soorath Autos location
-            const marker = new google.maps.Marker({
-                position: showroomLocation,
-                map: map,
-                title: "Soorath Autos",
-                animation: google.maps.Animation.DROP
-            });
-
-            // Add info window
-            const infoWindow = new google.maps.InfoWindow({
-                content: '<div class="info-window"><strong>Soorath Autos</strong><p>Premium Cars Showroom</p></div>'
-            });
-
-            marker.addListener("click", () => {
-                infoWindow.open(map, marker);
-            });
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var iframe = document.querySelector('.map iframe');
+            var img = document.querySelector('.map img');
+            
+            iframe.onload = function() {
+                // Hide fallback image when iframe loads successfully
+                img.style.display = 'none';
+                iframe.style.display = 'block';
+            };
+            
+            iframe.onerror = function() {
+                // Show fallback image if iframe fails to load
+                img.style.display = 'block';
+                iframe.style.display = 'none';
+            };
+        });
     </script>
-
-    <!-- Google Maps API with a placeholder API key - You need to replace this with a real API key -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&callback=initMap" async defer></script>
-
 </body>
 
 </html>
