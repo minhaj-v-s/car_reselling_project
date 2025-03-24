@@ -10,9 +10,20 @@ class User(models.Model):
     email = models.EmailField(max_length=200,null=True)
     phone = models.CharField(max_length=15,null=True)
     password = models.CharField(max_length=200,null=True)
+    otp = models.CharField(max_length=6, null=True, blank=True)
+    otp_created_at = models.DateTimeField(null=True,blank=True)
 
     def __str__(self):
         return self.name
+    
+    def is_otp_valid(self):
+        """"Check if OTP is still valid (within 15 minutes)"""
+        if not self.otp or not self.otp_created_at:
+            return False
+        
+        #OTP is valid for 15 minutes
+        expiry_time = self.otp_created_at + timedelta(minutes=15)
+        return timezone.now() <= expiry_time
     
 class Vehicle(models.Model):
     brand=models.CharField(max_length=200,null=True)

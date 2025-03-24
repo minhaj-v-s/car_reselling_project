@@ -431,7 +431,6 @@ form input:focus {
     padding: 0 20px;
 }
 
-// ... keep existing code (rest of the appointment styles)
 
 /* Responsive styles for loading animation */
 @media (max-width: 768px) {

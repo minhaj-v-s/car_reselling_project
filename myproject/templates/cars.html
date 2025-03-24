@@ -132,8 +132,8 @@
                 <div class="car_card sold">
                     <img src="{{i.image.url}}" alt="{{ i.brand }} {{ i.model }}">
                     <div class="car_name">{{ i.brand }} {{ i.model }}</div>
-                    <a href="{% url 'car_description' i.id %}" style="text-decoration: none;">
-                        <button class="view_description">
+                    <a href="{% url 'car_description' i.id %}" style="text-decoration: none;pointer-events: none;">
+                        <button class="view_description" disabled style="pointer-events: none; opacity: 0.5; cursor: not-allowed;">
                             <i class="fas fa-info-circle me-2"></i> View Details
                         </button>
                     </a>

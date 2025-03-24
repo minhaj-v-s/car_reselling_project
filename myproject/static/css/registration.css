@@ -415,7 +415,7 @@ form input:focus {
 
 
 
-// ... keep existing code (root, logo, animations, card, docs styles)
+
 
 /* Login Page Modifications - Flex Direction Reversed */
 .login-container {
@@ -440,10 +440,24 @@ form input:focus {
   
   .register-container {
     flex-direction: column-reverse;
+
   }
   
   .register-image-container {
     display: block;
     height: 30vh;
   }
+  
+  
 }
+
+@media (max-width: 992px) {
+    .register-container {
+      flex-direction: column-reverse;
+    }
+    
+    .register-image-container {
+      display: block;
+      height: 30vh;
+    }
+  }
