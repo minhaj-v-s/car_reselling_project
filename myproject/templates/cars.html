@@ -26,7 +26,7 @@
         <!-- Search Bar Section -->
         <div class="search_bar">
             <form action="{% url 'cars' %}" method="GET">
-                <input type="text" name="search" placeholder="Search for brand, model, or features..."
+                <input type="text" name="search" placeholder="Search for brand or model"
                     value="{{request.GET.search}}">
                 <button type="submit" class="searchBtn"><i class="fas fa-search me-2"></i> Search</button>
                 <button type="button" id="filterBtn" class="filter-btn"><i class="fa-solid fa-filter"></i></button>
